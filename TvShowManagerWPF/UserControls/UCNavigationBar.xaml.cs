@@ -15,13 +15,22 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TvShowManagerLibrary;
 
-namespace TvShowManagerWPF
+namespace TvShowManagerWPF.UserControls
 {
-    public partial class MainWindow : Window
+    public partial class UCNavigationBar : UserControl
     {
-        public MainWindow()
+        public UCNavigationBar()
         {
             InitializeComponent();
+        }
+
+        private void Command_SearchCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void Command_SearchExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
         }
     }
 }

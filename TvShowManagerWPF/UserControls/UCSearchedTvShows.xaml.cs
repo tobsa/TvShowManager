@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +14,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TvShowManagerLibrary;
 
-namespace TvShowManagerWPF
+namespace TvShowManagerWPF.UserControls
 {
-    public partial class MainWindow : Window
+    public partial class UCSearchedTvShow : UserControl
     {
-        public MainWindow()
+        public UCSearchedTvShow()
         {
             InitializeComponent();
         }

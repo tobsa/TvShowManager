@@ -3,10 +3,55 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TvShowManagerWPF"
+        xmlns:vm="clr-namespace:TvShowManagerWPF.ViewModels"
+        xmlns:uc="clr-namespace:TvShowManagerWPF.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Tv Show Manager" 
+        Width="1600"
+        Height="900"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainWindowViewModel x:Name="MainWindowDataContext" />
+    </Window.DataContext>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+
+        <uc:UCTitleBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" />
+
+        <uc:UCNavigationBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  
+                            DataContext="{Binding SearchedTvShows, Mode=TwoWay}"/>
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <TabControl>
+                <TabItem Header="TV Show Tracker" />
+                <TabItem Header="TV Show Viewer" />
+                <TabItem Header="Movie Viewer" />
+                <TabItem Header="Movie Transfer" />
+                <TabItem Header="Subtitle Matcher" />
+                <TabItem Header="Subtitle Renamer" />
+                <TabItem Header="IDX-Styler" />
+
+                <TabItem Header="Search Result" Name="TabItemSearchResult">
+                    <uc:UCSearchedTvShow DataContext="{Binding SearchedTvShows}"/>
+                </TabItem>
+                
+            </TabControl>
+        </Grid>
+
+        <GridSplitter Grid.Row="2" Grid.Column="1" Width="3" HorizontalAlignment="Stretch" />
+
+        <Grid Grid.Row="2" Grid.Column="2" Background="Black" />
+
     </Grid>
 </Window>

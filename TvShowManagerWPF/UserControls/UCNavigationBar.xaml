@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="TvShowManagerWPF.UserControls.UCNavigationBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cmd="clr-namespace:TvShowManagerWPF">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="cmd:CommandBindings.Search" CanExecute="Command_SearchCanExecute" Executed="Command_SearchExecuted" />
+    </UserControl.CommandBindings>
+    
+    <WrapPanel Margin="50 25">
+        <Button Content="(" Width="40" />
+        <Button Content=")" Width="40" />
+        <TextBox Width="200" />
+        <Button Content="Search" Command="cmd:CommandBindings.Search" />
+    </WrapPanel>
+</UserControl>
