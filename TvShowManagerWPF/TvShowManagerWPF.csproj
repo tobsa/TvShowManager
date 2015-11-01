@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CommandBindings.cs" />
+    <Compile Include="Converters\TvShowSubsciptionConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="UserControls\UCNavigationBar.xaml.cs">
       <DependentUpon>UCNavigationBar.xaml</DependentUpon>
@@ -66,11 +67,14 @@
     <Compile Include="UserControls\UCTitleBar.xaml.cs">
       <DependentUpon>UCTitleBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCTvShowDetails.xaml.cs">
+      <DependentUpon>UCTvShowDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCTvShowTracker.xaml.cs">
       <DependentUpon>UCTvShowTracker.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\NavigationBarViewModel.cs" />
+    <Compile Include="ViewModels\SearchedTvShowsViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCTitleBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCTvShowDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

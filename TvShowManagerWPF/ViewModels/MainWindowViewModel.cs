@@ -10,8 +10,9 @@ namespace TvShowManagerWPF.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-        private ObservableCollection<TvShow> _searchedTvShows;
-        public ObservableCollection<TvShow> SearchedTvShows
+        private SearchedTvShowsViewModel _searchedTvShows;
+
+        public SearchedTvShowsViewModel SearchedTvShows
         {
             get { return _searchedTvShows; }
             set { _searchedTvShows = value; OnPropertyChanged(); }

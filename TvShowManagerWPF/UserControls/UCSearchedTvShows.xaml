@@ -33,6 +33,6 @@
     </UserControl.Resources>
     
     <Grid>
-        <ListBox ItemsSource="{Binding}" />
+        <ListBox Name="ListBoxSearchedTvShows" ItemsSource="{Binding SearchedTvShows}" SelectionChanged="Selector_OnSelectionChanged"/>
     </Grid>
 </UserControl>

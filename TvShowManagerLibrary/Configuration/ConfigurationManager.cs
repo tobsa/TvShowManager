@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TvShowManagerWPF.ViewModels
+namespace TvShowManagerLibrary.Configuration
 {
-    public class NavigationBarViewModel : ViewModel
+    public class ConfigurationManager
     {
     }
 }

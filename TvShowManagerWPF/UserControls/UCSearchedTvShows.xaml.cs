@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TvShowManagerLibrary;
+using TvShowManagerWPF.ViewModels;
 
 namespace TvShowManagerWPF.UserControls
 {
@@ -21,6 +22,17 @@ namespace TvShowManagerWPF.UserControls
         public UCSearchedTvShow()
         {
             InitializeComponent();
+        }
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var context = DataContext as SearchedTvShowsViewModel;
+            DataContext = new SearchedTvShowsViewModel()
+            {
+                IsTvShowDetailsSelected = true,
+                TvShowDetails = ListBoxSearchedTvShows.SelectedItem as TvShow,
+                SearchedTvShows = context?.SearchedTvShows,
+            };
         }
     }
 }

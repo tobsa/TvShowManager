@@ -9,7 +9,7 @@
     <WrapPanel Margin="50 25">
         <Button Content="(" Width="40" />
         <Button Content=")" Width="40" />
-        <TextBox Width="200" />
+        <TextBox Width="200" Name="TextBoxSearchedTvShows" />
         <Button Content="Search" Command="cmd:CommandBindings.Search" />
     </WrapPanel>
 </UserControl>

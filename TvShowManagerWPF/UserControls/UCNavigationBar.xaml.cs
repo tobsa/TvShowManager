@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TvShowManagerLibrary;
+using TvShowManagerWPF.ViewModels;
 
 namespace TvShowManagerWPF.UserControls
 {
@@ -31,6 +32,31 @@ namespace TvShowManagerWPF.UserControls
 
         private void Command_SearchExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            DataContext = new SearchedTvShowsViewModel()
+            {
+                IsSearchedTvShowSelected = true,
+                SearchedTvShows = new ObservableCollection<TvShow>()
+                {
+                    new TvShow()
+                    {
+                        Name = TextBoxSearchedTvShows.Text,
+                        PosterPath =
+                            @"F:\Tobias\Programming\Software\TvShowManager\TvShowManagerWPF\Content\NoImageFound.png"
+                    },
+                    new TvShow()
+                    {
+                        Name = "Breaking Bad",
+                        PosterPath =
+                            @"F:\Tobias\Programming\Software\TvShowManager\TvShowManagerWPF\Content\NoImageFound.png"
+                    },
+                    new TvShow()
+                    {
+                        Name = "The Big Bang Theory",
+                        PosterPath =
+                            @"F:\Tobias\Programming\Software\TvShowManager\TvShowManagerWPF\Content\NoImageFound.png"
+                    },
+                }
+            };
         }
     }
 }

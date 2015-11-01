@@ -29,8 +29,7 @@
 
         <uc:UCTitleBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" />
 
-        <uc:UCNavigationBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  
-                            DataContext="{Binding SearchedTvShows, Mode=TwoWay}"/>
+        <uc:UCNavigationBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" DataContext="{Binding SearchedTvShows, Mode=TwoWay}" />
 
         <Grid Grid.Row="2" Grid.Column="0">
             <TabControl>
@@ -42,10 +41,13 @@
                 <TabItem Header="Subtitle Renamer" />
                 <TabItem Header="IDX-Styler" />
 
-                <TabItem Header="Search Result" Name="TabItemSearchResult">
-                    <uc:UCSearchedTvShow DataContext="{Binding SearchedTvShows}"/>
+                <TabItem Visibility="Collapsed" Name="TabItemSearchedTvShows" IsSelected="{Binding SearchedTvShows.IsSearchedTvShowSelected}">
+                    <uc:UCSearchedTvShow DataContext="{Binding SearchedTvShows, Mode=TwoWay}"/>
                 </TabItem>
-                
+
+                <TabItem Visibility="Collapsed" Name="TabItemTvShowDetails" IsSelected="{Binding SearchedTvShows.IsTvShowDetailsSelected}">
+                    <uc:UCTvShowDetails DataContext="{Binding SearchedTvShows, Mode=TwoWay}" />
+                </TabItem>
             </TabControl>
         </Grid>
 
