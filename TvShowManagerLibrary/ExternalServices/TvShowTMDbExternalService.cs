@@ -7,13 +7,13 @@ using TMDbWrapper;
 
 namespace TvShowManagerLibrary.ExternalServices
 {
-    public class TMDbExternalService : ITvShowExternalService<TvShow>
+    public class TvShowTMDbExternalService : ITvShowExternalService<TvShow>
     {
         private readonly TMDbService service;
 
-        public TMDbExternalService(TMDbService service)
+        public TvShowTMDbExternalService(string apiKey)
         {
-            this.service = service;
+            service = new TMDbService(apiKey);
         }
 
         public List<TvShow> SearchTvShows(string query)

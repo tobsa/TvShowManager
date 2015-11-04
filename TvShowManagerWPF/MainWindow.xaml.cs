@@ -23,5 +23,17 @@ namespace TvShowManagerWPF
         {
             InitializeComponent();
         }
+
+        private void Command_SearchExecuted(object sender, RoutedEventArgs e)
+        {
+            MainWindowDataContext.SearchTvShows(TextBoxTvShowSearchQuery.Text);
+            MainWindowDataContext.DisplayTvShowSearchView = true;
+        }
+
+        private void Command_SearchedTvShowsSelection(object sender, SelectionChangedEventArgs e)
+        {
+            MainWindowDataContext.TvShowDetailsViewItem = ListBoxTvShowSearchItems.SelectedItem as TvShow;
+            MainWindowDataContext.DisplayTvShowDetailsView = true;
+        }
     }
 }

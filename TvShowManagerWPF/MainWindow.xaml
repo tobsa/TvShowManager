@@ -32,8 +32,8 @@
         <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="50 20 20 20" >
             <Button Content="(" Width="40" />
             <Button Content=")" Width="40" />
-            <TextBox Width="200" />
-            <Button Content="Search" />
+            <TextBox Width="200" Name="TextBoxTvShowSearchQuery" />
+            <Button Content="Search" Click="Command_SearchExecuted"/>
         </WrapPanel>
 
         <Grid Grid.Row="2" Grid.Column="0">
@@ -46,10 +46,18 @@
                 <TabItem Header="Subtitle Renamer" />
                 <TabItem Header="IDX-Styler" />
 
-                <TabItem Visibility="Collapsed">
+                <TabItem Visibility="Collapsed" IsSelected="{Binding DisplayTvShowSearchView, Mode=TwoWay}">
+                    <ListBox Name="ListBoxTvShowSearchItems"
+                             ItemsSource="{Binding TvShowSearchViewItems}" 
+                             SelectionChanged="Command_SearchedTvShowsSelection"></ListBox>
                 </TabItem>
 
-                <TabItem Visibility="Collapsed">
+                <TabItem Visibility="Collapsed" IsSelected="{Binding DisplayTvShowDetailsView, Mode=TwoWay}">
+                    <StackPanel DataContext="{Binding TvShowDetailsViewItem}">
+                        <Label Content="{Binding Name}" />
+                        <Label Content="{Binding Overview}" />
+                        <Image Source="{Binding PosterPath}" />
+                    </StackPanel>
                 </TabItem>
             </TabControl>
         </Grid>
