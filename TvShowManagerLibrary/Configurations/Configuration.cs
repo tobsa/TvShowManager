@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TvShowManagerLibrary.Configuration
+namespace TvShowManagerLibrary.Configurations
 {
-    public class ConfigurationManager
+    public class Configuration
     {
+        public string ApiKey { get; set; }
     }
 }

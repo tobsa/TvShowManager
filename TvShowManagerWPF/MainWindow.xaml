@@ -4,8 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:TvShowManagerWPF.ViewModels"
-        xmlns:uc="clr-namespace:TvShowManagerWPF.UserControls"
-        mc:Ignorable="d"
         Title="Tv Show Manager" 
         Width="1600"
         Height="900"
@@ -27,9 +25,16 @@
             <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
 
-        <uc:UCTitleBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" />
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+            <Label Content="Tv Show Manager" HorizontalAlignment="Center" />
+        </Grid>
 
-        <uc:UCNavigationBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" DataContext="{Binding SearchedTvShows, Mode=TwoWay}" />
+        <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="50 20 20 20" >
+            <Button Content="(" Width="40" />
+            <Button Content=")" Width="40" />
+            <TextBox Width="200" />
+            <Button Content="Search" />
+        </WrapPanel>
 
         <Grid Grid.Row="2" Grid.Column="0">
             <TabControl>
@@ -41,12 +46,10 @@
                 <TabItem Header="Subtitle Renamer" />
                 <TabItem Header="IDX-Styler" />
 
-                <TabItem Visibility="Collapsed" Name="TabItemSearchedTvShows" IsSelected="{Binding SearchedTvShows.IsSearchedTvShowSelected}">
-                    <uc:UCSearchedTvShow DataContext="{Binding SearchedTvShows, Mode=TwoWay}"/>
+                <TabItem Visibility="Collapsed">
                 </TabItem>
 
-                <TabItem Visibility="Collapsed" Name="TabItemTvShowDetails" IsSelected="{Binding SearchedTvShows.IsTvShowDetailsSelected}">
-                    <uc:UCTvShowDetails DataContext="{Binding SearchedTvShows, Mode=TwoWay}" />
+                <TabItem Visibility="Collapsed">
                 </TabItem>
             </TabControl>
         </Grid>

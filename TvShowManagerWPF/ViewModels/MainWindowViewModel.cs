@@ -10,12 +10,26 @@ namespace TvShowManagerWPF.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-        private SearchedTvShowsViewModel _searchedTvShows;
+        private TvShowService service = TvShowService.CreateXmlService();
 
-        public SearchedTvShowsViewModel SearchedTvShows
+        private ObservableCollection<TvShow> tvShowSearchViewItems;
+        private bool displayTvShowSearchView;
+
+        public ObservableCollection<TvShow> TvShowSearchViewItems
         {
-            get { return _searchedTvShows; }
-            set { _searchedTvShows = value; OnPropertyChanged(); }
+            get
+            {
+                tvShowSearchViewItems = service.
+
+                return tvShowSearchViewItems; 
+            }
+            set { tvShowSearchViewItems = value; OnPropertyChanged(); }
+        }
+
+        public bool DisplayTvShowSearchView
+        {
+            get { return displayTvShowSearchView; }
+            set { displayTvShowSearchView = value; OnPropertyChanged(); }
         }
     }
 }

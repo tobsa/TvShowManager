@@ -56,25 +56,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CommandBindings.cs" />
-    <Compile Include="Converters\TvShowSubsciptionConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="UserControls\UCNavigationBar.xaml.cs">
-      <DependentUpon>UCNavigationBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCSearchedTvShows.xaml.cs">
-      <DependentUpon>UCSearchedTvShows.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCTitleBar.xaml.cs">
-      <DependentUpon>UCTitleBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCTvShowDetails.xaml.cs">
-      <DependentUpon>UCTvShowDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCTvShowTracker.xaml.cs">
-      <DependentUpon>UCTvShowTracker.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\SearchedTvShowsViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -88,26 +71,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\UCNavigationBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\UCSearchedTvShows.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\UCTitleBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\UCTvShowDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\UCTvShowTracker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -145,9 +108,7 @@
       <Name>TvShowManagerLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Styles\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
