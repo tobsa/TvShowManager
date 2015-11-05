@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TvShowManagerLibrary;
+using TvShowManagerLibrary.Configurations;
 
 namespace TvShowManagerWPF
 {
@@ -34,6 +35,11 @@ namespace TvShowManagerWPF
         {
             MainWindowDataContext.TvShowDetailsViewItem = ListBoxTvShowSearchItems.SelectedItem as TvShow;
             MainWindowDataContext.DisplayTvShowDetailsView = true;
+        }
+
+        private void Command_ToggleSubscriptionExecuted(object sender, RoutedEventArgs e)
+        {
+            MainWindowDataContext.TvShowDetailsToggleSubscription(MainWindowDataContext.TvShowDetailsViewItem);
         }
     }
 }

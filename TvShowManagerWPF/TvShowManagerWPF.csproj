@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CommandBindings.cs" />
+    <Compile Include="Configurations.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
@@ -103,6 +104,10 @@
     <Resource Include="Content\NoImageFound.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreLibrary\CoreLibrary.csproj">
+      <Project>{6619D0C6-09D6-4DFE-ADB1-BF77B382590C}</Project>
+      <Name>CoreLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TvShowManagerLibrary\TvShowManagerLibrary.csproj">
       <Project>{59C21328-5EA8-49F1-A1E0-345BEC7826C5}</Project>
       <Name>TvShowManagerLibrary</Name>

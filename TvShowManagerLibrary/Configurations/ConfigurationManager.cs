@@ -10,26 +10,16 @@ namespace TvShowManagerLibrary.Configurations
 {
     public static class ConfigurationManager
     {
-        private const string BaseFilePath = "Configuration.xml";
+        public static Configuration Configuration { get; set; } = new Configuration();
 
-        public static void Save(Configuration configuration)
+        public static void Save(string filename)
         {
-            Save(BaseFilePath, configuration);
+            XmlSerializerHelper.Serialize(Configuration, filename);
         }
 
-        public static Configuration Load()
+        public static void Load(string filename)
         {
-            return Load(BaseFilePath);
-        }
-
-        public static void Save(string filepath, Configuration configuration)
-        {
-            XmlSerializerHelper.Serialize(configuration, filepath);
-        }
-
-        public static Configuration Load(string filepath)
-        {
-            return XmlSerializerHelper.Deserialize<Configuration>(filepath) ?? new Configuration();
+            Configuration = XmlSerializerHelper.Deserialize<Configuration>(filename) ?? new Configuration();
         }
     }
 }

@@ -41,6 +41,9 @@ namespace TvShowManagerLibrary
         /// <returns>True if subscribing, false otherwise</returns>
         public bool IsSubscribing(TvShow show)
         {
+            if (show == null)
+                return false;
+
             return repository.GetTvShow(show.ID) != null;
         }
 

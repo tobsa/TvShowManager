@@ -49,14 +49,21 @@
                 <TabItem Visibility="Collapsed" IsSelected="{Binding DisplayTvShowSearchView, Mode=TwoWay}">
                     <ListBox Name="ListBoxTvShowSearchItems"
                              ItemsSource="{Binding TvShowSearchViewItems}" 
-                             SelectionChanged="Command_SearchedTvShowsSelection"></ListBox>
+                             SelectionChanged="Command_SearchedTvShowsSelection">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </TabItem>
 
                 <TabItem Visibility="Collapsed" IsSelected="{Binding DisplayTvShowDetailsView, Mode=TwoWay}">
-                    <StackPanel DataContext="{Binding TvShowDetailsViewItem}">
-                        <Label Content="{Binding Name}" />
-                        <Label Content="{Binding Overview}" />
-                        <Image Source="{Binding PosterPath}" />
+                    <StackPanel>
+                        <Label Content="{Binding TvShowDetailsViewItem.Name}" />
+                        <Label Content="{Binding TvShowDetailsViewItem.Overview}" />
+                        <Image Source="{Binding TvShowDetailsViewItem.PosterPath}" Width="150" Height="225" />
+                        <Button Content="{Binding TvShowDetailsToggleSubscriptionText}" Click="Command_ToggleSubscriptionExecuted" />
                     </StackPanel>
                 </TabItem>
             </TabControl>

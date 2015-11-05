@@ -5,13 +5,15 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TvShowManagerLibrary.Configurations;
 
 namespace TvShowManagerWPF
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        private void App_OnStartup(object sender, StartupEventArgs e)
+        {
+            ConfigurationManager.Load(Configurations.ConfigurationFilePath);
+        }
     }
 }

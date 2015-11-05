@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TvShowManagerLibrary;
+using TvShowManagerLibrary.Configurations;
 using TvShowManagerLibrary.ExternalServices;
 using TvShowManagerLibrary.Repositories;
 
@@ -18,11 +19,12 @@ namespace TvShowManagerWPF.ViewModels
         private bool displayTvShowSearchView;
         private bool displayTvShowDetailsView;
         private TvShow tvShowDetailsViewItem;
+        private string tvShowDetailsToggleSubscriptionText;
 
         public MainWindowViewModel()
         {
-            var externalService = new TvShowTMDbExternalService("12345");
-            var repository = new TvShowXmlRepository("Data/Subscriptions.xml");
+            var externalService = new TvShowTMDbExternalService(ConfigurationManager.Configuration.ApiKey);
+            var repository = new TvShowXmlRepository(Configurations.SubscriptionsFilepath);
             
             service = new TvShowService(externalService, repository);
         }
@@ -57,7 +59,34 @@ namespace TvShowManagerWPF.ViewModels
         public TvShow TvShowDetailsViewItem
         {
             get { return tvShowDetailsViewItem; }
-            set { tvShowDetailsViewItem = value; OnPropertyChanged(); }
+            set
+            {
+                tvShowDetailsViewItem = value;
+                TvShowDetailsToggleSubscriptionText = GetTvShowDetailsToggleSubscriptionText(value);
+
+                OnPropertyChanged();
+            }
+        }
+
+        public void TvShowDetailsToggleSubscription(TvShow show)
+        {
+            if (service.IsSubscribing(show))
+                service.Unsubscribe(show);
+            else
+                service.Subscribe(show);
+
+            TvShowDetailsToggleSubscriptionText = GetTvShowDetailsToggleSubscriptionText(show);
+        }
+
+        public string TvShowDetailsToggleSubscriptionText
+        {
+            get { return tvShowDetailsToggleSubscriptionText; }
+            set { tvShowDetailsToggleSubscriptionText = value; OnPropertyChanged(); }
+        }
+
+        private string GetTvShowDetailsToggleSubscriptionText(TvShow show)
+        {
+            return service.IsSubscribing(show) ? "Unsubscribe" : "Subscribe";
         }
     }
 }
