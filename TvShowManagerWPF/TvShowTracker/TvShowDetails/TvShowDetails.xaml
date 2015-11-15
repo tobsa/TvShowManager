@@ -10,11 +10,13 @@
         <local:TvShowDetailsViewModel />
     </UserControl.DataContext>
     <Grid>
-        
-        <StackPanel DataContext="{Binding TvShow}">
-            <Label Content="{Binding Name}" />
-            <Label Content="{Binding Overview}" />
-            <Image Source="{Binding PosterPath}" Width="150" Height="225" />
+        <StackPanel>
+            <StackPanel DataContext="{Binding TvShow}">
+                <Label Content="{Binding Name}" />
+                <Label Content="{Binding Overview}" />
+                <Image Source="{Binding PosterPath}" Width="150" Height="225" />
+            </StackPanel>
+            <Button Content="{Binding SubscribeButtonText}" Width="150" Command="{Binding SubscribeCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

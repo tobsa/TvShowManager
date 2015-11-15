@@ -20,7 +20,6 @@ namespace TvShowManagerWPF.TvShowTracker
     public class TvShowTrackerViewModel : BaseViewModel
     {
         #region Fields
-        private readonly TvShowService service; 
         private TvShowsViewModel tvShowsViewModel = new TvShowsViewModel();
         private TvShowsSearchedViewModel tvShowsSearchedViewModel = new TvShowsSearchedViewModel();
         private TvShowDetailsViewModel tvShowDetailsViewModel = new TvShowDetailsViewModel();
@@ -30,11 +29,11 @@ namespace TvShowManagerWPF.TvShowTracker
 
         public TvShowTrackerViewModel()
         {
-            service = TvShowServiceFactory.Create(ConfigurationManager.ApiKey, Filepaths.SubscriptionsFilepath);
             SearchCommand = new RelayCommand(SearchTvShows);
 
             TvShowsSearchedViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             TvShowsViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
+            TvShowDetailsViewModel.TvShowSubscriptionChanged += TvShowSubscriptionChanged;
         }
 
         #region Properties
@@ -77,7 +76,7 @@ namespace TvShowManagerWPF.TvShowTracker
         private void SearchTvShows()
         {
             IsTabItemTvShowSearchedSelected = true;
-            TvShowsSearchedViewModel.TvShows = service.SearchTvShows(TextBoxSearchQuery, Filepaths.NoImageFoundPath).ToObservableCollection();
+            TvShowsSearchedViewModel.TvShows = Service.SearchTvShows(TextBoxSearchQuery, Filepaths.NoImageFoundPath).ToObservableCollection();
         }
 
         private void DisplayTvShowDetails(TvShow show)
@@ -87,6 +86,20 @@ namespace TvShowManagerWPF.TvShowTracker
                 TvShowDetailsViewModel.TvShow = show;
                 IsTabItemTvShowDetailsSelected = true;
             }
+        }
+
+        private void TvShowSubscriptionChanged(TvShow show)
+        {
+            if (show == null)
+                return;
+
+            if (Service.IsSubscribing(show))
+                Service.Unsubscribe(show);
+            else
+                Service.Subscribe(show);
+
+            TvShowDetailsViewModel.TvShow = show;
+            TvShowsViewModel.TvShows = Service.GetAllSubscribedTvShows().ToObservableCollection();
         }
         #endregion
     }

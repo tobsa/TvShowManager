@@ -13,6 +13,8 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowsSearched
         private ObservableCollection<TvShow> tvShows;
         private TvShow selectedTvShow;
 
+        public event Action<TvShow> DisplayTvShowDetailsRequested = delegate { };
+
         public ObservableCollection<TvShow> TvShows
         {
             get { return tvShows; }
@@ -32,8 +34,6 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowsSearched
                 }
             }
         }
-
-        public event Action<TvShow> DisplayTvShowDetailsRequested = delegate { };
 
         private void DisplayTvShowDetails()
         {

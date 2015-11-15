@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TvShowManagerLibrary.Configurations;
 using TvShowManagerLibrary.Serialization;
+using TvShowManagerLibrary.Services;
 
 namespace TvShowManagerWPF
 {
@@ -15,6 +16,7 @@ namespace TvShowManagerWPF
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             ConfigurationManager.Load(Filepaths.ConfigurationFilePath);
+            BaseViewModel.Service = TvShowServiceFactory.Create(ConfigurationManager.ApiKey, Filepaths.SubscriptionsFilepath);
         }
     }
 }

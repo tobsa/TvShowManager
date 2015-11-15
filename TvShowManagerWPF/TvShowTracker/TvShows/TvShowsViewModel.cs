@@ -13,7 +13,6 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
 {
     public class TvShowsViewModel : BaseViewModel
     {
-        private readonly TvShowService service;
         private ObservableCollection<TvShow> tvShows;
         private TvShow selectedTvShow;
 
@@ -21,9 +20,7 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
 
         public TvShowsViewModel()
         {
-            service = TvShowServiceFactory.Create(ConfigurationManager.ApiKey, Filepaths.SubscriptionsFilepath);
-
-            TvShows = service.GetAllSubscribedTvShows().ToObservableCollection();
+            TvShows = Service.GetAllSubscribedTvShows().ToObservableCollection();
         }
 
         public ObservableCollection<TvShow> TvShows
