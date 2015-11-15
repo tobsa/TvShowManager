@@ -25,7 +25,9 @@ namespace TvShowManagerLibrary.Repositories
 
         public void UpdateTvShow(TvShow show)
         {
-            throw new NotImplementedException();
+            var index = shows.FindIndex(x => x.ID == show.ID);
+            if (index >= 0)
+                shows[index] = show;
         }
 
         public void RemoveTvShow(string id)
