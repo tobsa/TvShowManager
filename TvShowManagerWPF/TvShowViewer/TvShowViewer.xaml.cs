@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TvShowManagerLibrary;
-using TvShowManagerLibrary.Configurations;
 
-namespace TvShowManagerWPF
+namespace TvShowManagerWPF.TvShowViewer
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Interaction logic for TvShowViewer.xaml
+    /// </summary>
+    public partial class TvShowViewer : UserControl
     {
-        public MainWindow()
+        public TvShowViewer()
         {
             InitializeComponent();
         }

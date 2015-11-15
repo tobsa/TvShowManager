@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TvShowManagerWPF.Annotations;
 
-namespace TvShowManagerWPF.ViewModels
+namespace TvShowManagerWPF
 {
-    public class ViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using TvShowManagerLibrary.Configurations;
+using TvShowManagerLibrary.Serialization;
 
 namespace TvShowManagerWPF
 {
@@ -13,7 +14,7 @@ namespace TvShowManagerWPF
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            ConfigurationManager.Load(Configurations.ConfigurationFilePath);
+            ConfigurationManager.Load(Filepaths.ConfigurationFilePath);
         }
     }
 }

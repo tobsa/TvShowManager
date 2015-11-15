@@ -3,75 +3,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:TvShowManagerWPF.ViewModels"
+        xmlns:uc="clr-namespace:TvShowManagerWPF.TvShowTracker"
+        xmlns:local="clr-namespace:TvShowManagerWPF"
         Title="Tv Show Manager" 
         Width="1600"
         Height="900"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <vm:MainWindowViewModel x:Name="MainWindowDataContext" />
+        <local:MainWindowViewModel />
     </Window.DataContext>
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
+        <Label Grid.Row="0" HorizontalAlignment="Center">Tv Show Manager</Label>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="3" />
-            <ColumnDefinition Width="200" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-            <Label Content="Tv Show Manager" HorizontalAlignment="Center" />
-        </Grid>
-
-        <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="50 20 20 20" >
-            <Button Content="(" Width="40" />
-            <Button Content=")" Width="40" />
-            <TextBox Width="200" Name="TextBoxTvShowSearchQuery" />
-            <Button Content="Search" Click="Command_SearchExecuted"/>
-        </WrapPanel>
-
-        <Grid Grid.Row="2" Grid.Column="0">
-            <TabControl>
-                <TabItem Header="TV Show Tracker" />
-                <TabItem Header="TV Show Viewer" />
-                <TabItem Header="Movie Viewer" />
-                <TabItem Header="Movie Transfer" />
-                <TabItem Header="Subtitle Matcher" />
-                <TabItem Header="Subtitle Renamer" />
-                <TabItem Header="IDX-Styler" />
-
-                <TabItem Visibility="Collapsed" IsSelected="{Binding DisplayTvShowSearchView, Mode=TwoWay}">
-                    <ListBox Name="ListBoxTvShowSearchItems"
-                             ItemsSource="{Binding TvShowSearchViewItems}" 
-                             SelectionChanged="Command_SearchedTvShowsSelection">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding Name}" />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </TabItem>
-
-                <TabItem Visibility="Collapsed" IsSelected="{Binding DisplayTvShowDetailsView, Mode=TwoWay}">
-                    <StackPanel>
-                        <Label Content="{Binding TvShowDetailsViewItem.Name}" />
-                        <Label Content="{Binding TvShowDetailsViewItem.Overview}" />
-                        <Image Source="{Binding TvShowDetailsViewItem.PosterPath}" Width="150" Height="225" />
-                        <Button Content="{Binding TvShowDetailsToggleSubscriptionText}" Click="Command_ToggleSubscriptionExecuted" />
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
-        </Grid>
-
-        <GridSplitter Grid.Row="2" Grid.Column="1" Width="3" HorizontalAlignment="Stretch" />
-
-        <Grid Grid.Row="2" Grid.Column="2" Background="Black" />
-
+        <TabControl Grid.Row="1">
+            <TabItem Header="Tv Show Tracker">
+                <uc:TvShowTracker />
+            </TabItem>
+            <TabItem Header="Tv Show Viewer"></TabItem>
+            <TabItem Header="Movie Viewer"></TabItem>
+            <TabItem Header="Movie Transfer"></TabItem>
+            <TabItem Header="Subtitle Matcher"></TabItem>
+            <TabItem Header="Subtitle Renamer"></TabItem>
+            <TabItem Header="IDX Styler"></TabItem>
+        </TabControl>
     </Grid>
+   
 </Window>
