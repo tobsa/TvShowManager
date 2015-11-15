@@ -48,10 +48,15 @@
     <Compile Include="ExternalServices\TvShowTMDbExternalService.cs" />
     <Compile Include="TvShow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TvShowService.cs" />
+    <Compile Include="Services\TvShowService.cs" />
     <Compile Include="Repositories\TvShowXmlRepository.cs" />
+    <Compile Include="Services\TvShowServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreLibrary\CoreLibrary.csproj">
+      <Project>{6619D0C6-09D6-4DFE-ADB1-BF77B382590C}</Project>
+      <Name>CoreLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TMDbWrapper\TMDbWrapper.csproj">
       <Project>{24EC833A-FFEF-478A-83C1-DA5F2EDCB5E6}</Project>
       <Name>TMDbWrapper</Name>
