@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -10,16 +11,24 @@ namespace TvShowManagerLibrary.Configurations
 {
     public static class ConfigurationManager
     {
-        public static Configuration Configuration { get; set; } = new Configuration();
+        private static Configuration configuration = new Configuration();
 
-        public static void Save(string filename)
-        {
-            XmlSerializerHelper.Serialize(Configuration, filename);
-        }
+        public static string ApiKey { get; set; }
 
-        public static void Load(string filename)
+        public static void Load(string filepath)
         {
-            Configuration = XmlSerializerHelper.Deserialize<Configuration>(filename) ?? new Configuration();
+            configuration = XmlSerializerHelper.Deserialize<Configuration>(filepath);
+
+            var properties1 = configuration.GetType().GetProperties();
+            var properties2 = typeof (ConfigurationManager).GetProperties();
+
+            foreach (var property1 in properties1)
+            {
+                foreach (var property2 in properties2.Where(property2 => property1.Name == property2.Name))
+                {
+                    property2.SetValue(null, property1.GetValue(configuration));
+                }
+            }
         }
     }
 }
