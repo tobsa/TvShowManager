@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMDbWrapper;
+using TMDbWrapper.Utility;
 
 namespace TvShowManagerLibrary.ExternalServices
 {
@@ -16,9 +17,9 @@ namespace TvShowManagerLibrary.ExternalServices
             service = new TMDbService(apiKey);
         }
 
-        public List<TvShow> SearchTvShows(string query)
+        public List<TvShow> SearchTvShows(string query, string defaultPosterPath, PosterSize size = PosterSize.w500)
         {
-            var shows = service.SearchTvShows(query);
+            var shows = service.SearchTvShows(query, PosterSize.w500, defaultPosterPath);
 
             return shows.Select(show => new TvShow()
             {

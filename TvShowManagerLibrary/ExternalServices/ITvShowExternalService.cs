@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMDbWrapper.Utility;
 
 namespace TvShowManagerLibrary.ExternalServices
 {
@@ -12,6 +13,6 @@ namespace TvShowManagerLibrary.ExternalServices
     /// <typeparam name="T"></typeparam>
     public interface ITvShowExternalService<T>
     {
-        List<T> SearchTvShows(string query);
+        List<T> SearchTvShows(string query, string defaultPosterPath = "", PosterSize size = PosterSize.w500);
     }
 }
