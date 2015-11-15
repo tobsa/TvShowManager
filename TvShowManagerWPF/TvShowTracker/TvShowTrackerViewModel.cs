@@ -32,7 +32,9 @@ namespace TvShowManagerWPF.TvShowTracker
         {
             service = TvShowServiceFactory.Create(ConfigurationManager.ApiKey, Filepaths.SubscriptionsFilepath);
             SearchCommand = new RelayCommand(SearchTvShows);
-            tvShowsSearchedViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
+
+            TvShowsSearchedViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
+            TvShowsViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
         }
 
         #region Properties

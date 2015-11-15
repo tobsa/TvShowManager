@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CoreLibrary;
 using TvShowManagerLibrary;
 using TvShowManagerLibrary.Configurations;
 using TvShowManagerLibrary.Services;
@@ -16,9 +17,13 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
         private ObservableCollection<TvShow> tvShows;
         private TvShow selectedTvShow;
 
+        public event Action<TvShow> DisplayTvShowDetailsRequested = delegate { };
+
         public TvShowsViewModel()
         {
             service = TvShowServiceFactory.Create(ConfigurationManager.ApiKey, Filepaths.SubscriptionsFilepath);
+
+            TvShows = service.GetAllSubscribedTvShows().ToObservableCollection();
         }
 
         public ObservableCollection<TvShow> TvShows
@@ -30,7 +35,12 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
         public TvShow SelectedTvShow
         {
             get { return selectedTvShow; }
-            set { selectedTvShow = value; OnPropertyChanged(); }
+            set
+            {
+                selectedTvShow = value;
+                OnPropertyChanged();
+                DisplayTvShowDetailsRequested(value);
+            }
         }
     }
 }
