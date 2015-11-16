@@ -16,6 +16,8 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
         private string subscribeButtonText;
 
         public RelayCommand SubscribeCommand { get; private set; }
+        public RelayCommand SaveCustomDataCommand { get; private set; }
+
         public event Action<TvShow> TvShowSubscriptionChanged = delegate { };
 
         public TvShowDetailsViewModel()
@@ -25,10 +27,9 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
         public TvShowDetailsViewModel(TvShowService service)
         {
             this.service = service;
-
             SubscribeButtonText = GetSubscribeButtonText();
-
             SubscribeCommand = new RelayCommand(ToggleSubscription);
+            SaveCustomDataCommand = new RelayCommand(SaveCustomData);
         }
 
         public TvShow TvShow
@@ -59,6 +60,11 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
         {
             TvShowSubscriptionChanged(TvShow);
             SubscribeButtonText = GetSubscribeButtonText();
+        }
+
+        private void SaveCustomData()
+        {
+            service.UpdateTvShow(TvShow);
         }
     }
 }
