@@ -18,9 +18,9 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
 
         public event Action<TvShow> DisplayTvShowDetailsRequested = delegate { };
 
-        public TvShowsViewModel()
+        public TvShowsViewModel(TvShowService service)
         {
-            TvShows = Service.GetAllSubscribedTvShows().ToObservableCollection();
+            TvShows = service.GetAllSubscribedTvShows().ToObservableCollection();
         }
 
         public ObservableCollection<TvShow> TvShows

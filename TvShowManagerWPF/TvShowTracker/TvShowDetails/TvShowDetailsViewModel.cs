@@ -11,14 +11,17 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
 {
     public class TvShowDetailsViewModel : BaseViewModel
     {
+        private readonly TvShowService service;
         private TvShow tvShow;
-        private string _subscribeButtonText;
+        private string subscribeButtonText;
 
         public RelayCommand SubscribeCommand { get; private set; }
         public event Action<TvShow> TvShowSubscriptionChanged = delegate { };
 
-        public TvShowDetailsViewModel()
+        public TvShowDetailsViewModel(TvShowService service)
         {
+            this.service = service;
+
             SubscribeButtonText = GetSubscribeButtonText();
 
             SubscribeCommand = new RelayCommand(ToggleSubscription);
@@ -36,8 +39,8 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
 
         public string SubscribeButtonText
         {
-            get { return _subscribeButtonText; }
-            set { _subscribeButtonText = value; OnPropertyChanged(); }
+            get { return subscribeButtonText; }
+            set { subscribeButtonText = value; OnPropertyChanged(); }
         }
 
         private string GetSubscribeButtonText()
@@ -45,7 +48,7 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
             if (TvShow == null)
                 return "";
 
-            return Service.IsSubscribing(TvShow) ? "Unsubscribe" : "Subscribe";
+            return service.IsSubscribing(TvShow) ? "Unsubscribe" : "Subscribe";
         }
 
         private void ToggleSubscription()

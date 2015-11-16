@@ -16,7 +16,6 @@ namespace TvShowManagerWPF
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             ConfigurationManager.Load(Filepaths.ConfigurationFilePath);
-            BaseViewModel.Service = TvShowServiceFactory.Create(ConfigurationManager.ApiKey, Filepaths.SubscriptionsFilepath);
         }
     }
 }

@@ -12,8 +12,6 @@ namespace TvShowManagerWPF
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public static TvShowService Service { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

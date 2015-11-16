@@ -8,10 +8,6 @@
              xmlns:tvShowsSearched="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsSearched"
              xmlns:tvShowDetails="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowDetails"
              mc:Ignorable="d">
-    <UserControl.DataContext>
-        <local:TvShowTrackerViewModel />
-    </UserControl.DataContext>
-        
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

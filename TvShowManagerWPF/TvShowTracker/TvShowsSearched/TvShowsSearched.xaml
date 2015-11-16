@@ -6,10 +6,6 @@
              xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsSearched"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.DataContext>
-        <local:TvShowsSearchedViewModel />
-    </UserControl.DataContext>
-    
     <Grid>
         <ListBox ItemsSource="{Binding TvShows}"
                  SelectedItem="{Binding SelectedTvShow}"

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:uc="clr-namespace:TvShowManagerWPF.TvShowTracker"
         xmlns:local="clr-namespace:TvShowManagerWPF"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         Title="Tv Show Manager" 
         Width="1600"
         Height="900"
@@ -12,18 +13,37 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    
+        
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <Label Grid.Row="0" HorizontalAlignment="Center">Tv Show Manager</Label>
+
+        <StackPanel Grid.Row="0">
+            <Label HorizontalAlignment="Center">Tv Show Manager</Label>
+            
+            <WrapPanel HorizontalAlignment="Right">
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Width" Value="20" />
+                        <Setter Property="Height" Value="20" />
+                    </Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Foreground" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="0" />
+                    </Style>
+                </WrapPanel.Resources>
+
+            </WrapPanel>
+            
+        </StackPanel>
+
 
         <TabControl Grid.Row="1">
             <TabItem Header="Tv Show Tracker">
-                <uc:TvShowTracker />
+                <uc:TvShowTracker DataContext="{Binding TvShowTrackerViewModel}" />
             </TabItem>
             <TabItem Header="Tv Show Viewer"></TabItem>
             <TabItem Header="Movie Viewer"></TabItem>
