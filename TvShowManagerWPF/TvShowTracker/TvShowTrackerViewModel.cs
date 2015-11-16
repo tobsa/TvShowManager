@@ -28,6 +28,10 @@ namespace TvShowManagerWPF.TvShowTracker
         private bool isTabItemTvShowDetailsSelected;
         #endregion
 
+        public TvShowTrackerViewModel()
+        {
+        }
+
         public TvShowTrackerViewModel(TvShowService service)
         {
             this.service = service;

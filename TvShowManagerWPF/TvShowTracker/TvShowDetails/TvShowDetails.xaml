@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowDetails"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <local:TvShowDetailsViewModel />
+    </UserControl.DataContext>
     <Grid>
         <StackPanel>
             <StackPanel DataContext="{Binding TvShow}">

@@ -18,6 +18,10 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
         public RelayCommand SubscribeCommand { get; private set; }
         public event Action<TvShow> TvShowSubscriptionChanged = delegate { };
 
+        public TvShowDetailsViewModel()
+        {
+        }
+
         public TvShowDetailsViewModel(TvShowService service)
         {
             this.service = service;
