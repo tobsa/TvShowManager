@@ -86,7 +86,7 @@ namespace TvShowManagerWPF.TvShowTracker
         private void SearchTvShows()
         {
             IsTabItemTvShowSearchedSelected = true;
-            TvShowsSearchedViewModel.TvShows = service.SearchTvShows(TextBoxSearchQuery, Filepaths.NoImageFoundPath).ToObservableCollection();
+            TvShowsSearchedViewModel.TvShows = service.SearchTvShows(TextBoxSearchQuery, ConfigurationData.NoImageFoundPath).ToObservableCollection();
         }
 
         private void DisplayTvShowDetails(TvShow show)

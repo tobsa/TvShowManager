@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Configurations\Configuration.cs" />
     <Compile Include="Configurations\ConfigurationManager.cs" />
+    <Compile Include="Configurations\Link.cs" />
+    <Compile Include="Configurations\LinkManager.cs" />
     <Compile Include="ExternalServices\ITvShowExternalService.cs" />
     <Compile Include="Repositories\ITvShowRepository.cs" />
     <Compile Include="Serialization\XmlSerializerHelper.cs" />

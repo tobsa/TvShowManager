@@ -7,7 +7,29 @@
     <UserControl.DataContext>
         <local:TvShowsViewModel />
     </UserControl.DataContext>
-    <Grid>
+    <StackPanel>
+        <WrapPanel HorizontalAlignment="Center" Margin="0 20 0 20">
+            <ItemsControl ItemsSource="{Binding ImagePaths}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding Path=DataContext.HyperLinkMultiCommand, 
+                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                CommandParameter="{Binding Name}">
+                            <StackPanel Orientation="Horizontal" Width="120">
+                                <Image Source="{Binding Link}" Width="16" Height="16" />
+                                <Label Content="{Binding Name}" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </WrapPanel>
+        
         <ListBox ItemsSource="{Binding TvShows}"
                  SelectedItem="{Binding SelectedTvShow}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -25,5 +47,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </Grid>
+    </StackPanel>
 </UserControl>

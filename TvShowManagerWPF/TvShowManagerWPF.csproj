@@ -56,7 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BaseViewModel.cs" />
-    <Compile Include="Filepaths.cs" />
+    <Compile Include="ConfigurationData.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -68,6 +68,7 @@
       <DependentUpon>TvShowsSearched.xaml</DependentUpon>
     </Compile>
     <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearchedViewModel.cs" />
+    <Compile Include="TvShowTracker\TvShows\ImageLink.cs" />
     <Compile Include="TvShowTracker\TvShows\TvShows.xaml.cs">
       <DependentUpon>TvShows.xaml</DependentUpon>
     </Compile>

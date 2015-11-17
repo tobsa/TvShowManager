@@ -17,7 +17,7 @@ namespace TvShowManagerWPF
 
         public MainWindowViewModel()
         {
-            service = TvShowServiceFactory.Create(ConfigurationManager.ApiKey, Filepaths.SubscriptionsFilepath);
+            service = TvShowServiceFactory.Create(ConfigurationManager.ApiKey, ConfigurationData.SubscriptionsFilepath);
             tvShowTrackerViewModel = new TvShowTrackerViewModel(service);
         }
 
