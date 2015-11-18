@@ -14,10 +14,10 @@ namespace TvShowManagerWPF
 
         public const string NoImageFoundPath = "../../Content/NoImageFound.png";
 
-        public const string SceneAccess = "SceneAccess";
-        public const string Addic7ed = "Addic7ed";
-        public const string PirateBay = "PirateBay";
-        public const string KickassTorrent = "KickassTorrent";
-        public const string IMDb = "IMDb";
+        public const string SceneAccessIcon = "../../Content/SceneAccessIcon.ico";
+        public const string Addic7edIcon = "../../Content/Addic7edIcon.ico";
+        public const string PirateBayIcon = "../../Content/PirateBayIcon.ico";
+        public const string KickassTorrentIcon = "../../Content/KickassTorrentIcon.ico";
+        public const string IMDbIcon = "../../Content/ImdbIcon.ico";
     }
 }

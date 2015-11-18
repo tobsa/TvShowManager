@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearchedViewModel.cs" />
     <Compile Include="TvShowTracker\TvShows\ImageLink.cs" />
+    <Compile Include="TvShowTracker\TvShows\TvShowLink.cs" />
     <Compile Include="TvShowTracker\TvShows\TvShows.xaml.cs">
       <DependentUpon>TvShows.xaml</DependentUpon>
     </Compile>

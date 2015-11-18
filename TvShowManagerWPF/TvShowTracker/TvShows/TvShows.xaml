@@ -17,7 +17,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Command="{Binding Path=DataContext.HyperLinkMultiCommand, 
+                        <Button Command="{Binding Path=DataContext.OnHyperLinkMultiNavigateCommand, 
                             RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
                                 CommandParameter="{Binding Name}">
                             <StackPanel Orientation="Horizontal" Width="120">
@@ -43,6 +43,28 @@
                     <StackPanel>
                         <Image Source="{Binding PosterPath}" Width="150" Height="225" />
                         <Label Content="{Binding Name}" />
+                        <WrapPanel>
+                            <Button Command="{Binding DataContext.OnHyperLink1NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                CommandParameter="{Binding}" Width="16" Height="16">
+                                <Image Source="../../Content/SceneAccessIcon.ico"  />
+                            </Button>
+                            <Button Command="{Binding DataContext.OnHyperLink2NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                CommandParameter="{Binding}" Width="16" Height="16">
+                                <Image Source="../../Content/Addic7edIcon.ico" />
+                            </Button>
+                            <Button Command="{Binding DataContext.OnHyperLink3NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                CommandParameter="{Binding}" Width="16" Height="16">
+                                <Image Source="../../Content/PirateBayIcon.ico" />
+                            </Button>
+                            <Button Command="{Binding DataContext.OnHyperLink4NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                CommandParameter="{Binding}" Width="16" Height="16">
+                                <Image Source="../../Content/KickassTorrentIcon.ico" />
+                            </Button>
+                            <Button Command="{Binding DataContext.OnHyperLink5NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                CommandParameter="{Binding}" Width="16" Height="16">
+                                <Image Source="../../Content/ImdbIcon.ico" />
+                            </Button>
+                        </WrapPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CoreLibrary;
 using TvShowManagerLibrary;
+using TvShowManagerLibrary.BrowserLauncher;
 using TvShowManagerLibrary.Configurations;
 using TvShowManagerLibrary.Services;
 
@@ -14,12 +15,19 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
 {
     public class TvShowsViewModel : BaseViewModel
     {
+        private BrowserLauncher launcher;
         private ObservableCollection<TvShow> tvShows;
         private TvShow selectedTvShow;
 
         public event Action<TvShow> DisplayTvShowDetailsRequested = delegate { };
 
-        public RelayCommand<string> HyperLinkMultiCommand { get; private set; }
+        public RelayCommand<TvShow> OnHyperLink1NavigateCommand { get; private set; }
+        public RelayCommand<TvShow> OnHyperLink2NavigateCommand { get; private set; }
+        public RelayCommand<TvShow> OnHyperLink3NavigateCommand { get; private set; }
+        public RelayCommand<TvShow> OnHyperLink4NavigateCommand { get; private set; }
+        public RelayCommand<TvShow> OnHyperLink5NavigateCommand { get; private set; }
+        public RelayCommand<string> OnHyperLinkMultiNavigateCommand { get; private set; }
+
 
         public TvShowsViewModel()
         {
@@ -27,8 +35,14 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
 
         public TvShowsViewModel(TvShowService service)
         {
+            launcher = new BrowserLauncher(ConfigurationData.LinksFilepath);
             TvShows = service.GetAllSubscribedTvShows().ToObservableCollection();
-            HyperLinkMultiCommand = new RelayCommand<string>(HyperLinkMultiClicked);
+            OnHyperLink1NavigateCommand = new RelayCommand<TvShow>(OnHyperLink1Navigate);
+            OnHyperLink2NavigateCommand = new RelayCommand<TvShow>(OnHyperLink2Navigate);
+            OnHyperLink3NavigateCommand = new RelayCommand<TvShow>(OnHyperLink3Navigate);
+            OnHyperLink4NavigateCommand = new RelayCommand<TvShow>(OnHyperLink4Navigate);
+            OnHyperLink5NavigateCommand = new RelayCommand<TvShow>(OnHyperLink5Navigate);
+            OnHyperLinkMultiNavigateCommand = new RelayCommand<string>(OnHyperLinkMultiNavigate);
         }
 
         public ObservableCollection<TvShow> TvShows
@@ -50,49 +64,40 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
 
         public List<ImageLink> ImagePaths => new List<ImageLink>()
         {
-            new ImageLink(ConfigurationData.SceneAccess, "../../Content/SceneAccessIcon.ico"),
-            new ImageLink(ConfigurationData.Addic7ed, "../../Content/Addic7edIcon.ico"),
-            new ImageLink(ConfigurationData.PirateBay, "../../Content/PirateBayIcon.ico"),
-            new ImageLink(ConfigurationData.KickassTorrent, "../../Content/KickassTorrentIcon.ico"),
-            new ImageLink(ConfigurationData.IMDb, "../../Content/ImdbIcon.ico"),
+            new ImageLink(BrowserLauncher.SceneAccess, ConfigurationData.SceneAccessIcon),
+            new ImageLink(BrowserLauncher.Addic7ed, ConfigurationData.Addic7edIcon),
+            new ImageLink(BrowserLauncher.PirateBay, ConfigurationData.PirateBayIcon),
+            new ImageLink(BrowserLauncher.KickassTorrent, ConfigurationData.KickassTorrentIcon),
+            new ImageLink(BrowserLauncher.IMDb, ConfigurationData.IMDbIcon),
         };
 
-        private void HyperLinkMultiClicked(string parameter)
+        private void OnHyperLinkMultiNavigate(string parameter)
         {
-            var links = LinkManager.DeserializeLinks(ConfigurationData.LinksFilepath);
-            var link = links.Single(x => x.Name == parameter);
-
             foreach (var show in TvShows)
             {
-                switch (parameter)
-                {
-                    case ConfigurationData.SceneAccess:
-                        if (GetName(show).HasValue())
-                            Process.Start(new ProcessStartInfo(link.PreValue + GetName(show) + link.PostValue));
-                        break;
-                    case ConfigurationData.Addic7ed:
-                        if (show.Addic7edID.HasValue())
-                            Process.Start(new ProcessStartInfo(link.PreValue + show.Addic7edID + link.PostValue));
-                        break;
-                    case ConfigurationData.PirateBay:
-                        if (GetName(show).HasValue())
-                            Process.Start(new ProcessStartInfo(link.PreValue + GetName(show) + link.PostValue));
-                        break;
-                    case ConfigurationData.KickassTorrent:
-                        if (GetName(show).HasValue())
-                            Process.Start(new ProcessStartInfo(link.PreValue + GetName(show) + link.PostValue));
-                        break;
-                    case ConfigurationData.IMDb:
-                        if (show.IMDbID.HasValue())
-                            Process.Start(new ProcessStartInfo(link.PreValue + show.IMDbID + link.PostValue));
-                        break;
-                }
+                launcher.LaunchBrowser(show, parameter);
             }
         }
 
-        private string GetName(TvShow show)
+        private void OnHyperLink1Navigate(TvShow show)
         {
-            return show.CustomName.HasValue() ? show.CustomName : show.Name;
+            launcher.LaunchBrowser(show, BrowserLauncher.SceneAccess);
+        }
+        private void OnHyperLink2Navigate(TvShow show)
+        {
+            launcher.LaunchBrowser(show, BrowserLauncher.Addic7ed);
+        }
+        private void OnHyperLink3Navigate(TvShow show)
+        {
+            launcher.LaunchBrowser(show, BrowserLauncher.PirateBay);
+        }
+        private void OnHyperLink4Navigate(TvShow show)
+        {
+            launcher.LaunchBrowser(show, BrowserLauncher.KickassTorrent);
+        }
+        private void OnHyperLink5Navigate(TvShow show)
+        {
+            launcher.LaunchBrowser(show, BrowserLauncher.IMDb);
         }
     }
 }
