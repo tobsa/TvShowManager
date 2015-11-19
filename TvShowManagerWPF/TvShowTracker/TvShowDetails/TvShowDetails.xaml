@@ -7,6 +7,7 @@
     <UserControl.DataContext>
         <local:TvShowDetailsViewModel />
     </UserControl.DataContext>
+    
     <Grid>
         <StackPanel>
             <StackPanel DataContext="{Binding TvShow}">
@@ -18,22 +19,23 @@
             
             <Separator />
 
-            <StackPanel DataContext="{Binding TvShow}" >
+            <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Width="110" HorizontalContentAlignment="Right" Content="Custom Name:" />
-                    <TextBox Width="200" VerticalAlignment="Center" Text="{Binding CustomName}" />
+                    <TextBox Width="200" VerticalAlignment="Center" Text="{Binding CustomName, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Width="110" HorizontalContentAlignment="Right" Content="Addic7ed ID:" />
-                    <TextBox Width="200" VerticalAlignment="Center" Text="{Binding Addic7edID}" />
+                    <TextBox Width="200" VerticalAlignment="Center" Text="{Binding Addic7edID, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Width="110" HorizontalContentAlignment="Right" Content="IMDb ID:" />
-                    <TextBox Width="200" VerticalAlignment="Center" Text="{Binding IMDbID}"/>
+                    <TextBox Width="200" VerticalAlignment="Center" Text="{Binding IMDbID, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </StackPanel>
 
-            <Button Content="Save" Command="{Binding SaveCustomDataCommand}" />
+            <Button Content="{Binding SaveButtonText}" 
+                    Command="{Binding SaveCustomDataCommand}" />
         </StackPanel>
     </Grid>
 </UserControl>

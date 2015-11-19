@@ -51,6 +51,8 @@
         
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="3" HorizontalAlignment="Stretch" />
         
-        <Grid Row="1" Column="2" Background="Black"></Grid>
+        <Grid Row="1" Column="2" Background="Black">
+            
+        </Grid>
     </Grid>
 </UserControl>

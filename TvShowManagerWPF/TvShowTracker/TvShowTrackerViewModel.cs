@@ -14,6 +14,7 @@ using TvShowManagerLibrary.Services;
 using TvShowManagerWPF.TvShowTracker.TvShowDetails;
 using TvShowManagerWPF.TvShowTracker.TvShows;
 using TvShowManagerWPF.TvShowTracker.TvShowsSearched;
+using TvShowManagerWPF.TvShowTracker.TvShowSubtitles;
 
 namespace TvShowManagerWPF.TvShowTracker
 {
@@ -26,6 +27,7 @@ namespace TvShowManagerWPF.TvShowTracker
         private TvShowDetailsViewModel tvShowDetailsViewModel;
         private bool isTabItemTvShowSearchedSelected;
         private bool isTabItemTvShowDetailsSelected;
+        private TvShowSubtitlesViewModel tvShowSubtitlesViewModel;
         #endregion
 
         public TvShowTrackerViewModel()
@@ -38,6 +40,7 @@ namespace TvShowManagerWPF.TvShowTracker
             tvShowsViewModel = new TvShowsViewModel(service);
             tvShowsSearchedViewModel = new TvShowsSearchedViewModel();
             tvShowDetailsViewModel = new TvShowDetailsViewModel(service);
+            tvShowSubtitlesViewModel = new TvShowSubtitlesViewModel();
 
             SearchCommand = new RelayCommand(SearchTvShows);
 
@@ -78,6 +81,12 @@ namespace TvShowManagerWPF.TvShowTracker
         }
 
         public string TextBoxSearchQuery { get; set; }
+
+        public TvShowSubtitlesViewModel TvShowSubtitlesViewModel
+        {
+            get { return tvShowSubtitlesViewModel; }
+            set { tvShowSubtitlesViewModel = value; OnPropertyChanged(); }
+        }
         #endregion  
 
         public RelayCommand SearchCommand { get; private set; }

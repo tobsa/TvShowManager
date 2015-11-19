@@ -26,7 +26,7 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
         public RelayCommand<TvShow> OnHyperLink3NavigateCommand { get; private set; }
         public RelayCommand<TvShow> OnHyperLink4NavigateCommand { get; private set; }
         public RelayCommand<TvShow> OnHyperLink5NavigateCommand { get; private set; }
-        public RelayCommand<string> OnHyperLinkMultiNavigateCommand { get; private set; }
+        public RelayCommand<Websites> OnHyperLinkMultiNavigateCommand { get; private set; }
 
 
         public TvShowsViewModel()
@@ -42,7 +42,7 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
             OnHyperLink3NavigateCommand = new RelayCommand<TvShow>(OnHyperLink3Navigate);
             OnHyperLink4NavigateCommand = new RelayCommand<TvShow>(OnHyperLink4Navigate);
             OnHyperLink5NavigateCommand = new RelayCommand<TvShow>(OnHyperLink5Navigate);
-            OnHyperLinkMultiNavigateCommand = new RelayCommand<string>(OnHyperLinkMultiNavigate);
+            OnHyperLinkMultiNavigateCommand = new RelayCommand<Websites>(OnHyperLinkMultiNavigate);
         }
 
         public ObservableCollection<TvShow> TvShows
@@ -64,14 +64,14 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
 
         public List<ImageLink> ImagePaths => new List<ImageLink>()
         {
-            new ImageLink(BrowserLauncher.SceneAccess, ConfigurationData.SceneAccessIcon),
-            new ImageLink(BrowserLauncher.Addic7ed, ConfigurationData.Addic7edIcon),
-            new ImageLink(BrowserLauncher.PirateBay, ConfigurationData.PirateBayIcon),
-            new ImageLink(BrowserLauncher.KickassTorrent, ConfigurationData.KickassTorrentIcon),
-            new ImageLink(BrowserLauncher.IMDb, ConfigurationData.IMDbIcon),
+            new ImageLink(Websites.SceneAccess, ConfigurationData.SceneAccessIcon),
+            new ImageLink(Websites.Addic7ed, ConfigurationData.Addic7edIcon),
+            new ImageLink(Websites.PirateBay, ConfigurationData.PirateBayIcon),
+            new ImageLink(Websites.KickassTorrent, ConfigurationData.KickassTorrentIcon),
+            new ImageLink(Websites.IMDb, ConfigurationData.IMDbIcon),
         };
 
-        private void OnHyperLinkMultiNavigate(string parameter)
+        private void OnHyperLinkMultiNavigate(Websites parameter)
         {
             foreach (var show in TvShows)
             {
@@ -81,23 +81,23 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
 
         private void OnHyperLink1Navigate(TvShow show)
         {
-            launcher.LaunchBrowser(show, BrowserLauncher.SceneAccess);
+            launcher.LaunchBrowser(show, Websites.SceneAccess);
         }
         private void OnHyperLink2Navigate(TvShow show)
         {
-            launcher.LaunchBrowser(show, BrowserLauncher.Addic7ed);
+            launcher.LaunchBrowser(show, Websites.Addic7ed);
         }
         private void OnHyperLink3Navigate(TvShow show)
         {
-            launcher.LaunchBrowser(show, BrowserLauncher.PirateBay);
+            launcher.LaunchBrowser(show, Websites.PirateBay);
         }
         private void OnHyperLink4Navigate(TvShow show)
         {
-            launcher.LaunchBrowser(show, BrowserLauncher.KickassTorrent);
+            launcher.LaunchBrowser(show, Websites.KickassTorrent);
         }
         private void OnHyperLink5Navigate(TvShow show)
         {
-            launcher.LaunchBrowser(show, BrowserLauncher.IMDb);
+            launcher.LaunchBrowser(show, Websites.IMDb);
         }
     }
 }
