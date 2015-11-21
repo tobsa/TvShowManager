@@ -27,5 +27,20 @@ namespace CoreLibrary
         {
             return str == null;
         }
+
+        /// <summary>
+        /// Finds and extracts the string between two tags
+        /// </summary>
+        /// <param name="str">The string to apply this method to</param>
+        /// <param name="beginTag">The begin tag</param>
+        /// <param name="endTag">The end tag</param>
+        /// <returns>The extracted string between two tags</returns>
+        public static string FindSubstring(this string str, string beginTag, string endTag)
+        {
+            var beginIndex = str.IndexOf(beginTag, StringComparison.Ordinal) + beginTag.Length;
+            var endIndex = str.IndexOf(endTag, beginIndex, StringComparison.Ordinal);
+
+            return str.Substring(beginIndex, endIndex - beginIndex);
+        }
     }
 }
