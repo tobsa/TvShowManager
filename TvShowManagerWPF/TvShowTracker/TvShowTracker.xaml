@@ -7,6 +7,7 @@
              xmlns:tvShows="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShows"
              xmlns:tvShowsSearched="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsSearched"
              xmlns:tvShowDetails="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowDetails"
+             xmlns:tvShowLatestNews="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowLatestNews"
              mc:Ignorable="d">
     <UserControl.DataContext>
         <local:TvShowTrackerViewModel />
@@ -52,7 +53,7 @@
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="3" HorizontalAlignment="Stretch" />
         
         <Grid Row="1" Column="2" Background="Black">
-            
+            <tvShowLatestNews:TvShowLatestNews DataContext="{Binding TvShowLatestNewsViewModel}"/>
         </Grid>
     </Grid>
 </UserControl>

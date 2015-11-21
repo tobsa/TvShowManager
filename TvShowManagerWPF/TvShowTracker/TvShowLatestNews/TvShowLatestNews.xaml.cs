@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TvShowManagerWPF.TvShowTracker.TvShowSubtitles
+namespace TvShowManagerWPF.TvShowTracker.TvShowLatestNews
 {
     /// <summary>
-    /// Interaction logic for TvShowSubtitles.xaml
+    /// Interaction logic for TvShowLatestNews.xaml
     /// </summary>
-    public partial class TvShowSubtitles : UserControl
+    public partial class TvShowLatestNews : UserControl
     {
-        public TvShowSubtitles()
+        public TvShowLatestNews()
         {
             InitializeComponent();
         }

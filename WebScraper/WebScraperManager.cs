@@ -13,20 +13,36 @@ namespace WebScraper
 { 
     public class WebScraperManager
     {
+        public static string CacheFilepath { get; set; }
+
         public static WebScraperResult Scrape(WebScraperUri uri)
         {
-            using (var client = new WebClient())
-            {
-                var content = client.DownloadString(uri.Uri);
+            var content = GetContent(uri.Uri);
 
-                return new WebScraperResult
-                {
-                    Uri = uri,
-                    Content = content,
-                    Result = content.Split('\n')
+            return new WebScraperResult
+            {
+                Uri = uri,
+                Content = content,
+                Result = content.Split('\n')
                             .Where(x => x.Contains(uri.BeginTag))
                             .Select(x => x.FindSubstring(uri.BeginTag, uri.EndTag)).ToList()
-                };
+            };
+        }
+
+        private static string GetContent(string uri)
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    var content = client.DownloadString(uri);
+                    File.WriteAllText(CacheFilepath, content);
+                    return content;
+                }
+            }
+            catch (WebException)
+            {
+                return File.Exists(CacheFilepath) ? File.ReadAllText(CacheFilepath) : string.Empty;
             }
         }
 

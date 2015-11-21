@@ -60,19 +60,18 @@
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RelayCommand.cs" />
-    <Compile Include="TvShowTracker\TvShowDetails\SaveButtonContentConverter.cs" />
     <Compile Include="TvShowTracker\TvShowDetails\TvShowDetails.xaml.cs">
       <DependentUpon>TvShowDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="TvShowTracker\TvShowDetails\TvShowDetailsViewModel.cs" />
+    <Compile Include="TvShowTracker\TvShowLatestNews\TvShowLatestNews.xaml.cs">
+      <DependentUpon>TvShowLatestNews.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearched.xaml.cs">
       <DependentUpon>TvShowsSearched.xaml</DependentUpon>
     </Compile>
     <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearchedViewModel.cs" />
-    <Compile Include="TvShowTracker\TvShowSubtitles\TvShowSubtitles.xaml.cs">
-      <DependentUpon>TvShowSubtitles.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TvShowTracker\TvShowSubtitles\TvShowSubtitlesViewModel.cs" />
+    <Compile Include="TvShowTracker\TvShowLatestNews\TvShowLatestNewsViewModel.cs" />
     <Compile Include="TvShowTracker\TvShows\ImageLink.cs" />
     <Compile Include="TvShowTracker\TvShows\TvShowLink.cs" />
     <Compile Include="TvShowTracker\TvShows\TvShows.xaml.cs">
@@ -103,11 +102,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TvShowTracker\TvShowsSearched\TvShowsSearched.xaml">
+    <Page Include="TvShowTracker\TvShowLatestNews\TvShowLatestNews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TvShowTracker\TvShowSubtitles\TvShowSubtitles.xaml">
+    <Page Include="TvShowTracker\TvShowsSearched\TvShowsSearched.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,6 +161,10 @@
     <ProjectReference Include="..\TvShowManagerLibrary\TvShowManagerLibrary.csproj">
       <Project>{59C21328-5EA8-49F1-A1E0-345BEC7826C5}</Project>
       <Name>TvShowManagerLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebScraper\WebScraper.csproj">
+      <Project>{EFEA4298-B08E-4FB5-9C24-9743252255C5}</Project>
+      <Name>WebScraper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
