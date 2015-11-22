@@ -9,14 +9,25 @@
     <UserControl.DataContext>
         <local:TvShowLatestNewsViewModel />
     </UserControl.DataContext>
-    
-    <Grid>
-        <ItemsControl ItemsSource="{Binding Shows}" Foreground="Wheat">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Content="{Binding SeriesName}" HorizontalContentAlignment="Left" ToolTip="{Binding SeriesName}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+
+    <ItemsControl ItemsSource="{Binding Shows}" Foreground="Wheat">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Button ToolTip="{Binding SeriesName}" Command="{Binding DataContext.OnOpenLinkCommand, 
+                    RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        CommandParameter="{Binding}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SeriesName}" />
+                        
+                        <WrapPanel>
+                            <Label Content="Season: " Margin="0"/>
+                            <Label Content="{Binding Season}" Margin="0" />
+                            <Label Content=" Episode: " Margin="0"/>
+                            <Label Content="{Binding Episode}" Margin="0"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </Button>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

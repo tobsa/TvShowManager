@@ -16,5 +16,6 @@ namespace TvShowManagerLibrary
         public string CustomName { get; set; }
         public string IMDbID { get; set; }
         public string Addic7edID { get; set; }
+        public bool IsArchived { get; set; }
     }
 }

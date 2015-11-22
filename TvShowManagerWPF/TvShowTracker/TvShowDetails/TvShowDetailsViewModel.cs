@@ -14,15 +14,19 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
         private readonly TvShowService service;
         private TvShow tvShow;
         private string subscribeButtonText;
-        private string _customName;
+        private string customName;
         private string addic7edID;
         private string imdbID;
         private string saveButtonText;
+        private bool isSubscribing;
+        private string archiveButtonText;
 
         public RelayCommand SubscribeCommand { get; private set; }
+        public RelayCommand ArchiveCommand { get; private set; }
         public RelayCommand SaveCustomDataCommand { get; private set; }
 
         public event Action<TvShow> TvShowSubscriptionChanged = delegate { };
+        public event Action<TvShow> TvShowArchiveChanged = delegate { };
 
         public TvShowDetailsViewModel()
         {
@@ -33,16 +37,18 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
             this.service = service;
             SubscribeButtonText = GetSubscribeButtonText();
             SaveButtonText = GetSaveButtonText();
+            ArchiveButtonText = GetArchiveButtonText();
             SubscribeCommand = new RelayCommand(ToggleSubscription);
+            ArchiveCommand = new RelayCommand(ToggleArchive);
             SaveCustomDataCommand = new RelayCommand(SaveCustomData);
         }
 
         public string CustomName
         {
-            get { return _customName; }
+            get { return customName; }
             set
             {
-                _customName = value;
+                customName = value;
                 SaveButtonText = GetSaveButtonText();
                 OnPropertyChanged();
             }
@@ -83,7 +89,15 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
                 OnPropertyChanged();
                 SubscribeButtonText = GetSubscribeButtonText();
                 SaveButtonText = GetSaveButtonText();
+                IsSubscribing = service.IsSubscribing(value);
+                ArchiveButtonText = GetArchiveButtonText();
             }
+        }
+
+        public bool IsSubscribing
+        {
+            get { return isSubscribing; }
+            set { isSubscribing = value; OnPropertyChanged(); }
         }
 
         public string SubscribeButtonText
@@ -96,6 +110,12 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
         {
             get { return saveButtonText; }
             set { saveButtonText = value; OnPropertyChanged(); }
+        }
+
+        public string ArchiveButtonText
+        {
+            get { return archiveButtonText; }
+            set { archiveButtonText = value; OnPropertyChanged(); }
         }
 
         private string GetSubscribeButtonText()
@@ -114,14 +134,35 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
             return "Save*";
         }
 
+        private string GetArchiveButtonText()
+        {
+            if (TvShow == null || TvShow.IsArchived)
+                return "Activate";
+
+            return "Archive";
+        }
+
         private void ToggleSubscription()
         {
             TvShowSubscriptionChanged(TvShow);
             SubscribeButtonText = GetSubscribeButtonText();
+            IsSubscribing = service.IsSubscribing(TvShow);
+            ArchiveButtonText = GetArchiveButtonText();
+        }
+
+        private void ToggleArchive()
+        {
+            TvShow.IsArchived = !TvShow.IsArchived;
+            service.UpdateTvShow(TvShow);
+            ArchiveButtonText = GetArchiveButtonText();
+            TvShowArchiveChanged(TvShow);
         }
 
         private void SaveCustomData()
         {
+            if (TvShow.CustomName == CustomName && TvShow.Addic7edID == Addic7edID && TvShow.IMDbID == IMDbID)
+                return;
+
             TvShow.CustomName = CustomName;
             TvShow.Addic7edID = Addic7edID;
             TvShow.IMDbID = IMDbID;

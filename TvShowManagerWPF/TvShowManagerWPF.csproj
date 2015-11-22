@@ -67,13 +67,16 @@
     <Compile Include="TvShowTracker\TvShowLatestNews\TvShowLatestNews.xaml.cs">
       <DependentUpon>TvShowLatestNews.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TvShowTracker\TvShowsArchived\TvShowsArchived.xaml.cs">
+      <DependentUpon>TvShowsArchived.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TvShowTracker\TvShowsArchived\TvShowsArchivedViewModel.cs" />
     <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearched.xaml.cs">
       <DependentUpon>TvShowsSearched.xaml</DependentUpon>
     </Compile>
     <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearchedViewModel.cs" />
     <Compile Include="TvShowTracker\TvShowLatestNews\TvShowLatestNewsViewModel.cs" />
     <Compile Include="TvShowTracker\TvShows\ImageLink.cs" />
-    <Compile Include="TvShowTracker\TvShows\TvShowLink.cs" />
     <Compile Include="TvShowTracker\TvShows\TvShows.xaml.cs">
       <DependentUpon>TvShows.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TvShowTracker\TvShowLatestNews\TvShowLatestNews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TvShowTracker\TvShowsArchived\TvShowsArchived.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,8 +189,6 @@
     <Folder Include="MovieViewer\" />
     <Folder Include="SubtitleMatcher\" />
     <Folder Include="SubtitleRenamer\" />
-    <Folder Include="TvShowTracker\TvShowsAll\" />
-    <Folder Include="TvShowTracker\TvShowsToday\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

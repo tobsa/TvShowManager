@@ -50,6 +50,16 @@ namespace TvShowManagerLibrary.Services
             return repository.GetTvShows();
         }
 
+        public List<TvShow> GetActiveTvShows()
+        {
+            return repository.GetTvShows().Where(show => !show.IsArchived).ToList();
+        }
+
+        public List<TvShow> GetArchivedTvShows()
+        { 
+            return repository.GetTvShows().Where(show => show.IsArchived).ToList();
+        }
+
         public void UpdateTvShow(TvShow show)
         {
             repository.UpdateTvShow(show);

@@ -30,44 +30,48 @@
             </ItemsControl>
         </WrapPanel>
         
-        <ListBox ItemsSource="{Binding TvShows}"
-                 SelectedItem="{Binding SelectedTvShow}"
+        <ItemsControl ItemsSource="{Binding TvShows}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListBox.ItemsPanel>
+            <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
                 </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <Image Source="{Binding PosterPath}" Width="150" Height="225" />
-                        <Label Content="{Binding Name}" />
-                        <WrapPanel>
-                            <Button Command="{Binding DataContext.OnHyperLink1NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                CommandParameter="{Binding}" Width="16" Height="16">
-                                <Image Source="../../Content/SceneAccessIcon.ico"  />
-                            </Button>
-                            <Button Command="{Binding DataContext.OnHyperLink2NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                CommandParameter="{Binding}" Width="16" Height="16">
-                                <Image Source="../../Content/Addic7edIcon.ico" />
-                            </Button>
-                            <Button Command="{Binding DataContext.OnHyperLink3NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                CommandParameter="{Binding}" Width="16" Height="16">
-                                <Image Source="../../Content/PirateBayIcon.ico" />
-                            </Button>
-                            <Button Command="{Binding DataContext.OnHyperLink4NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                CommandParameter="{Binding}" Width="16" Height="16">
-                                <Image Source="../../Content/KickassTorrentIcon.ico" />
-                            </Button>
-                            <Button Command="{Binding DataContext.OnHyperLink5NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                CommandParameter="{Binding}" Width="16" Height="16">
-                                <Image Source="../../Content/ImdbIcon.ico" />
-                            </Button>
-                        </WrapPanel>
-                    </StackPanel>
+                    <Button Command="{Binding DataContext.OnDisplayTvShowDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}"
+                            Margin="5"
+                            Width="150">
+                        <StackPanel>
+                            <Image Source="{Binding PosterPath}" Width="150" Height="225" />
+                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
+                            <WrapPanel>
+                                <Button Command="{Binding DataContext.OnHyperLink1NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                    CommandParameter="{Binding}" Width="16" Height="16">
+                                    <Image Source="../../Content/SceneAccessIcon.ico"  />
+                                </Button>
+                                <Button Command="{Binding DataContext.OnHyperLink2NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                    CommandParameter="{Binding}" Width="16" Height="16">
+                                    <Image Source="../../Content/Addic7edIcon.ico" />
+                                </Button>
+                                <Button Command="{Binding DataContext.OnHyperLink3NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                    CommandParameter="{Binding}" Width="16" Height="16">
+                                    <Image Source="../../Content/PirateBayIcon.ico" />
+                                </Button>
+                                <Button Command="{Binding DataContext.OnHyperLink4NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                    CommandParameter="{Binding}" Width="16" Height="16">
+                                    <Image Source="../../Content/KickassTorrentIcon.ico" />
+                                </Button>
+                                <Button Command="{Binding DataContext.OnHyperLink5NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                    CommandParameter="{Binding}" Width="16" Height="16">
+                                    <Image Source="../../Content/ImdbIcon.ico" />
+                                </Button>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Button>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </StackPanel>
 </UserControl>

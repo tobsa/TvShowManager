@@ -8,6 +8,7 @@ namespace TvShowManagerLibrary.WebScrapers
 {
     public class WebScraperShow
     {
+        public string Uri { get; set; }
         public string SeriesName { get; set; }
         public string EpisodeName { get; set; }
         public string Season { get; set; }

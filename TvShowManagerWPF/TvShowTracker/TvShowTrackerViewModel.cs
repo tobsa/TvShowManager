@@ -15,6 +15,7 @@ using TvShowManagerWPF.TvShowTracker.TvShowDetails;
 using TvShowManagerWPF.TvShowTracker.TvShows;
 using TvShowManagerWPF.TvShowTracker.TvShowsSearched;
 using TvShowManagerWPF.TvShowTracker.TvShowLatestNews;
+using TvShowManagerWPF.TvShowTracker.TvShowsArchived;
 
 namespace TvShowManagerWPF.TvShowTracker
 {
@@ -28,6 +29,7 @@ namespace TvShowManagerWPF.TvShowTracker
         private bool isTabItemTvShowSearchedSelected;
         private bool isTabItemTvShowDetailsSelected;
         private TvShowLatestNewsViewModel tvShowLatestNewsViewModel;
+        private TvShowsArchivedViewModel tvShowsArchivedViewModel;
         #endregion
 
         public TvShowTrackerViewModel()
@@ -40,13 +42,16 @@ namespace TvShowManagerWPF.TvShowTracker
             tvShowsViewModel = new TvShowsViewModel(service);
             tvShowsSearchedViewModel = new TvShowsSearchedViewModel();
             tvShowDetailsViewModel = new TvShowDetailsViewModel(service);
-            tvShowLatestNewsViewModel = new TvShowLatestNewsViewModel();
+            tvShowLatestNewsViewModel = new TvShowLatestNewsViewModel("");
+            tvShowsArchivedViewModel = new TvShowsArchivedViewModel(service);
 
             SearchCommand = new RelayCommand(SearchTvShows);
 
             TvShowsSearchedViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             TvShowsViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             TvShowDetailsViewModel.TvShowSubscriptionChanged += TvShowSubscriptionChanged;
+            TvShowDetailsViewModel.TvShowArchiveChanged += TvShowArchiveChanged;
+            TvShowsArchivedViewModel.OnDisplayTvShowDetailsRequested += DisplayTvShowDetails;
         }
 
         #region Properties
@@ -54,6 +59,12 @@ namespace TvShowManagerWPF.TvShowTracker
         {
             get { return tvShowsViewModel; }
             set { tvShowsViewModel = value; OnPropertyChanged(); }
+        }
+
+        public TvShowsArchivedViewModel TvShowsArchivedViewModel
+        {
+            get { return tvShowsArchivedViewModel; }
+            set { tvShowsArchivedViewModel = value; OnPropertyChanged(); }
         }
 
         public TvShowsSearchedViewModel TvShowsSearchedViewModel
@@ -118,7 +129,19 @@ namespace TvShowManagerWPF.TvShowTracker
                 service.Subscribe(show);
 
             TvShowDetailsViewModel.TvShow = show;
-            TvShowsViewModel.TvShows = service.GetAllSubscribedTvShows().ToObservableCollection();
+            TvShowsViewModel.TvShows = service.GetActiveTvShows().ToObservableCollection();
+            TvShowsArchivedViewModel.Shows = service.GetArchivedTvShows().ToObservableCollection();
+
+        }
+
+        private void TvShowArchiveChanged(TvShow show)
+        {
+            if (show == null)
+                return;
+
+            TvShowDetailsViewModel.TvShow = show;
+            TvShowsViewModel.TvShows = service.GetActiveTvShows().ToObservableCollection();
+            TvShowsArchivedViewModel.Shows = service.GetArchivedTvShows().ToObservableCollection();
         }
         #endregion
     }

@@ -15,12 +15,12 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
 {
     public class TvShowsViewModel : BaseViewModel
     {
-        private BrowserLauncher launcher;
+        private readonly BrowserLauncher launcher;
         private ObservableCollection<TvShow> tvShows;
-        private TvShow selectedTvShow;
-
+        
         public event Action<TvShow> DisplayTvShowDetailsRequested = delegate { };
 
+        public RelayCommand<TvShow> OnDisplayTvShowDetailsCommand { get; private set; }
         public RelayCommand<TvShow> OnHyperLink1NavigateCommand { get; private set; }
         public RelayCommand<TvShow> OnHyperLink2NavigateCommand { get; private set; }
         public RelayCommand<TvShow> OnHyperLink3NavigateCommand { get; private set; }
@@ -36,7 +36,8 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
         public TvShowsViewModel(TvShowService service)
         {
             launcher = new BrowserLauncher(ConfigurationData.LinksFilepath);
-            TvShows = service.GetAllSubscribedTvShows().ToObservableCollection();
+            TvShows = service.GetActiveTvShows().ToObservableCollection();
+            OnDisplayTvShowDetailsCommand = new RelayCommand<TvShow>(OnDisplayTvShowDetails);
             OnHyperLink1NavigateCommand = new RelayCommand<TvShow>(OnHyperLink1Navigate);
             OnHyperLink2NavigateCommand = new RelayCommand<TvShow>(OnHyperLink2Navigate);
             OnHyperLink3NavigateCommand = new RelayCommand<TvShow>(OnHyperLink3Navigate);
@@ -50,18 +51,7 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
             get { return tvShows; }
             set { tvShows = value; OnPropertyChanged(); }
         }
-
-        public TvShow SelectedTvShow
-        {
-            get { return selectedTvShow; }
-            set
-            {
-                selectedTvShow = value;
-                OnPropertyChanged();
-                DisplayTvShowDetailsRequested(value);
-            }
-        }
-
+        
         public List<ImageLink> ImagePaths => new List<ImageLink>()
         {
             new ImageLink(Websites.SceneAccess, ConfigurationData.SceneAccessIcon),
@@ -70,6 +60,11 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
             new ImageLink(Websites.KickassTorrent, ConfigurationData.KickassTorrentIcon),
             new ImageLink(Websites.IMDb, ConfigurationData.IMDbIcon),
         };
+
+        private void OnDisplayTvShowDetails(TvShow show)
+        {
+            DisplayTvShowDetailsRequested(show);
+        }
 
         private void OnHyperLinkMultiNavigate(Websites parameter)
         {

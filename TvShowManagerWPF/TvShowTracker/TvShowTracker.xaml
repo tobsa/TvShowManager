@@ -8,6 +8,7 @@
              xmlns:tvShowsSearched="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsSearched"
              xmlns:tvShowDetails="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowDetails"
              xmlns:tvShowLatestNews="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowLatestNews"
+             xmlns:tvShowsArchived="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsArchived"
              mc:Ignorable="d">
     <UserControl.DataContext>
         <local:TvShowTrackerViewModel />
@@ -34,11 +35,8 @@
             <TabItem Header="Tv Shows">
                 <tvShows:TvShows DataContext="{Binding TvShowsViewModel}"/>
             </TabItem>
-            <TabItem Header="Today">
-                <Label Content="2" />
-            </TabItem>
             <TabItem Header="All Subscriptions">
-                <Label Content="3"/>
+                <tvShowsArchived:TvShowsArchived DataContext="{Binding TvShowsArchivedViewModel}" /> 
             </TabItem>
             
             <TabItem Visibility="Collapsed" IsSelected="{Binding IsTabItemTvShowSearchedSelected, Mode=TwoWay}">
