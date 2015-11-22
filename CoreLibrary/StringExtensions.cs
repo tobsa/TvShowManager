@@ -42,5 +42,43 @@ namespace CoreLibrary
 
             return str.Substring(beginIndex, endIndex - beginIndex);
         }
+
+        public static int IndexOfNth(this string input, string value, int nth)
+        {
+            var startIndex = 0;
+            while (true)
+            {
+                if (nth < 1)
+                    throw new NotSupportedException("Param 'nth' must be greater than 0!");
+
+                var index = input.IndexOf(value, startIndex, StringComparison.Ordinal);
+
+                if (nth == 1)
+                    return index;
+                if (index == -1)
+                    return -1;
+
+                startIndex = index + 1;
+                nth = --nth;
+            }
+        }
+
+        public static string Slice(this string str, int start, int end)
+        {
+            if (end < 0)
+                end = str.Length + end;
+
+            return str.Substring(start, end - start);
+        }
+
+        public static string SliceIndexOfNth(this string str, string startValue, int startIndex, string endValue, int endIndex)
+        {
+            return str.Slice(str.IndexOfNth(startValue, startIndex), str.IndexOfNth(endValue, endIndex));
+        }
+
+        public static string SliceIndexOfNth(this string str, string value, int startIndex, int endIndex)
+        {
+            return str.SliceIndexOfNth(value, startIndex, value, endIndex);
+        }
     }
 }
