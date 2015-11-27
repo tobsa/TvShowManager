@@ -4,7 +4,22 @@
              StartupUri="MainWindow.xaml"
              Startup="App_OnStartup">
     <Application.Resources>
-        
-         
+        <SolidColorBrush x:Key="HighDarkBackground" Color="#282828" />
+        <SolidColorBrush x:Key="MediumDarkBackground" Color="#232323" />
+        <SolidColorBrush x:Key="LowDarkBackground" Color="#181818" />
+        <SolidColorBrush x:Key="MediumToHighDarkBackground" Color="#2d2e30" />
+
+        <SolidColorBrush x:Key="HighForeground" Color="#ffffff" />
+        <SolidColorBrush x:Key="MediumForeground" Color="#d1d1d1" />
+        <SolidColorBrush x:Key="LowForeground" Color="#9a9a9a" />
+
+        <SolidColorBrush x:Key="ColorizedForeground" Color="#1e60d7" />
+
+        <LinearGradientBrush x:Key="ThemeColor" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#1e55aa" Offset="0.0"/>
+            <GradientStop Color="#1e60a1" Offset="0.5"/>
+            <GradientStop Color="#1e60FF" Offset="1.0"/>
+        </LinearGradientBrush>
+
     </Application.Resources>
 </Application>

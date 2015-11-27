@@ -28,16 +28,11 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
         public RelayCommand<TvShow> OnHyperLink5NavigateCommand { get; private set; }
         public RelayCommand<Websites> OnHyperLinkMultiNavigateCommand { get; private set; }
 
-
         public TvShowsViewModel()
         {
-        }
-
-        public TvShowsViewModel(TvShowService service)
-        {
             launcher = new BrowserLauncher(ConfigurationData.LinksFilepath);
-            TvShows = service.GetActiveTvShows().ToObservableCollection();
             OnDisplayTvShowDetailsCommand = new RelayCommand<TvShow>(OnDisplayTvShowDetails);
+
             OnHyperLink1NavigateCommand = new RelayCommand<TvShow>(OnHyperLink1Navigate);
             OnHyperLink2NavigateCommand = new RelayCommand<TvShow>(OnHyperLink2Navigate);
             OnHyperLink3NavigateCommand = new RelayCommand<TvShow>(OnHyperLink3Navigate);
@@ -46,21 +41,17 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
             OnHyperLinkMultiNavigateCommand = new RelayCommand<Websites>(OnHyperLinkMultiNavigate);
         }
 
+        public void LoadTvShows()
+        {
+            TvShows = TvShowService.GetActiveTvShows().ToObservableCollection();
+        }
+
         public ObservableCollection<TvShow> TvShows
         {
             get { return tvShows; }
             set { tvShows = value; OnPropertyChanged(); }
         }
         
-        public List<ImageLink> ImagePaths => new List<ImageLink>()
-        {
-            new ImageLink(Websites.SceneAccess, ConfigurationData.SceneAccessIcon),
-            new ImageLink(Websites.Addic7ed, ConfigurationData.Addic7edIcon),
-            new ImageLink(Websites.PirateBay, ConfigurationData.PirateBayIcon),
-            new ImageLink(Websites.KickassTorrent, ConfigurationData.KickassTorrentIcon),
-            new ImageLink(Websites.IMDb, ConfigurationData.IMDbIcon),
-        };
-
         private void OnDisplayTvShowDetails(TvShow show)
         {
             DisplayTvShowDetailsRequested(show);

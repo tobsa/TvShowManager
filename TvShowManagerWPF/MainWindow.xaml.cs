@@ -24,5 +24,10 @@ namespace TvShowManagerWPF
         {
             InitializeComponent();
         }
+
+        private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

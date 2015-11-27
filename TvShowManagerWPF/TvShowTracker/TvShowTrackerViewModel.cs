@@ -21,100 +21,89 @@ namespace TvShowManagerWPF.TvShowTracker
 {
     public class TvShowTrackerViewModel : BaseViewModel
     {
-        #region Fields
-        private readonly TvShowService service;
-        private TvShowsViewModel tvShowsViewModel;
-        private TvShowsSearchedViewModel tvShowsSearchedViewModel;
-        private TvShowDetailsViewModel tvShowDetailsViewModel;
-        private bool isTabItemTvShowSearchedSelected;
-        private bool isTabItemTvShowDetailsSelected;
-        private TvShowLatestNewsViewModel tvShowLatestNewsViewModel;
-        private TvShowsArchivedViewModel tvShowsArchivedViewModel;
-        #endregion
+        private BaseViewModel currentViewModel;
+        private readonly TvShowsViewModel shows = new TvShowsViewModel();
+        private readonly TvShowsSearchedViewModel searchedTvShows = new TvShowsSearchedViewModel();
+        private readonly TvShowDetailsViewModel showDetails = new TvShowDetailsViewModel();
+        private readonly TvShowsArchivedViewModel archivedShows = new TvShowsArchivedViewModel();
+        private TvShowLatestNewsViewModel tvShowLatestNewsViewModel = new TvShowLatestNewsViewModel();
+
+        private bool isTvShowsChecked;
+        private bool _isTvShowsArchivedChecked;
 
         public TvShowTrackerViewModel()
         {
+            SearchCommand = new RelayCommand(OnSearchTvShows);
+            NavigateCommand = new RelayCommand<Navigations>(OnNavigation);
+
+            shows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
+            searchedTvShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
+            archivedShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
+            showDetails.TvShowSubscriptionChanged += TvShowSubscriptionChanged;
+            showDetails.TvShowArchiveChanged += TvShowArchiveChanged;
+            
+            CurrentViewModel = shows;
+            IsTvShowsChecked = true;
         }
 
-        public TvShowTrackerViewModel(TvShowService service)
+        public BaseViewModel CurrentViewModel
         {
-            this.service = service;
-            tvShowsViewModel = new TvShowsViewModel(service);
-            tvShowsSearchedViewModel = new TvShowsSearchedViewModel();
-            tvShowDetailsViewModel = new TvShowDetailsViewModel(service);
-            tvShowLatestNewsViewModel = new TvShowLatestNewsViewModel("");
-            tvShowsArchivedViewModel = new TvShowsArchivedViewModel(service);
-
-            SearchCommand = new RelayCommand(SearchTvShows);
-
-            TvShowsSearchedViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
-            TvShowsViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
-            TvShowDetailsViewModel.TvShowSubscriptionChanged += TvShowSubscriptionChanged;
-            TvShowDetailsViewModel.TvShowArchiveChanged += TvShowArchiveChanged;
-            TvShowsArchivedViewModel.OnDisplayTvShowDetailsRequested += DisplayTvShowDetails;
+            get { return currentViewModel; }
+            set { currentViewModel = value; OnPropertyChanged(); }
         }
 
-        #region Properties
-        public TvShowsViewModel TvShowsViewModel
+        public bool IsTvShowsChecked
         {
-            get { return tvShowsViewModel; }
-            set { tvShowsViewModel = value; OnPropertyChanged(); }
+            get { return isTvShowsChecked; }
+            set { isTvShowsChecked = value; OnPropertyChanged(); }
         }
 
-        public TvShowsArchivedViewModel TvShowsArchivedViewModel
+        public bool IsTvShowsArchivedChecked
         {
-            get { return tvShowsArchivedViewModel; }
-            set { tvShowsArchivedViewModel = value; OnPropertyChanged(); }
-        }
-
-        public TvShowsSearchedViewModel TvShowsSearchedViewModel
-        {
-            get { return tvShowsSearchedViewModel; }
-            set { tvShowsSearchedViewModel = value; OnPropertyChanged(); }
-        }
-
-        public TvShowDetailsViewModel TvShowDetailsViewModel
-        {
-            get { return tvShowDetailsViewModel; }
-            set { tvShowDetailsViewModel = value; OnPropertyChanged(); }
-        }
-
-        public bool IsTabItemTvShowSearchedSelected
-        {
-            get { return isTabItemTvShowSearchedSelected; }
-            set { isTabItemTvShowSearchedSelected = value; OnPropertyChanged(); }
-        }
-
-        public bool IsTabItemTvShowDetailsSelected
-        {
-            get { return isTabItemTvShowDetailsSelected; }
-            set { isTabItemTvShowDetailsSelected = value; OnPropertyChanged(); }
+            get { return _isTvShowsArchivedChecked; }
+            set { _isTvShowsArchivedChecked = value; OnPropertyChanged(); }
         }
 
         public string TextBoxSearchQuery { get; set; }
 
-        public TvShowLatestNewsViewModel TvShowLatestNewsViewModel
-        {
-            get { return tvShowLatestNewsViewModel; }
-            set { tvShowLatestNewsViewModel = value; OnPropertyChanged(); }
-        }
-        #endregion  
-
         public RelayCommand SearchCommand { get; private set; }
+        public RelayCommand<Navigations> NavigateCommand { get; private set; } 
 
-        #region Methods
-        private void SearchTvShows()
+        public void OnNavigation(Navigations navigation)
         {
-            IsTabItemTvShowSearchedSelected = true;
-            TvShowsSearchedViewModel.TvShows = service.SearchTvShows(TextBoxSearchQuery, ConfigurationData.NoImageFoundPath).ToObservableCollection();
+            switch (navigation)
+            {
+                case Navigations.TvShows:
+                    CurrentViewModel = shows;
+                    break;
+                case Navigations.TvShowDetails:
+                    CurrentViewModel = showDetails;
+                    IsTvShowsChecked = false;
+                    IsTvShowsArchivedChecked = false;
+                    break;
+                case Navigations.TvShowsSearched:
+                    CurrentViewModel = searchedTvShows;
+                    IsTvShowsChecked = false;
+                    IsTvShowsArchivedChecked = false;
+                    break;
+                case Navigations.TvShowsArchived:
+                    CurrentViewModel = archivedShows;
+                    break;
+            }
+        }
+
+        private void OnSearchTvShows()
+        {
+            searchedTvShows.TvShows = TvShowService.SearchTvShows(TextBoxSearchQuery, ConfigurationData.NoImageFoundPath).ToObservableCollection();
+            OnNavigation(Navigations.TvShowsSearched);
         }
 
         private void DisplayTvShowDetails(TvShow show)
         {
             if (show != null)
             {
-                TvShowDetailsViewModel.TvShow = show;
-                IsTabItemTvShowDetailsSelected = true;
+                showDetails.TvShow = show;
+                OnNavigation(Navigations.TvShowDetails);
             }
         }
 
@@ -123,15 +112,14 @@ namespace TvShowManagerWPF.TvShowTracker
             if (show == null)
                 return;
 
-            if (service.IsSubscribing(show))
-                service.Unsubscribe(show);
+            if (TvShowService.IsSubscribing(show))
+                TvShowService.Unsubscribe(show);
             else
-                service.Subscribe(show);
+                TvShowService.Subscribe(show);
 
-            TvShowDetailsViewModel.TvShow = show;
-            TvShowsViewModel.TvShows = service.GetActiveTvShows().ToObservableCollection();
-            TvShowsArchivedViewModel.Shows = service.GetArchivedTvShows().ToObservableCollection();
-
+            showDetails.TvShow = show;
+            shows.TvShows = TvShowService.GetActiveTvShows().ToObservableCollection();
+            archivedShows.TvShows = TvShowService.GetArchivedTvShows().ToObservableCollection();
         }
 
         private void TvShowArchiveChanged(TvShow show)
@@ -139,10 +127,9 @@ namespace TvShowManagerWPF.TvShowTracker
             if (show == null)
                 return;
 
-            TvShowDetailsViewModel.TvShow = show;
-            TvShowsViewModel.TvShows = service.GetActiveTvShows().ToObservableCollection();
-            TvShowsArchivedViewModel.Shows = service.GetArchivedTvShows().ToObservableCollection();
+            showDetails.TvShow = show;
+            shows.TvShows = TvShowService.GetActiveTvShows().ToObservableCollection();
+            archivedShows.TvShows = TvShowService.GetArchivedTvShows().ToObservableCollection();
         }
-        #endregion
     }
 }

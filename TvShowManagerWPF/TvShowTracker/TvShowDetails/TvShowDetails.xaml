@@ -4,10 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowDetails">
-    <UserControl.DataContext>
-        <local:TvShowDetailsViewModel />
-    </UserControl.DataContext>
-    
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>

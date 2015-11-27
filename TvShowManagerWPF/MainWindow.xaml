@@ -3,17 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:uc="clr-namespace:TvShowManagerWPF.TvShowTracker"
         xmlns:local="clr-namespace:TvShowManagerWPF"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
-        Title="Tv Show Manager" 
+        xmlns:tvShowViewer="clr-namespace:TvShowManagerWPF.TvShowViewer"
+        xmlns:tvShowTracker="clr-namespace:TvShowManagerWPF.TvShowTracker"
+        Title="TV Show Manager" 
         Width="1600"
         Height="900"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Loaded="MainWindow_OnLoaded">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-        
+                
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -25,20 +27,17 @@
             
             <Menu Margin="0 0 0 25">
                 <MenuItem Header="File" />
-                <MenuItem Header="Tv Show Tracker">
-                    <MenuItem Header="Web Scrapers" />
-                    <MenuItem Header="Link Management" />
+                <MenuItem Header="TV Show Tracker">
                 </MenuItem>
             </Menu>
-            
+           
         </StackPanel>
-
-
-        <TabControl Grid.Row="1">
-            <TabItem Header="Tv Show Tracker">
-                <uc:TvShowTracker DataContext="{Binding TvShowTrackerViewModel}" />
+        
+        <TabControl Grid.Row="1" Background="Transparent" BorderThickness="0">
+            <TabItem Header="TV Show Tracker">
+                <tvShowTracker:TvShowTracker />
             </TabItem>
-            <TabItem Header="Tv Show Viewer"></TabItem>
+            <TabItem Header="TV Show Viewer"></TabItem>
             <TabItem Header="Movie Viewer"></TabItem>
             <TabItem Header="Movie Transfer"></TabItem>
             <TabItem Header="Subtitle Matcher"></TabItem>

@@ -12,34 +12,30 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowsArchived
 {
     public class TvShowsArchivedViewModel : BaseViewModel
     {
-        private readonly TvShowService servive;
-        private ObservableCollection<TvShow> shows;
+        private ObservableCollection<TvShow> _tvShows;
 
-        public event Action<TvShow> OnDisplayTvShowDetailsRequested = delegate { };
-
+        public event Action<TvShow> DisplayTvShowDetailsRequested = delegate { };
         public RelayCommand<TvShow> OnDisplayTvShowDetailsCommand { get; private set; }
 
         public TvShowsArchivedViewModel()
         {
-        }
-
-        public TvShowsArchivedViewModel(TvShowService service)
-        {
-            this.servive = service;
-
-            Shows = service.GetArchivedTvShows().ToObservableCollection();
             OnDisplayTvShowDetailsCommand = new RelayCommand<TvShow>(OnDisplayTvShowDetails);
         }
 
-        public ObservableCollection<TvShow> Shows
+        public void LoadTvShows()
         {
-            get { return shows; }
-            set { shows = value; OnPropertyChanged(); }
+            TvShows = TvShowService.GetArchivedTvShows().ToObservableCollection();
+        }
+
+        public ObservableCollection<TvShow> TvShows
+        {
+            get { return _tvShows; }
+            set { _tvShows = value; OnPropertyChanged(); }
         }
 
         private void OnDisplayTvShowDetails(TvShow show)
         {
-            OnDisplayTvShowDetailsRequested(show);
+            DisplayTvShowDetailsRequested(show);
         }
     }
 }

@@ -15,14 +15,16 @@ using System.Windows.Shapes;
 
 namespace TvShowManagerWPF.TvShowTracker
 {
-    /// <summary>
-    /// Interaction logic for TvShowTracker.xaml
-    /// </summary>
     public partial class TvShowTracker : UserControl
     {
         public TvShowTracker()
         {
             InitializeComponent();
+        }
+
+        private void TvShowTracker_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

@@ -6,10 +6,6 @@
              xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowLatestNews"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.DataContext>
-        <local:TvShowLatestNewsViewModel />
-    </UserControl.DataContext>
-
     <ItemsControl ItemsSource="{Binding Shows}" Foreground="Wheat">
         <ItemsControl.ItemTemplate>
             <DataTemplate>

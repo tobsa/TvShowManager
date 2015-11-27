@@ -23,12 +23,11 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowLatestNews
 
         public TvShowLatestNewsViewModel()
         {
+            OnOpenLinkCommand = new RelayCommand<WebScraperShow>(OnOpenLink);
         }
 
-        public TvShowLatestNewsViewModel(string ignored)
+        public void LoadTvShows()
         {
-            OnOpenLinkCommand = new RelayCommand<WebScraperShow>(OnOpenLink);
-
             var result = WebScraperManager.Scrape(new WebScraperUri() { BaseUri = BaseUri, Uri = Uri, BeginTag = "href=\"serie", EndTag = "\"" });
             Shows = WebScraperManager.Map<WebScraperShow, WebScraperShowMapper>(result).ToObservableCollection();
         }

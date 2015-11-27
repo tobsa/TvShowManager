@@ -12,19 +12,19 @@ namespace TvShowManagerWPF
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private readonly TvShowService service;
-        private TvShowTrackerViewModel tvShowTrackerViewModel;
+        private BaseViewModel _currentViewModel;
+        private readonly TvShowTrackerViewModel tvShowTrackerViewModel = new TvShowTrackerViewModel();
+        private TvShowViewerViewModel tvShowViewerViewModel = new TvShowViewerViewModel();
 
         public MainWindowViewModel()
         {
-            service = TvShowServiceFactory.Create(ConfigurationManager.ApiKey, ConfigurationData.SubscriptionsFilepath);
-            tvShowTrackerViewModel = new TvShowTrackerViewModel(service);
+            CurrentViewModel = tvShowTrackerViewModel;
         }
 
-        public TvShowTrackerViewModel TvShowTrackerViewModel
+        public BaseViewModel CurrentViewModel
         {
-            get { return tvShowTrackerViewModel; }
-            set { tvShowTrackerViewModel = value; OnPropertyChanged(); }
+            get { return _currentViewModel; }
+            set { _currentViewModel = value; OnPropertyChanged(); }
         }
     }
 }

@@ -10,12 +10,10 @@ namespace TvShowManagerLibrary.Services
 {
     public static class TvShowServiceFactory
     {
-        public static TvShowService Create(string apiKey, string filename)
+        public static void CreateTvShowService(string apiKey, string filename)
         {
-            var externalService = new TvShowTMDbExternalService(apiKey);
-            var repository = new TvShowXmlRepository(filename);
-
-            return new TvShowService(externalService, repository);
+            TvShowService.Service = new TvShowTMDbExternalService(apiKey);
+            TvShowService.Repository = new TvShowXmlRepository(filename);
         }
     }
 }

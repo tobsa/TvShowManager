@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +16,19 @@ using System.Windows.Shapes;
 
 namespace TvShowManagerWPF.TvShowTracker.TvShowsArchived
 {
-    /// <summary>
-    /// Interaction logic for TvShowsArchived.xaml
-    /// </summary>
     public partial class TvShowsArchived : UserControl
     {
         public TvShowsArchived()
         {
             InitializeComponent();
+        }
+
+        private void TvShowsArchived_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return;
+            
+            ((TvShowsArchivedViewModel)DataContext)?.LoadTvShows();
         }
     }
 }

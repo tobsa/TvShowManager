@@ -9,61 +9,55 @@ using TvShowManagerLibrary.Repositories;
 
 namespace TvShowManagerLibrary.Services
 {
-    public class TvShowService
+    public static class TvShowService
     {
-        private readonly ITvShowExternalService<TvShow> service; 
-        private readonly ITvShowRepository repository;
+        public static ITvShowExternalService<TvShow> Service { get; set; }
+        public static ITvShowRepository Repository { get; set; }
 
-        public TvShowService(ITvShowExternalService<TvShow> service, ITvShowRepository repository)
+        public static List<TvShow> SearchTvShows(string query, string defaultPosterPath = "")
         {
-            this.service = service;
-            this.repository = repository;
-        }
-
-        public List<TvShow> SearchTvShows(string query, string defaultPosterPath = "")
-        {
-            return service.SearchTvShows(query, defaultPosterPath);
+            return Service.SearchTvShows(query, defaultPosterPath);
         }
         
-        public bool IsSubscribing(TvShow show)
+        public static bool IsSubscribing(TvShow show)
         {
             if (show == null)
                 return false;
 
-            return repository.GetTvShow(show.ID) != null;
+            return Repository.GetTvShow(show.ID) != null;
         }
 
-        public void Subscribe(TvShow show)
+        public static void Subscribe(TvShow show)
         {
-            repository.InsertTvShow(show);
-            repository.Save();
+            Repository.InsertTvShow(show);
+            Repository.Save();
         }
 
-        public void Unsubscribe(TvShow show)
+        public static void Unsubscribe(TvShow show)
         {
-            repository.RemoveTvShow(show.ID);
-            repository.Save();
+            Repository.RemoveTvShow(show.ID);
+            Repository.Save();
         }
 
-        public List<TvShow> GetAllSubscribedTvShows()
+        public static List<TvShow> GetAllSubscribedTvShows()
         {
-            return repository.GetTvShows();
+            return Repository.GetTvShows();
         }
 
-        public List<TvShow> GetActiveTvShows()
+        public static List<TvShow> GetActiveTvShows()
         {
-            return repository.GetTvShows().Where(show => !show.IsArchived).ToList();
+            return Repository.GetTvShows().Where(show => !show.IsArchived).ToList();
         }
 
-        public List<TvShow> GetArchivedTvShows()
+        public static List<TvShow> GetArchivedTvShows()
         { 
-            return repository.GetTvShows().Where(show => show.IsArchived).ToList();
+            return Repository.GetTvShows().Where(show => show.IsArchived).ToList();
         }
 
-        public void UpdateTvShow(TvShow show)
+        public static void UpdateTvShow(TvShow show)
         {
-            repository.UpdateTvShow(show);
-            repository.Save();
+            Repository.UpdateTvShow(show);
+            Repository.Save();
         }
     }
 }

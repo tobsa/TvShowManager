@@ -9,49 +9,83 @@
              xmlns:tvShowDetails="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowDetails"
              xmlns:tvShowLatestNews="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowLatestNews"
              xmlns:tvShowsArchived="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsArchived"
-             mc:Ignorable="d">
+             xmlns:tvShowManagerWpf="clr-namespace:TvShowManagerWPF"
+             mc:Ignorable="d"
+             Loaded="TvShowTracker_OnLoaded">
     <UserControl.DataContext>
         <local:TvShowTrackerViewModel />
     </UserControl.DataContext>
+    
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type tvShows:TvShowsViewModel}">
+            <tvShows:TvShows />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type tvShowDetails:TvShowDetailsViewModel}">
+            <tvShowDetails:TvShowDetails />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type tvShowsSearched:TvShowsSearchedViewModel}">
+            <tvShowsSearched:TvShowsSearched />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type tvShowsArchived:TvShowsArchivedViewModel}">
+            <tvShowsArchived:TvShowsArchived />
+        </DataTemplate>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="3" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="3" />
             <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
         
-        <WrapPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="50 25 0 25">
+        <WrapPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="50 25 0 25">
             <Button Content="(" Width="40" />
             <Button Content=")" Width="40" />
             <TextBox Width="200" Text="{Binding TextBoxSearchQuery}" />
             <Button Content="Search" Width="60" Command="{Binding SearchCommand}" />
         </WrapPanel>
+        
+        <Grid Row="1" Column="0" Background="Gray">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type RadioButton}">
+                        <Border BorderBrush="Black" Background="{TemplateBinding Background}" Padding="5" BorderThickness="1">
+                            <ContentPresenter Content="{TemplateBinding Content}"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                    <Style TargetType="{x:Type RadioButton}">
+                        <Setter Property="Template" Value="{StaticResource ControlTemplate}" />
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="LightBlue" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+                
+                <RadioButton Content="TV Shows" IsChecked="{Binding IsTvShowsChecked}" 
+                             Command="{Binding NavigateCommand}" 
+                             CommandParameter="{x:Static tvShowManagerWpf:Navigations.TvShows}" />
+                <RadioButton Content="TV Shows (Archived)" IsChecked="{Binding IsTvShowsArchivedChecked}"
+                             Command="{Binding NavigateCommand}"
+                             CommandParameter="{x:Static tvShowManagerWpf:Navigations.TvShowsArchived}"/>
+            </StackPanel>
+        </Grid>
 
-        <TabControl Grid.Row="1" Grid.Column="0" TabStripPlacement="Left">
-            <TabItem Header="Tv Shows">
-                <tvShows:TvShows DataContext="{Binding TvShowsViewModel}"/>
-            </TabItem>
-            <TabItem Header="All Subscriptions">
-                <tvShowsArchived:TvShowsArchived DataContext="{Binding TvShowsArchivedViewModel}" /> 
-            </TabItem>
-            
-            <TabItem Visibility="Collapsed" IsSelected="{Binding IsTabItemTvShowSearchedSelected, Mode=TwoWay}">
-                <tvShowsSearched:TvShowsSearched DataContext="{Binding TvShowsSearchedViewModel}" />
-            </TabItem>
-            
-            <TabItem Visibility="Collapsed" IsSelected="{Binding IsTabItemTvShowDetailsSelected, Mode=TwoWay}">
-                <tvShowDetails:TvShowDetails DataContext="{Binding TvShowDetailsViewModel}" />
-            </TabItem>
-        </TabControl>
-        
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="3" HorizontalAlignment="Stretch" />
+
+        <ContentControl Grid.Row="1" Grid.Column="2" Content="{Binding CurrentViewModel}" />
+               
+        <GridSplitter Grid.Row="1" Grid.Column="3" Width="3" HorizontalAlignment="Stretch" />
         
-        <Grid Row="1" Column="2" Background="Black">
-            <tvShowLatestNews:TvShowLatestNews DataContext="{Binding TvShowLatestNewsViewModel}"/>
+        <Grid Row="1" Column="4" Background="Black">
+            <!--<tvShowLatestNews:TvShowLatestNews DataContext="{Binding TvShowLatestNewsViewModel}"/>-->
         </Grid>
     </Grid>
 </UserControl>

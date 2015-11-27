@@ -21,6 +21,8 @@ namespace TvShowManagerWPF
             ConfigurationManager.Load(ConfigurationData.ConfigurationFilePath);
 
             WebScraperManager.CacheFilepath = ConfigurationData.Addic7edRequestCacheFilepath;
+
+            TvShowServiceFactory.CreateTvShowService(ConfigurationManager.ApiKey, ConfigurationData.SubscriptionsFilepath);
         }
     }
 }

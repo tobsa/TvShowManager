@@ -3,75 +3,111 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShows">
-    <UserControl.DataContext>
-        <local:TvShowsViewModel />
-    </UserControl.DataContext>
-    <StackPanel>
-        <WrapPanel HorizontalAlignment="Center" Margin="0 20 0 20">
-            <ItemsControl ItemsSource="{Binding ImagePaths}">
+             xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShows"
+             xmlns:tvShowManagerLibrary="clr-namespace:TvShowManagerLibrary;assembly=TvShowManagerLibrary"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:TvShowsViewModel, IsDesignTimeCreatable=True}"
+             Loaded="TvShows_OnLoaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <WrapPanel Grid.Row="0" HorizontalAlignment="Center" Margin="25">
+            <WrapPanel.Resources>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Width" Value="16" />
+                    <Setter Property="Height" Value="16" />
+                </Style>
+            </WrapPanel.Resources>
+
+            <Button Command="{Binding OnHyperLinkMultiNavigateCommand}" 
+                    CommandParameter="{x:Static tvShowManagerLibrary:Websites.SceneAccess}">
+                <WrapPanel>
+                    <Image Source="../../Content/SceneAccessIcon.ico"  />
+                    <Label Content="SceneAccess" />
+                </WrapPanel>
+            </Button>
+            <Button Command="{Binding OnHyperLinkMultiNavigateCommand}" 
+                    CommandParameter="{x:Static tvShowManagerLibrary:Websites.Addic7ed}">
+                <WrapPanel>
+                    <Image Source="../../Content/Addic7edIcon.ico"  />
+                    <Label Content="Addic7ed" />
+                </WrapPanel>
+            </Button>
+            <Button Command="{Binding OnHyperLinkMultiNavigateCommand}" 
+                    CommandParameter="{x:Static tvShowManagerLibrary:Websites.PirateBay}">
+                <WrapPanel>
+                    <Image Source="../../Content/PirateBayIcon.ico"  />
+                    <Label Content="PirateBay" />
+                </WrapPanel>
+            </Button>
+            <Button Command="{Binding OnHyperLinkMultiNavigateCommand}" 
+                    CommandParameter="{x:Static tvShowManagerLibrary:Websites.KickassTorrent}">
+                <WrapPanel>
+                    <Image Source="../../Content/KickassTorrentIcon.ico"  />
+                    <Label Content="KickassTorrent" />
+                </WrapPanel>
+            </Button>
+            <Button Command="{Binding OnHyperLinkMultiNavigateCommand}" 
+                    CommandParameter="{x:Static tvShowManagerLibrary:Websites.IMDb}">
+                <WrapPanel>
+                    <Image Source="../../Content/ImdbIcon.ico"  />
+                    <Label Content="IMDb" />
+                </WrapPanel>
+            </Button>
+        </WrapPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" >
+            <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding TvShows}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Command="{Binding Path=DataContext.OnHyperLinkMultiNavigateCommand, 
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                CommandParameter="{Binding Name}">
-                            <StackPanel Orientation="Horizontal" Width="120">
-                                <Image Source="{Binding Link}" Width="16" Height="16" />
-                                <Label Content="{Binding Name}" />
+                        <Button Command="{Binding DataContext.OnDisplayTvShowDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}" Margin="5" Width="150">
+                            <StackPanel>
+                                <Image Source="{Binding PosterPath}" Height="225" />
+                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
+                                <WrapPanel>
+                                    <WrapPanel.Resources>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Width" Value="16" />
+                                            <Setter Property="Height" Value="16" />
+                                        </Style>
+                                    </WrapPanel.Resources>
+
+                                    <Button Command="{Binding DataContext.OnHyperLink1NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                            CommandParameter="{Binding}">
+                                        <Image Source="../../Content/SceneAccessIcon.ico"  />
+                                    </Button>
+                                    <Button Command="{Binding DataContext.OnHyperLink2NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                            CommandParameter="{Binding}">
+                                        <Image Source="../../Content/Addic7edIcon.ico" />
+                                    </Button>
+                                    <Button Command="{Binding DataContext.OnHyperLink3NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                            CommandParameter="{Binding}">
+                                        <Image Source="../../Content/PirateBayIcon.ico" />
+                                    </Button>
+                                    <Button Command="{Binding DataContext.OnHyperLink4NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                            CommandParameter="{Binding}">
+                                        <Image Source="../../Content/KickassTorrentIcon.ico" />
+                                    </Button>
+                                    <Button Command="{Binding DataContext.OnHyperLink5NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                            CommandParameter="{Binding}">
+                                        <Image Source="../../Content/ImdbIcon.ico" />
+                                    </Button>
+                                </WrapPanel>
                             </StackPanel>
                         </Button>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </WrapPanel>
-        
-        <ItemsControl ItemsSource="{Binding TvShows}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Command="{Binding DataContext.OnDisplayTvShowDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                            CommandParameter="{Binding}"
-                            Margin="5"
-                            Width="150">
-                        <StackPanel>
-                            <Image Source="{Binding PosterPath}" Width="150" Height="225" />
-                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
-                            <WrapPanel>
-                                <Button Command="{Binding DataContext.OnHyperLink1NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                    CommandParameter="{Binding}" Width="16" Height="16">
-                                    <Image Source="../../Content/SceneAccessIcon.ico"  />
-                                </Button>
-                                <Button Command="{Binding DataContext.OnHyperLink2NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                    CommandParameter="{Binding}" Width="16" Height="16">
-                                    <Image Source="../../Content/Addic7edIcon.ico" />
-                                </Button>
-                                <Button Command="{Binding DataContext.OnHyperLink3NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                    CommandParameter="{Binding}" Width="16" Height="16">
-                                    <Image Source="../../Content/PirateBayIcon.ico" />
-                                </Button>
-                                <Button Command="{Binding DataContext.OnHyperLink4NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                    CommandParameter="{Binding}" Width="16" Height="16">
-                                    <Image Source="../../Content/KickassTorrentIcon.ico" />
-                                </Button>
-                                <Button Command="{Binding DataContext.OnHyperLink5NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                    CommandParameter="{Binding}" Width="16" Height="16">
-                                    <Image Source="../../Content/ImdbIcon.ico" />
-                                </Button>
-                            </WrapPanel>
-                        </StackPanel>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </UserControl>
