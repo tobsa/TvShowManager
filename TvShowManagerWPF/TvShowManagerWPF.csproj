@@ -74,6 +74,10 @@
       <DependentUpon>TvShowsArchived.xaml</DependentUpon>
     </Compile>
     <Compile Include="TvShowTracker\TvShowsArchived\TvShowsArchivedViewModel.cs" />
+    <Compile Include="TvShowTracker\TvShowsPopular\TvShowsPopular.xaml.cs">
+      <DependentUpon>TvShowsPopular.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TvShowTracker\TvShowsPopular\TvShowsPopularViewModel.cs" />
     <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearched.xaml.cs">
       <DependentUpon>TvShowsSearched.xaml</DependentUpon>
     </Compile>
@@ -116,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TvShowTracker\TvShowsArchived\TvShowsArchived.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TvShowTracker\TvShowsPopular\TvShowsPopular.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

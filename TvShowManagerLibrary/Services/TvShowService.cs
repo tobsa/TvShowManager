@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMDbWrapper.Utility;
 using TvShowManagerLibrary.ExternalServices;
 using TvShowManagerLibrary.Repositories;
 
@@ -18,6 +19,11 @@ namespace TvShowManagerLibrary.Services
         {
             return Service.SearchTvShows(query, defaultPosterPath);
         }
+
+        public static List<TvShow> GetPopularTvShows(string defaultPosterPath = "")
+        {
+            return Service.GetPopularTvShows(defaultPosterPath);
+        } 
         
         public static bool IsSubscribing(TvShow show)
         {

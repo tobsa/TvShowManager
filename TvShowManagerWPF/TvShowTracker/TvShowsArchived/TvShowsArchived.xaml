@@ -8,13 +8,12 @@
              d:DataContext="{d:DesignInstance local:TvShowsArchivedViewModel, IsDesignTimeCreatable=True}"
              Loaded="TvShowsArchived_OnLoaded"
              Background="{StaticResource LowDarkBackground}">
-
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="50 0">
             <Label Foreground="{StaticResource HighForeground}" FontWeight="Light"  FontSize="36" Content="Archived TV Shows"/>
             <Separator Background="{StaticResource MediumDarkBackground}" Margin="0 0 0 25" />
 
-            <ItemsControl ItemsSource="{Binding TvShows}">
+            <ItemsControl ItemsSource="{Binding TvShows}" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -43,7 +42,7 @@
                                 CommandParameter="{Binding}" Margin="5" Width="150"
                                 VerticalContentAlignment="Top">
                             <StackPanel HorizontalAlignment="Center">
-                                <Image Source="{Binding PosterPath}" Height="225" Width="150" />
+                                <Image Source="{Binding PosterPath}" Height="225" Width="150" Stretch="Fill" />
                                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Foreground="{StaticResource LowForeground}" Margin="8"/>
                             </StackPanel>
                         </Button>

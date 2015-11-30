@@ -16,6 +16,7 @@ using TvShowManagerWPF.TvShowTracker.TvShows;
 using TvShowManagerWPF.TvShowTracker.TvShowsSearched;
 using TvShowManagerWPF.TvShowTracker.TvShowLatestNews;
 using TvShowManagerWPF.TvShowTracker.TvShowsArchived;
+using TvShowManagerWPF.TvShowTracker.TvShowsPopular;
 
 namespace TvShowManagerWPF.TvShowTracker
 {
@@ -27,8 +28,10 @@ namespace TvShowManagerWPF.TvShowTracker
         private readonly TvShowDetailsViewModel showDetails = new TvShowDetailsViewModel();
         private readonly TvShowsArchivedViewModel archivedShows = new TvShowsArchivedViewModel();
         private TvShowLatestNewsViewModel latestNews = new TvShowLatestNewsViewModel();
+        private readonly TvShowsPopularViewModel popularShows = new TvShowsPopularViewModel();
         private bool isTvShowsChecked;
         private bool _isTvShowsArchivedChecked;
+        private bool isTvShowsPopularChecked;
 
         public TvShowTrackerViewModel()
         {
@@ -38,6 +41,7 @@ namespace TvShowManagerWPF.TvShowTracker
             shows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             searchedTvShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             archivedShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
+            popularShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             showDetails.TvShowSubscriptionChanged += TvShowSubscriptionChanged;
             showDetails.TvShowArchiveChanged += TvShowArchiveChanged;
             
@@ -63,6 +67,12 @@ namespace TvShowManagerWPF.TvShowTracker
             set { _isTvShowsArchivedChecked = value; OnPropertyChanged(); }
         }
 
+        public bool IsTvShowsPopularChecked
+        {
+            get { return isTvShowsPopularChecked; }
+            set { isTvShowsPopularChecked = value; OnPropertyChanged(); }
+        }
+
         public TvShowLatestNewsViewModel TvShowLatestNewsViewModel
         {
             get { return latestNews; }
@@ -83,18 +93,26 @@ namespace TvShowManagerWPF.TvShowTracker
                     break;
                 case Navigations.TvShowDetails:
                     CurrentViewModel = showDetails;
-                    IsTvShowsChecked = false;
-                    IsTvShowsArchivedChecked = false;
+                    SetCheckedStatusOnAllControls(false);
                     break;
                 case Navigations.TvShowsSearched:
                     CurrentViewModel = searchedTvShows;
-                    IsTvShowsChecked = false;
-                    IsTvShowsArchivedChecked = false;
+                    SetCheckedStatusOnAllControls(false);
                     break;
                 case Navigations.TvShowsArchived:
                     CurrentViewModel = archivedShows;
                     break;
+                case Navigations.TvShowsPopular:
+                        CurrentViewModel = popularShows;
+                    break;
             }
+        }
+
+        private void SetCheckedStatusOnAllControls(bool status)
+        {
+            IsTvShowsChecked = status;
+            IsTvShowsArchivedChecked = status;
+            IsTvShowsPopularChecked = status;
         }
 
         private void OnSearchTvShows()

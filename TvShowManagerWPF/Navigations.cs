@@ -11,6 +11,8 @@ namespace TvShowManagerWPF
         TvShows,
         TvShowsArchived,
         TvShowsSearched,
-        TvShowDetails
+        TvShowDetails,
+        TvShowsPopular,
+        TvShowsTopRated,
     }
 }

@@ -10,6 +10,7 @@
              xmlns:tvShowLatestNews="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowLatestNews"
              xmlns:tvShowsArchived="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsArchived"
              xmlns:tvShowManagerWpf="clr-namespace:TvShowManagerWPF"
+             xmlns:tvShowsPopular="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsPopular"
              mc:Ignorable="d"
              Loaded="TvShowTracker_OnLoaded">
     <UserControl.DataContext>
@@ -28,6 +29,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type tvShowsArchived:TvShowsArchivedViewModel}">
             <tvShowsArchived:TvShowsArchived />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type tvShowsPopular:TvShowsPopularViewModel}">
+            <tvShowsPopular:TvShowsPopular />
         </DataTemplate>
     </UserControl.Resources>
     
@@ -59,7 +63,7 @@
                     <StackPanel.Resources>
                         <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type RadioButton}">
                             <Border Name="Border"  BorderBrush="Transparent" Background="{TemplateBinding Background}" Padding="10 5 5 5" BorderThickness="5 0 0 0">
-                                <ContentPresenter Content="{TemplateBinding Content}"></ContentPresenter>
+                                <ContentPresenter Content="{TemplateBinding Content}" />
                             </Border>
 
                             <ControlTemplate.Triggers>
@@ -85,6 +89,17 @@
                             </Style.Triggers>
                         </Style>
                     </StackPanel.Resources>
+                    
+                    <Label Content="MAIN MENU" Foreground="{StaticResource LowForeground}" FontSize="12" Margin="0" />
+                    
+                    <RadioButton Content="Popular" IsChecked="{Binding IsTvShowsPopularChecked}" Margin="0"
+                                 Command="{Binding NavigateCommand}" 
+                                 CommandParameter="{x:Static tvShowManagerWpf:Navigations.TvShowsPopular}" />
+                    <!--<RadioButton Content="Top Rated" IsChecked="{Binding IsTvShowsArchivedChecked}"
+                             Command="{Binding NavigateCommand}"
+                             CommandParameter="{x:Static tvShowManagerWpf:Navigations.TvShowsArchived}"/>-->
+
+                    <Label Content="MY SUBSCRIPTIONS" Foreground="{StaticResource LowForeground}" FontSize="12" Margin="0 10 0 0" />
 
                     <RadioButton Content="TV Shows" IsChecked="{Binding IsTvShowsChecked}" 
                              Command="{Binding NavigateCommand}" 

@@ -1,19 +1,17 @@
-﻿<UserControl x:Class="TvShowManagerWPF.TvShowTracker.TvShowsSearched.TvShowsSearched"
+﻿<UserControl x:Class="TvShowManagerWPF.TvShowTracker.TvShowsPopular.TvShowsPopular"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsSearched"
+             xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsPopular"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance local:TvShowsSearchedViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance local:TvShowsPopularViewModel, IsDesignTimeCreatable=True}"
+             Loaded="TvShowsPopular_OnLoaded"
              Background="{StaticResource LowDarkBackground}">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="50 0">
-            <TextBlock Foreground="{StaticResource HighForeground}" FontWeight="Light"  FontSize="24" Margin="5 10 5 10">
-                    <Run>Showing results for</Run>
-                    <Run Text="{Binding SearchQuery}" />
-            </TextBlock>
-
+            <Label Foreground="{StaticResource HighForeground}" FontWeight="Light"  FontSize="36" Content="Popular TV Shows"/>
             <Separator Background="{StaticResource MediumDarkBackground}" Margin="5 0 5 25" />
 
             <ItemsControl ItemsSource="{Binding TvShows}" HorizontalAlignment="Center">
@@ -45,7 +43,7 @@
                                 CommandParameter="{Binding}" Margin="5" Width="150"
                                 VerticalContentAlignment="Top">
                             <StackPanel HorizontalAlignment="Center">
-                                <Image Source="{Binding PosterPath}" Height="225" Width="150" Stretch="Fill" />
+                                <Image Source="{Binding PosterPath}" Height="225" Width="150" />
                                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Foreground="{StaticResource LowForeground}" Margin="8"/>
                             </StackPanel>
                         </Button>
@@ -53,5 +51,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
+
     </ScrollViewer>
 </UserControl>

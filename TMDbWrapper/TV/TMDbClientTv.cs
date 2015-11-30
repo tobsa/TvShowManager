@@ -35,6 +35,12 @@ namespace TMDbWrapper
             return client.Get<ExternalIDs>(request).Data.IMDbID;
         }
 
+        public List<TMDbTvShow> GetPopularTvShows()
+        {
+            var request = new RestRequest("tv/popular");
+            return client.Get<TmdbTvShowSearchResult>(request).Data.TvShows;
+        } 
+
         private class TmdbTvShowSearchResult
         {
             [DeserializeAs(Name = "results")]
