@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,14 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowLatestNews
         public TvShowLatestNews()
         {
             InitializeComponent();
+        }
+
+        private void TvShowLatestNews_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return;
+
+            ((TvShowLatestNewsViewModel)DataContext).LoadTvShows();
         }
     }
 }

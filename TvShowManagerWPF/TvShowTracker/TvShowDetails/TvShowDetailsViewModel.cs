@@ -135,7 +135,7 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowDetails
         private string GetArchiveButtonText()
         {
             if (TvShow == null || TvShow.IsArchived)
-                return "Activate";
+                return "Unarchive";
 
             return "Archive";
         }

@@ -26,8 +26,7 @@ namespace TvShowManagerWPF.TvShowTracker
         private readonly TvShowsSearchedViewModel searchedTvShows = new TvShowsSearchedViewModel();
         private readonly TvShowDetailsViewModel showDetails = new TvShowDetailsViewModel();
         private readonly TvShowsArchivedViewModel archivedShows = new TvShowsArchivedViewModel();
-        private TvShowLatestNewsViewModel tvShowLatestNewsViewModel = new TvShowLatestNewsViewModel();
-
+        private TvShowLatestNewsViewModel latestNews = new TvShowLatestNewsViewModel();
         private bool isTvShowsChecked;
         private bool _isTvShowsArchivedChecked;
 
@@ -64,6 +63,12 @@ namespace TvShowManagerWPF.TvShowTracker
             set { _isTvShowsArchivedChecked = value; OnPropertyChanged(); }
         }
 
+        public TvShowLatestNewsViewModel TvShowLatestNewsViewModel
+        {
+            get { return latestNews; }
+            set { latestNews = value; OnPropertyChanged(); }
+        }
+
         public string TextBoxSearchQuery { get; set; }
 
         public RelayCommand SearchCommand { get; private set; }
@@ -95,6 +100,7 @@ namespace TvShowManagerWPF.TvShowTracker
         private void OnSearchTvShows()
         {
             searchedTvShows.TvShows = TvShowService.SearchTvShows(TextBoxSearchQuery, ConfigurationData.NoImageFoundPath).ToObservableCollection();
+            searchedTvShows.SearchQuery = TextBoxSearchQuery;
             OnNavigation(Navigations.TvShowsSearched);
         }
 

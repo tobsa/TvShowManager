@@ -11,6 +11,7 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowsSearched
     public class TvShowsSearchedViewModel : BaseViewModel
     {
         private ObservableCollection<TvShow> tvShows;
+        private string searchQuery;
 
         public event Action<TvShow> DisplayTvShowDetailsRequested = delegate { };
         public RelayCommand<TvShow> OnDisplayTvShowDetailsCommand { get; private set; }
@@ -24,6 +25,12 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowsSearched
         {
             get { return tvShows; }
             set { tvShows = value; OnPropertyChanged(); }
+        }
+
+        public string SearchQuery
+        {
+            get { return searchQuery; }
+            set { searchQuery = value; OnPropertyChanged(); }
         }
 
         private void DisplayTvShowDetails(TvShow show)

@@ -43,49 +43,67 @@
             <ColumnDefinition Width="3" />
             <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" BorderThickness="0 0 0 1" BorderBrush="{StaticResource LowDarkBackground}">
+            <WrapPanel Margin="50 25 0 25">
+                <Button Content="(" Width="40" />
+                <Button Content=")" Width="40" />
+                <TextBox Width="200" Text="{Binding TextBoxSearchQuery}" />
+                <Button Content="Search" Width="60" Command="{Binding SearchCommand}" />
+            </WrapPanel>
+        </Border>
         
-        <WrapPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="50 25 0 25">
-            <Button Content="(" Width="40" />
-            <Button Content=")" Width="40" />
-            <TextBox Width="200" Text="{Binding TextBoxSearchQuery}" />
-            <Button Content="Search" Width="60" Command="{Binding SearchCommand}" />
-        </WrapPanel>
-        
-        <Grid Row="1" Column="0" Background="Gray">
-            <StackPanel>
-                <StackPanel.Resources>
-                    <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type RadioButton}">
-                        <Border BorderBrush="Black" Background="{TemplateBinding Background}" Padding="5" BorderThickness="1">
-                            <ContentPresenter Content="{TemplateBinding Content}"></ContentPresenter>
-                        </Border>
-                    </ControlTemplate>
-                    <Style TargetType="{x:Type RadioButton}">
-                        <Setter Property="Template" Value="{StaticResource ControlTemplate}" />
-                        <Style.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Background" Value="LightBlue" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Resources>
-                
-                <RadioButton Content="TV Shows" IsChecked="{Binding IsTvShowsChecked}" 
+        <Grid Row="1" Column="0" Background="{StaticResource MediumDarkBackground}">
+            <Border BorderThickness="0 0 0 0" BorderBrush="{StaticResource LowDarkBackground}">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type RadioButton}">
+                            <Border Name="Border"  BorderBrush="Transparent" Background="{TemplateBinding Background}" Padding="10 5 5 5" BorderThickness="5 0 0 0">
+                                <ContentPresenter Content="{TemplateBinding Content}"></ContentPresenter>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource ThemeColor}" />
+                                </Trigger>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="{StaticResource HighForeground}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+                        <Style TargetType="{x:Type RadioButton}">
+                            <Setter Property="Template" Value="{StaticResource ControlTemplate}" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="{StaticResource LowForeground}" />
+                            <Setter Property="FontSize" Value="14" />
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Foreground" Value="{StaticResource HighForeground}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <RadioButton Content="TV Shows" IsChecked="{Binding IsTvShowsChecked}" 
                              Command="{Binding NavigateCommand}" 
                              CommandParameter="{x:Static tvShowManagerWpf:Navigations.TvShows}" />
-                <RadioButton Content="TV Shows (Archived)" IsChecked="{Binding IsTvShowsArchivedChecked}"
+                    <RadioButton Content="TV Shows (Archived)" IsChecked="{Binding IsTvShowsArchivedChecked}"
                              Command="{Binding NavigateCommand}"
                              CommandParameter="{x:Static tvShowManagerWpf:Navigations.TvShowsArchived}"/>
-            </StackPanel>
+                </StackPanel>
+            </Border>
         </Grid>
 
-        <GridSplitter Grid.Row="1" Grid.Column="1" Width="3" HorizontalAlignment="Stretch" />
+        <GridSplitter Grid.Row="1" Grid.Column="1" Width="3" HorizontalAlignment="Stretch" Background="{StaticResource MediumToHighDarkBackground}" />
 
         <ContentControl Grid.Row="1" Grid.Column="2" Content="{Binding CurrentViewModel}" />
-               
-        <GridSplitter Grid.Row="1" Grid.Column="3" Width="3" HorizontalAlignment="Stretch" />
+
+        <GridSplitter Grid.Row="1" Grid.Column="3" Width="3" HorizontalAlignment="Stretch" Background="{StaticResource MediumToHighDarkBackground}" />
         
-        <Grid Row="1" Column="4" Background="Black">
-            <!--<tvShowLatestNews:TvShowLatestNews DataContext="{Binding TvShowLatestNewsViewModel}"/>-->
+        <Grid Row="1" Column="4" Background="{StaticResource MediumDarkBackground}">
+            <tvShowLatestNews:TvShowLatestNews />
         </Grid>
     </Grid>
 </UserControl>

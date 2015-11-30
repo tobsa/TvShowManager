@@ -103,6 +103,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TvShowTracker\ScrollViewerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TvShowTracker\TvShowDetails\TvShowDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +195,9 @@
     <Folder Include="MovieViewer\" />
     <Folder Include="SubtitleMatcher\" />
     <Folder Include="SubtitleRenamer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\TvShowDetailsBackdrop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,22 +4,39 @@
              StartupUri="MainWindow.xaml"
              Startup="App_OnStartup">
     <Application.Resources>
-        <SolidColorBrush x:Key="HighDarkBackground" Color="#282828" />
-        <SolidColorBrush x:Key="MediumDarkBackground" Color="#232323" />
-        <SolidColorBrush x:Key="LowDarkBackground" Color="#181818" />
-        <SolidColorBrush x:Key="MediumToHighDarkBackground" Color="#2d2e30" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="TvShowTracker/ScrollViewerStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <SolidColorBrush x:Key="HighForeground" Color="#ffffff" />
-        <SolidColorBrush x:Key="MediumForeground" Color="#d1d1d1" />
-        <SolidColorBrush x:Key="LowForeground" Color="#9a9a9a" />
+            <SolidColorBrush x:Key="HighDarkBackground" Color="#282828" />
+            <SolidColorBrush x:Key="MediumDarkBackground" Color="#232323" />
+            <SolidColorBrush x:Key="LowDarkBackground" Color="#181818" />
+            <SolidColorBrush x:Key="MediumToHighDarkBackground" Color="#2d2e30" />
+            <SolidColorBrush x:Key="HighestDarkBackground" Color="#414141" />
 
-        <SolidColorBrush x:Key="ColorizedForeground" Color="#1e60d7" />
+            <SolidColorBrush x:Key="HighForeground" Color="#ffffff" />
+            <SolidColorBrush x:Key="MediumForeground" Color="#d1d1d1" />
+            <SolidColorBrush x:Key="LowForeground" Color="#9a9a9a" />
 
-        <LinearGradientBrush x:Key="ThemeColor" StartPoint="0.5,0" EndPoint="0.5,1">
-            <GradientStop Color="#1e55aa" Offset="0.0"/>
-            <GradientStop Color="#1e60a1" Offset="0.5"/>
-            <GradientStop Color="#1e60FF" Offset="1.0"/>
-        </LinearGradientBrush>
+            <SolidColorBrush x:Key="ColorizedForeground" Color="#1e60d7" />
 
+            <LinearGradientBrush x:Key="ThemeColor" StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Color="#1e55aa" Offset="0.0"/>
+                <GradientStop Color="#1e60a1" Offset="0.5"/>
+                <GradientStop Color="#1e60FF" Offset="1.0"/>
+            </LinearGradientBrush>
+
+            <!--MainWindow-->
+            <SolidColorBrush x:Key="TitleDescriptionForeground" Color="{Binding Color, Source={StaticResource LowForeground}}" />
+            <SolidColorBrush x:Key="MainTabControlDefaultForeground" Color="{Binding Color, Source={StaticResource LowForeground}}" />
+            <SolidColorBrush x:Key="MainTabControlDefaultBorderColor" Color="{Binding Color, Source={StaticResource MediumToHighDarkBackground}}" />
+            <LinearGradientBrush x:Key="MainTabControlSelectedBorderColor" 
+                             StartPoint="{Binding StartPoint, Source={StaticResource ThemeColor}}"
+                             EndPoint="{Binding EndPoint, Source={StaticResource ThemeColor}}" 
+                             GradientStops="{Binding GradientStops, Source={StaticResource ThemeColor}}"/>
+            <SolidColorBrush x:Key="MainTabControlSelectedForeground" Color="{Binding Color, Source={StaticResource HighForeground}}"/>
+            <SolidColorBrush x:Key="MainTabControlIsMouseOverForeground" Color="{Binding Color, Source={StaticResource HighForeground}}"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

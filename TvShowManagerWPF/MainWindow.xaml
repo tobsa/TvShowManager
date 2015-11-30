@@ -11,7 +11,8 @@
         Width="1600"
         Height="900"
         WindowStartupLocation="CenterScreen"
-        Loaded="MainWindow_OnLoaded">
+        Loaded="MainWindow_OnLoaded"
+        Background="{StaticResource MediumDarkBackground}">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
@@ -23,9 +24,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <Label HorizontalAlignment="Center">Tv Show Manager</Label>
+            <Label HorizontalAlignment="Center" Foreground="{StaticResource TitleDescriptionForeground}">TV Show Manager - By Tobias Savinainen</Label>
             
-            <Menu Margin="0 0 0 25">
+            <Menu Margin="0 0 0 25" Background="Transparent" Foreground="{StaticResource LowForeground}">
                 <MenuItem Header="File" />
                 <MenuItem Header="TV Show Tracker">
                 </MenuItem>
@@ -34,6 +35,41 @@
         </StackPanel>
         
         <TabControl Grid.Row="1" Background="Transparent" BorderThickness="0">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="{StaticResource MainTabControlDefaultForeground}" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="Padding" Value="20 0 20 0" />
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Grid>
+                                    <Border Name="Border" Padding="0 0 0 10" BorderThickness="0 0 0 3" BorderBrush="{StaticResource MainTabControlDefaultBorderColor}" >
+                                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                                          ContentSource="Header" Margin="12,2,12,2" />
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Panel.ZIndex" Value="100" />
+                                        <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource MainTabControlSelectedBorderColor}" />
+                                        <Setter Property="Foreground" Value="{StaticResource MainTabControlSelectedForeground}" />
+                                    </Trigger>
+                                    
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="{StaticResource MainTabControlIsMouseOverForeground}" />
+                                    </Trigger>
+
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            
             <TabItem Header="TV Show Tracker">
                 <tvShowTracker:TvShowTracker />
             </TabItem>

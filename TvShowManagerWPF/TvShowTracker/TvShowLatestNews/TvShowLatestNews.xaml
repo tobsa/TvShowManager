@@ -5,8 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowLatestNews"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <ItemsControl ItemsSource="{Binding Shows}" Foreground="Wheat">
+             d:DesignHeight="300" d:DesignWidth="300"
+             Loaded="TvShowLatestNews_OnLoaded">
+    <UserControl.DataContext>
+        <local:TvShowLatestNewsViewModel />
+    </UserControl.DataContext>
+    
+    <ItemsControl ItemsSource="{Binding TvShows}" Foreground="Wheat">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Button ToolTip="{Binding SeriesName}" Command="{Binding DataContext.OnOpenLinkCommand, 
@@ -16,10 +21,10 @@
                         <TextBlock Text="{Binding SeriesName}" />
                         
                         <WrapPanel>
-                            <Label Content="Season: " Margin="0"/>
-                            <Label Content="{Binding Season}" Margin="0" />
-                            <Label Content=" Episode: " Margin="0"/>
-                            <Label Content="{Binding Episode}" Margin="0"/>
+                            <Label Content="S" Margin="0" Padding="0"/>
+                            <Label Content="{Binding Season}" Margin="0" Padding="0" />
+                            <Label Content="E" Margin="0" Padding="0"/>
+                            <Label Content="{Binding Episode}" Margin="0" Padding="0"/>
                         </WrapPanel>
                     </StackPanel>
                 </Button>
