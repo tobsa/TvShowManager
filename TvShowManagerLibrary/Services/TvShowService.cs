@@ -23,8 +23,13 @@ namespace TvShowManagerLibrary.Services
         public static List<TvShow> GetPopularTvShows(string defaultPosterPath = "")
         {
             return Service.GetPopularTvShows(defaultPosterPath);
+        }
+
+        public static List<TvShow> GetTopRatedTvShows(string defaultPosterPath = "")
+        {
+            return Service.GetTopRatedTvShows(defaultPosterPath);
         } 
-        
+
         public static bool IsSubscribing(TvShow show)
         {
             if (show == null)

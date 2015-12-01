@@ -83,6 +83,10 @@
     </Compile>
     <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearchedViewModel.cs" />
     <Compile Include="TvShowTracker\TvShowLatestNews\TvShowLatestNewsViewModel.cs" />
+    <Compile Include="TvShowTracker\TvShowsTopRated\TvShowsTopRated.xaml.cs">
+      <DependentUpon>TvShowsTopRated.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TvShowTracker\TvShowsTopRated\TvShowsTopRatedViewModel.cs" />
     <Compile Include="TvShowTracker\TvShows\TvShows.xaml.cs">
       <DependentUpon>TvShows.xaml</DependentUpon>
     </Compile>
@@ -128,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TvShowTracker\TvShowsSearched\TvShowsSearched.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TvShowTracker\TvShowsTopRated\TvShowsTopRated.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

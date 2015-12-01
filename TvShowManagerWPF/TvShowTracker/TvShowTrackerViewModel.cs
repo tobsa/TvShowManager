@@ -17,6 +17,7 @@ using TvShowManagerWPF.TvShowTracker.TvShowsSearched;
 using TvShowManagerWPF.TvShowTracker.TvShowLatestNews;
 using TvShowManagerWPF.TvShowTracker.TvShowsArchived;
 using TvShowManagerWPF.TvShowTracker.TvShowsPopular;
+using TvShowManagerWPF.TvShowTracker.TvShowsTopRated;
 
 namespace TvShowManagerWPF.TvShowTracker
 {
@@ -29,9 +30,11 @@ namespace TvShowManagerWPF.TvShowTracker
         private readonly TvShowsArchivedViewModel archivedShows = new TvShowsArchivedViewModel();
         private TvShowLatestNewsViewModel latestNews = new TvShowLatestNewsViewModel();
         private readonly TvShowsPopularViewModel popularShows = new TvShowsPopularViewModel();
+        private readonly TvShowsTopRatedViewModel topRatedViewModel = new TvShowsTopRatedViewModel();
         private bool isTvShowsChecked;
         private bool _isTvShowsArchivedChecked;
         private bool isTvShowsPopularChecked;
+        private bool isTvShowsTopRatedChecked;
 
         public TvShowTrackerViewModel()
         {
@@ -42,6 +45,7 @@ namespace TvShowManagerWPF.TvShowTracker
             searchedTvShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             archivedShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             popularShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
+            topRatedViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             showDetails.TvShowSubscriptionChanged += TvShowSubscriptionChanged;
             showDetails.TvShowArchiveChanged += TvShowArchiveChanged;
             
@@ -71,6 +75,12 @@ namespace TvShowManagerWPF.TvShowTracker
         {
             get { return isTvShowsPopularChecked; }
             set { isTvShowsPopularChecked = value; OnPropertyChanged(); }
+        }
+
+        public bool IsTvShowsTopRatedChecked
+        {
+            get { return isTvShowsTopRatedChecked; }
+            set { isTvShowsTopRatedChecked = value; OnPropertyChanged(); }
         }
 
         public TvShowLatestNewsViewModel TvShowLatestNewsViewModel
@@ -105,6 +115,9 @@ namespace TvShowManagerWPF.TvShowTracker
                 case Navigations.TvShowsPopular:
                         CurrentViewModel = popularShows;
                     break;
+                case Navigations.TvShowsTopRated:
+                    CurrentViewModel = topRatedViewModel;
+                    break;
             }
         }
 
@@ -113,6 +126,7 @@ namespace TvShowManagerWPF.TvShowTracker
             IsTvShowsChecked = status;
             IsTvShowsArchivedChecked = status;
             IsTvShowsPopularChecked = status;
+            IsTvShowsTopRatedChecked = status;
         }
 
         private void OnSearchTvShows()

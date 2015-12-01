@@ -9,7 +9,7 @@
              Loaded="TvShowsArchived_OnLoaded"
              Background="{StaticResource LowDarkBackground}">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="50 0">
+        <StackPanel Margin="50 0" HorizontalAlignment="Center">
             <Label Foreground="{StaticResource HighForeground}" FontWeight="Light"  FontSize="36" Content="Archived TV Shows"/>
             <Separator Background="{StaticResource MediumDarkBackground}" Margin="0 0 0 25" />
 

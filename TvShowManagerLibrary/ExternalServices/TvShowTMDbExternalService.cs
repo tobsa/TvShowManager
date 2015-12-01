@@ -30,6 +30,12 @@ namespace TvShowManagerLibrary.ExternalServices
             return shows.Select(Map).ToList();
         }
 
+        public List<TvShow> GetTopRatedTvShows(string defaultPosterPath, PosterSize size = PosterSize.w500)
+        {
+            var shows = service.GetTopRatedTvShows(defaultPosterPath, size);
+            return shows.Select(Map).ToList();
+        }
+
         private static TvShow Map(TMDbTvShow show)
         {
             return new TvShow()

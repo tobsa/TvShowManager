@@ -11,6 +11,7 @@
              xmlns:tvShowsArchived="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsArchived"
              xmlns:tvShowManagerWpf="clr-namespace:TvShowManagerWPF"
              xmlns:tvShowsPopular="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsPopular"
+             xmlns:tvShowsTopRated="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsTopRated"
              mc:Ignorable="d"
              Loaded="TvShowTracker_OnLoaded">
     <UserControl.DataContext>
@@ -32,6 +33,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type tvShowsPopular:TvShowsPopularViewModel}">
             <tvShowsPopular:TvShowsPopular />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type tvShowsTopRated:TvShowsTopRatedViewModel}">
+            <tvShowsTopRated:TvShowsTopRated />
         </DataTemplate>
     </UserControl.Resources>
     
@@ -95,9 +99,9 @@
                     <RadioButton Content="Popular" IsChecked="{Binding IsTvShowsPopularChecked}" Margin="0"
                                  Command="{Binding NavigateCommand}" 
                                  CommandParameter="{x:Static tvShowManagerWpf:Navigations.TvShowsPopular}" />
-                    <!--<RadioButton Content="Top Rated" IsChecked="{Binding IsTvShowsArchivedChecked}"
+                    <RadioButton Content="Top Rated" IsChecked="{Binding IsTvShowsTopRatedChecked}"
                              Command="{Binding NavigateCommand}"
-                             CommandParameter="{x:Static tvShowManagerWpf:Navigations.TvShowsArchived}"/>-->
+                             CommandParameter="{x:Static tvShowManagerWpf:Navigations.TvShowsTopRated}"/>
 
                     <Label Content="MY SUBSCRIPTIONS" Foreground="{StaticResource LowForeground}" FontSize="12" Margin="0 10 0 0" />
 

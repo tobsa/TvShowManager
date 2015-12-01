@@ -53,6 +53,18 @@ namespace TMDbWrapper
             }
 
             return shows;
-        } 
+        }
+
+        public List<TMDbTvShow> GetTopRatedTvShows(string defaultPosterPath = "", PosterSize size = PosterSize.w500)
+        {
+            var shows = client.GetTopRatedTvShows();
+
+            foreach (var show in shows)
+            {
+                show.PosterPath = show.PosterPath.HasValue() ? BasePosterPath + size + show.PosterPath : defaultPosterPath;
+            }
+
+            return shows;
+        }
     }
 }

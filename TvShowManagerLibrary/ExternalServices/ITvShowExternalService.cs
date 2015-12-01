@@ -11,5 +11,6 @@ namespace TvShowManagerLibrary.ExternalServices
     {
         List<T> SearchTvShows(string query, string defaultPosterPath = "", PosterSize size = PosterSize.w500);
         List<T> GetPopularTvShows(string defaultPosterPath = "", PosterSize size = PosterSize.w500);
+        List<T> GetTopRatedTvShows(string defaultPosterPath = "", PosterSize size = PosterSize.w500);
     }
 }

@@ -39,7 +39,13 @@ namespace TMDbWrapper
         {
             var request = new RestRequest("tv/popular");
             return client.Get<TmdbTvShowSearchResult>(request).Data.TvShows;
-        } 
+        }
+
+        public List<TMDbTvShow> GetTopRatedTvShows()
+        {
+            var request = new RestRequest("tv/top_rated");
+            return client.Get<TmdbTvShowSearchResult>(request).Data.TvShows;
+        }
 
         private class TmdbTvShowSearchResult
         {
