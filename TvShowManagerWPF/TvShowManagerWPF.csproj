@@ -60,12 +60,15 @@
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="ConfigurationData.cs" />
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="Navigations.cs" />
+    <Compile Include="Navigation.cs" />
+    <Compile Include="INavigationState.cs" />
+    <Compile Include="NavigationStateService.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="TvShowTracker\TvShowDetails\TvShowDetails.xaml.cs">
       <DependentUpon>TvShowDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TvShowTracker\TvShowDetails\TvShowDetailsNavigationState.cs" />
     <Compile Include="TvShowTracker\TvShowDetails\TvShowDetailsViewModel.cs" />
     <Compile Include="TvShowTracker\TvShowLatestNews\TvShowLatestNews.xaml.cs">
       <DependentUpon>TvShowLatestNews.xaml</DependentUpon>
@@ -73,23 +76,28 @@
     <Compile Include="TvShowTracker\TvShowsArchived\TvShowsArchived.xaml.cs">
       <DependentUpon>TvShowsArchived.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TvShowTracker\TvShowsArchived\TvShowsArchivedNavigationState.cs" />
     <Compile Include="TvShowTracker\TvShowsArchived\TvShowsArchivedViewModel.cs" />
     <Compile Include="TvShowTracker\TvShowsPopular\TvShowsPopular.xaml.cs">
       <DependentUpon>TvShowsPopular.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TvShowTracker\TvShowsPopular\TvShowsPopularNavigationState.cs" />
     <Compile Include="TvShowTracker\TvShowsPopular\TvShowsPopularViewModel.cs" />
     <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearched.xaml.cs">
       <DependentUpon>TvShowsSearched.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearchedNavigationState.cs" />
     <Compile Include="TvShowTracker\TvShowsSearched\TvShowsSearchedViewModel.cs" />
     <Compile Include="TvShowTracker\TvShowLatestNews\TvShowLatestNewsViewModel.cs" />
     <Compile Include="TvShowTracker\TvShowsTopRated\TvShowsTopRated.xaml.cs">
       <DependentUpon>TvShowsTopRated.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TvShowTracker\TvShowsTopRated\TvShowsTopRatedNavigationState.cs" />
     <Compile Include="TvShowTracker\TvShowsTopRated\TvShowsTopRatedViewModel.cs" />
     <Compile Include="TvShowTracker\TvShows\TvShows.xaml.cs">
       <DependentUpon>TvShows.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TvShowTracker\TvShows\TvShowsNavigationState.cs" />
     <Compile Include="TvShowTracker\TvShows\TvShowsViewModel.cs" />
     <Compile Include="TvShowTracker\TvShowTracker.xaml.cs">
       <DependentUpon>TvShowTracker.xaml</DependentUpon>
@@ -214,6 +222,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\TvShowDetailsBackdrop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\appbar.window.casement.closed.png" />
+    <Resource Include="Content\appbar.window.casement.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

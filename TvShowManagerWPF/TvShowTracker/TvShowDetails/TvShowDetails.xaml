@@ -123,8 +123,9 @@
                         </Grid.Resources>
 
                         <Button Width="150" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                            Command="{Binding ArchiveCommand}"
-                            CommandParameter="{Binding TvShow}">
+                                Command="{Binding ArchiveCommand}"
+                                CommandParameter="{Binding TvShow}"
+                                Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}">
                             <TextBlock VerticalAlignment="Center" Margin="0 0 0 2" Text="{Binding ArchiveButtonText}"/>
                         </Button>
                     </Grid>

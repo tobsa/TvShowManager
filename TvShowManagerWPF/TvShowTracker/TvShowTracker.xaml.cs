@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,10 @@ namespace TvShowManagerWPF.TvShowTracker
 
         private void TvShowTracker_OnLoaded(object sender, RoutedEventArgs e)
         {
-            
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return;
+
+            ((TvShowTrackerViewModel)DataContext)?.LoadTvShows();
         }
     }
 }

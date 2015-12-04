@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TvShowManagerWPF
 {
-    public enum Navigations
+    public enum Navigation
     {
         TvShows,
         TvShowsArchived,

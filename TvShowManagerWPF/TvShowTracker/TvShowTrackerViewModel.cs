@@ -30,27 +30,37 @@ namespace TvShowManagerWPF.TvShowTracker
         private readonly TvShowsArchivedViewModel archivedShows = new TvShowsArchivedViewModel();
         private TvShowLatestNewsViewModel latestNews = new TvShowLatestNewsViewModel();
         private readonly TvShowsPopularViewModel popularShows = new TvShowsPopularViewModel();
-        private readonly TvShowsTopRatedViewModel topRatedViewModel = new TvShowsTopRatedViewModel();
+        private readonly TvShowsTopRatedViewModel topRatedShows = new TvShowsTopRatedViewModel();
         private bool isTvShowsChecked;
-        private bool _isTvShowsArchivedChecked;
+        private bool isTvShowsArchivedChecked;
         private bool isTvShowsPopularChecked;
         private bool isTvShowsTopRatedChecked;
+        private readonly NavigationStateService navigationService;
 
         public TvShowTrackerViewModel()
         {
+            navigationService = new NavigationStateService();
+
             SearchCommand = new RelayCommand(OnSearchTvShows);
-            NavigateCommand = new RelayCommand<Navigations>(OnNavigation);
+            NavigateCommand = new RelayCommand<Navigation>(OnNavigation);
+            NavigateForwardCommand = new RelayCommand(NavigateForward);
+            NavigateBackwardCommand = new RelayCommand(NavigateBackward);
 
             shows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             searchedTvShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             archivedShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             popularShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
-            topRatedViewModel.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
+            topRatedShows.DisplayTvShowDetailsRequested += DisplayTvShowDetails;
             showDetails.TvShowSubscriptionChanged += TvShowSubscriptionChanged;
             showDetails.TvShowArchiveChanged += TvShowArchiveChanged;
             
-            CurrentViewModel = shows;
             IsTvShowsChecked = true;
+        }
+
+        public void LoadTvShows()
+        {
+            shows.LoadTvShows();
+            OnNavigation(Navigation.TvShows);
         }
 
         public BaseViewModel CurrentViewModel
@@ -67,8 +77,8 @@ namespace TvShowManagerWPF.TvShowTracker
 
         public bool IsTvShowsArchivedChecked
         {
-            get { return _isTvShowsArchivedChecked; }
-            set { _isTvShowsArchivedChecked = value; OnPropertyChanged(); }
+            get { return isTvShowsArchivedChecked; }
+            set { isTvShowsArchivedChecked = value; OnPropertyChanged(); }
         }
 
         public bool IsTvShowsPopularChecked
@@ -92,33 +102,82 @@ namespace TvShowManagerWPF.TvShowTracker
         public string TextBoxSearchQuery { get; set; }
 
         public RelayCommand SearchCommand { get; private set; }
-        public RelayCommand<Navigations> NavigateCommand { get; private set; } 
+        public RelayCommand<Navigation> NavigateCommand { get; private set; } 
+        public RelayCommand NavigateForwardCommand { get; private set; } 
+        public RelayCommand NavigateBackwardCommand { get; private set; } 
 
-        public void OnNavigation(Navigations navigation)
+        public void OnNavigation(Navigation navigation)
         {
             switch (navigation)
             {
-                case Navigations.TvShows:
+                case Navigation.TvShows:
                     CurrentViewModel = shows;
+                    navigationService.AddNavigationState(new TvShowsNavigationState());
                     break;
-                case Navigations.TvShowDetails:
+                case Navigation.TvShowDetails:
+                    CurrentViewModel = showDetails;
+                    SetCheckedStatusOnAllControls(false);
+                    navigationService.AddNavigationState(new TvShowDetailsNavigationState(showDetails));
+                    break;
+                case Navigation.TvShowsSearched:
+                    CurrentViewModel = searchedTvShows;
+                    SetCheckedStatusOnAllControls(false);
+                    navigationService.AddNavigationState(new TvShowsSearchedNavigationState(searchedTvShows));
+                    break;
+                case Navigation.TvShowsArchived:
+                    CurrentViewModel = archivedShows;
+                    navigationService.AddNavigationState(new TvShowsArchivedNavigationState());
+                    break;
+                case Navigation.TvShowsPopular:
+                    CurrentViewModel = popularShows;
+                    navigationService.AddNavigationState(new TvShowsPopularNavigationState());
+                    break;
+                case Navigation.TvShowsTopRated:
+                    CurrentViewModel = topRatedShows;
+                    navigationService.AddNavigationState(new TvShowsTopRatedNavigationState());
+                    break;
+            }
+        }
+
+        public void OnHistoryNavigation(Navigation navigation)
+        {
+            switch (navigation)
+            {
+                case Navigation.TvShows:
+                    CurrentViewModel = shows;
+                    IsTvShowsChecked = true;
+                    break;
+                case Navigation.TvShowDetails:
                     CurrentViewModel = showDetails;
                     SetCheckedStatusOnAllControls(false);
                     break;
-                case Navigations.TvShowsSearched:
+                case Navigation.TvShowsSearched:
                     CurrentViewModel = searchedTvShows;
                     SetCheckedStatusOnAllControls(false);
                     break;
-                case Navigations.TvShowsArchived:
+                case Navigation.TvShowsArchived:
                     CurrentViewModel = archivedShows;
+                    IsTvShowsArchivedChecked = true;
                     break;
-                case Navigations.TvShowsPopular:
-                        CurrentViewModel = popularShows;
+                case Navigation.TvShowsPopular:
+                    CurrentViewModel = popularShows;
+                    IsTvShowsPopularChecked = true;
                     break;
-                case Navigations.TvShowsTopRated:
-                    CurrentViewModel = topRatedViewModel;
+                case Navigation.TvShowsTopRated:
+                    CurrentViewModel = topRatedShows;
+                    IsTvShowsTopRatedChecked = true;
                     break;
             }
+        }
+
+        public void NavigateForward()
+        {
+            OnHistoryNavigation(navigationService.NavigateForward());
+        }
+
+        public void NavigateBackward()
+        {
+            OnHistoryNavigation(navigationService.NavigateBackward());
         }
 
         private void SetCheckedStatusOnAllControls(bool status)
@@ -133,7 +192,7 @@ namespace TvShowManagerWPF.TvShowTracker
         {
             searchedTvShows.TvShows = TvShowService.SearchTvShows(TextBoxSearchQuery, ConfigurationData.NoImageFoundPath).ToObservableCollection();
             searchedTvShows.SearchQuery = TextBoxSearchQuery;
-            OnNavigation(Navigations.TvShowsSearched);
+            OnNavigation(Navigation.TvShowsSearched);
         }
 
         private void DisplayTvShowDetails(TvShow show)
@@ -141,7 +200,7 @@ namespace TvShowManagerWPF.TvShowTracker
             if (show != null)
             {
                 showDetails.TvShow = show;
-                OnNavigation(Navigations.TvShowDetails);
+                OnNavigation(Navigation.TvShowDetails);
             }
         }
 
