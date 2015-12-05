@@ -12,15 +12,17 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="50 0 50 0" >
             <DockPanel HorizontalAlignment="Center">
                 <StackPanel DockPanel.Dock="Top">
-                    <DockPanel Margin="5 0 0 25">
+                   
+                    <DockPanel Margin="5 0 0 15">
                         <Border BorderThickness="5" BorderBrush="#242424" DockPanel.Dock="Left">
                             <Image Stretch="None"  Source="../../Content/TvShowsBackground.png" />
                         </Border>
                         
                         <StackPanel>
-                            <Label Foreground="{StaticResource HighForeground}" FontWeight="Light"  FontSize="36" Content="TV Shows"/>
-                            <Separator Background="{StaticResource MediumDarkBackground}" Margin="5 0" />
-                            <WrapPanel Margin="5 25" Background="#202020">
+                            <Label Content="TV Shows" Margin="5 0 0 0" Foreground="{StaticResource HighForeground}" FontWeight="Light"  FontSize="36" />
+                            <Separator Background="{StaticResource MediumDarkBackground}" Margin="10 0" />
+                            
+                            <WrapPanel Margin="5 5">
                                 <WrapPanel.Resources>
                                     <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
                                         <Setter Property="Foreground" Value="{StaticResource LowForeground}" />
@@ -35,13 +37,13 @@
                                     <Style TargetType="{x:Type Button}">
                                         <Setter Property="Background" Value="Transparent" />
                                         <Setter Property="BorderThickness" Value="0" />
-                                        <Setter Property="Width" Value="120" />
+                                        <Setter Property="Margin" Value="5 0" />
 
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="{x:Type Button}">
                                                     <Border Background="{TemplateBinding Background}">
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                                     </Border>
                                                 </ControlTemplate>
                                             </Setter.Value>
@@ -56,36 +58,36 @@
                                 </WrapPanel.Resources>
 
                                 <Button Command="{Binding OnHyperLinkMultiNavigateCommand}" 
-                                CommandParameter="{x:Static tvShowManagerLibrary:Websites.SceneAccess}">
-                                    <WrapPanel>
+                                        CommandParameter="{x:Static tvShowManagerLibrary:Websites.SceneAccess}">
+                                    <WrapPanel Margin="5 0 0 0">
                                         <Image Source="../../Content/SceneAccessIcon.ico"  />
                                         <Label Content="SceneAccess" Style="{StaticResource LabelStyle}"  />
                                     </WrapPanel>
                                 </Button>
                                 <Button Command="{Binding OnHyperLinkMultiNavigateCommand}" 
-                                CommandParameter="{x:Static tvShowManagerLibrary:Websites.Addic7ed}">
-                                    <WrapPanel>
+                                        CommandParameter="{x:Static tvShowManagerLibrary:Websites.Addic7ed}">
+                                    <WrapPanel Margin="5 0 0 0">
                                         <Image Source="../../Content/Addic7edIcon.ico"  />
                                         <Label Content="Addic7ed" Style="{StaticResource LabelStyle}"/>
                                     </WrapPanel>
                                 </Button>
                                 <Button Command="{Binding OnHyperLinkMultiNavigateCommand}" 
-                                CommandParameter="{x:Static tvShowManagerLibrary:Websites.PirateBay}">
-                                    <WrapPanel>
+                                        CommandParameter="{x:Static tvShowManagerLibrary:Websites.PirateBay}">
+                                    <WrapPanel Margin="5 0 0 0">
                                         <Image Source="../../Content/PirateBayIcon.ico"  />
                                         <Label Content="PirateBay" Style="{StaticResource LabelStyle}"/>
                                     </WrapPanel>
                                 </Button>
                                 <Button Command="{Binding OnHyperLinkMultiNavigateCommand}" 
                                 CommandParameter="{x:Static tvShowManagerLibrary:Websites.KickassTorrent}">
-                                    <WrapPanel>
+                                    <WrapPanel Margin="5 0 0 0">
                                         <Image Source="../../Content/KickassTorrentIcon.ico"  />
                                         <Label Content="KickassTorrent" Style="{StaticResource LabelStyle}"/>
                                     </WrapPanel>
                                 </Button>
                                 <Button Command="{Binding OnHyperLinkMultiNavigateCommand}" 
-                                CommandParameter="{x:Static tvShowManagerLibrary:Websites.IMDb}">
-                                    <WrapPanel>
+                                        CommandParameter="{x:Static tvShowManagerLibrary:Websites.IMDb}">
+                                    <WrapPanel Margin="5 0 0 0">
                                         <Image Source="../../Content/ImdbIcon.ico"  />
                                         <Label Content="IMDb" Style="{StaticResource LabelStyle}"/>
                                     </WrapPanel>
@@ -121,6 +123,16 @@
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
+                                    
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Effect">
+                                                <Setter.Value>
+                                                    <DropShadowEffect ShadowDepth="0" Color="WhiteSmoke" Opacity="0.6" BlurRadius="15" RenderingBias="Quality"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
                                 </Style>
                             </DataTemplate.Resources>
 
