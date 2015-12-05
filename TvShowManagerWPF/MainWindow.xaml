@@ -9,7 +9,12 @@
         Title="TV Show Manager" 
         Width="1600"
         Height="900"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
+        BorderThickness="5"
+        BorderBrush="{StaticResource MediumDarkBackground}"
         Background="{StaticResource MediumDarkBackground}">
     <Window.DataContext>
         <local:MainWindowViewModel x:Name="MainWindowViewModel" />
@@ -21,15 +26,29 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <Label HorizontalAlignment="Center" Foreground="{StaticResource TitleDescriptionForeground}">TV Show Manager - By Tobias Savinainen</Label>
+        <StackPanel Grid.Row="0" MouseLeftButtonDown="UIElement_OnMouseDown" MouseMove="UIElement_OnMouseMove" 
+                    MouseLeftButtonUp ="UIElement_OnMouseUp" Background="{StaticResource MediumDarkBackground}">
+            <Grid>
+                <Image Width="20" Height="20" Source="Content/Icon.png" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       RenderOptions.BitmapScalingMode="HighQuality" />
+                
+                <Label HorizontalAlignment="Center" Foreground="{StaticResource TitleDescriptionForeground}">TV Show Manager - By Tobias Savinainen</Label>
             
-            <Menu Margin="0 0 0 25" Background="Transparent" Foreground="{StaticResource LowForeground}">
+                <WrapPanel HorizontalAlignment="Right">
+                    <Button Style="{StaticResource TitleBarMinimizeButtonStyyle}" PreviewMouseLeftButtonUp="MinimizeButton_OnMouseUp" />
+                    <Button Style="{StaticResource TitleBarMaximizeButtonStyle}" PreviewMouseLeftButtonUp="MaximizeButton_OnMouseUp" />
+                    <Button Style="{StaticResource TitleBarCloseButtonStyle}" PreviewMouseLeftButtonUp="CloseButton_OnMouseUp" />
+                </WrapPanel>
+            </Grid>
+
+
+            <Menu Margin="0 0 0 25" HorizontalAlignment="Left" Background="{StaticResource MediumDarkBackground}" Foreground="{StaticResource LowForeground}">
                 <MenuItem Header="File" />
-                <MenuItem Header="TV Show Tracker">
+                <MenuItem Header="Settings">
+                    <MenuItem Header="Link Management" />
+                    <MenuItem Header="Webscraper Options" />
                 </MenuItem>
             </Menu>
-           
         </StackPanel>
         
         <TabControl Grid.Row="1" Background="Transparent" BorderThickness="0">

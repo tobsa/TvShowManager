@@ -38,7 +38,7 @@
             </LinearGradientBrush>
 
             <!--MainWindow-->
-            <SolidColorBrush x:Key="TitleDescriptionForeground" Color="{Binding Color, Source={StaticResource LowForeground}}" />
+            <SolidColorBrush x:Key="TitleDescriptionForeground" Color="{Binding Color, Source={StaticResource MediumForeground}}" />
             <SolidColorBrush x:Key="MainTabControlDefaultForeground" Color="{Binding Color, Source={StaticResource LowForeground}}" />
             <SolidColorBrush x:Key="MainTabControlDefaultBorderColor" Color="{Binding Color, Source={StaticResource MediumToHighDarkBackground}}" />
             <LinearGradientBrush x:Key="MainTabControlSelectedBorderColor" 
@@ -51,6 +51,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="TvShowTracker/ScrollViewerStyle.xaml" />
                 <ResourceDictionary Source="TvShowTracker/NavigationButtonStyles.xaml" />
+                <ResourceDictionary Source="TitleBarButtonStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

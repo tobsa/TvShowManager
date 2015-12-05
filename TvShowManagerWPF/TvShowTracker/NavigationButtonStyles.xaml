@@ -12,7 +12,7 @@
                     <Border Background="{TemplateBinding Background}" CornerRadius="3">
                         <Image Name="Image" Width="12" Height="18">
                             <Image.Source>
-                                <CroppedBitmap Source="../../Content/NavigationArrowBackward.png" SourceRect="12 0 12 18" />
+                                <CroppedBitmap Source="../Content/NavigationArrowBackward.png" SourceRect="12 0 12 18" />
                             </Image.Source>
                         </Image>
                     </Border>
@@ -21,7 +21,7 @@
                         <DataTrigger Binding="{Binding IsBackwardNavigationStackEmpty}" Value="True">
                             <Setter TargetName="Image" Property="Source">
                                 <Setter.Value>
-                                    <CroppedBitmap Source="../../Content/NavigationArrowBackward.png" SourceRect="0 0 12 18" />
+                                    <CroppedBitmap Source="../Content/NavigationArrowBackward.png" SourceRect="0 0 12 18" />
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>
@@ -33,7 +33,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="Image" Property="Source">
                                 <Setter.Value>
-                                    <CroppedBitmap Source="../../Content/NavigationArrowBackward.png" SourceRect="24 0 12 18" />
+                                    <CroppedBitmap Source="../Content/NavigationArrowBackward.png" SourceRect="24 0 12 18" />
                                 </Setter.Value>
                             </Setter>
                         </MultiDataTrigger>
@@ -54,7 +54,7 @@
                     <Border Background="{TemplateBinding Background}" CornerRadius="3">
                         <Image Name="Image" Width="12" Height="18">
                             <Image.Source>
-                                <CroppedBitmap Source="../../Content/NavigationArrowForward.png" SourceRect="12 0 12 18" />
+                                <CroppedBitmap Source="../Content/NavigationArrowForward.png" SourceRect="12 0 12 18" />
                             </Image.Source>
                         </Image>
                     </Border>
@@ -63,7 +63,7 @@
                         <DataTrigger Binding="{Binding IsForwardNavigationStackEmpty}" Value="True">
                             <Setter TargetName="Image" Property="Source">
                                 <Setter.Value>
-                                    <CroppedBitmap Source="../../Content/NavigationArrowForward.png" SourceRect="0 0 12 18" />
+                                    <CroppedBitmap Source="../Content/NavigationArrowForward.png" SourceRect="0 0 12 18" />
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>
@@ -75,7 +75,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="Image" Property="Source">
                                 <Setter.Value>
-                                    <CroppedBitmap Source="../../Content/NavigationArrowForward.png" SourceRect="24 0 12 18" />
+                                    <CroppedBitmap Source="../Content/NavigationArrowForward.png" SourceRect="24 0 12 18" />
                                 </Setter.Value>
                             </Setter>
                         </MultiDataTrigger>
