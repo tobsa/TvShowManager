@@ -14,9 +14,9 @@
              xmlns:tvShowsTopRated="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsTopRated"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:TvShowTrackerViewModel, IsDesignTimeCreatable=True}"
-             Loaded="TvShowTracker_OnLoaded">
+             Loaded="TvShowTracker_OnLoaded" PreviewMouseDown="UserControl_PreviewMouseDown">
     <UserControl.DataContext>
-        <local:TvShowTrackerViewModel />
+        <local:TvShowTrackerViewModel x:Name="TvShowTrackerViewModel"/>
     </UserControl.DataContext>
     
     <UserControl.Resources>
@@ -54,11 +54,63 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" BorderThickness="0 0 0 1" BorderBrush="{StaticResource LowDarkBackground}">
-            <WrapPanel Margin="50 25 0 25">
-                <Button Content="(" Width="40" Command="{Binding NavigateBackwardCommand}" />
-                <Button Content=")" Width="40" Command="{Binding NavigateForwardCommand}"/>
-                <TextBox Width="200" Text="{Binding TextBoxSearchQuery}" />
-                <Button Content="Search" Width="60" Command="{Binding SearchCommand}" />
+            <WrapPanel Margin="25 15 0 15">
+                <Button Command="{Binding NavigateBackwardCommand}" Margin="0 0 25 0" Style="{StaticResource BackwardNavigationButtonStyle}"/>
+                <Button Command="{Binding NavigateForwardCommand}" Margin="0 0 25 0" Style="{StaticResource ForwardNavigationButtonStyle}"/>
+                
+                <Border CornerRadius="3" BorderThickness="3" BorderBrush="{StaticResource LowDarkBackground}" Background="White">
+                    <DockPanel Margin="5 3">
+                        <DockPanel.Resources>
+                            <ControlTemplate x:Key="ControlTemplate" TargetType="TextBox">
+                                <Grid>
+                                    <TextBox Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, 
+                                             UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" />
+                                    <TextBlock VerticalAlignment="Center" Text="Search..." Margin="5,0,5,0" IsHitTestVisible="False" 
+                                               x:Name="UserMessage" Visibility="Hidden" Foreground="{StaticResource LowForeground}" />
+                                </Grid>
+
+                                <ControlTemplate.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="Text" Value=""/>
+                                            <Condition Property="IsKeyboardFocusWithin" Value="False"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Visibility" TargetName="UserMessage" Value="Visible"/>
+                                    </MultiTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </DockPanel.Resources>
+                        
+                        <Image Margin="0 0 3 0" Source="../Content/SearchIcon.png" DockPanel.Dock="Left" Height="18"/>
+                        <TextBox Width="200" Template="{StaticResource ControlTemplate}" Text="{Binding TextBoxSearchQuery}" />
+                    </DockPanel>
+                </Border>
+
+                <Grid>
+                    <Grid.Resources>
+                        <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type Button}">
+                            <Border CornerRadius="1" Height="28" BorderThickness="1" BorderBrush="#181818" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template" Value="{StaticResource ControlTemplate}" />
+                            <Setter Property="Foreground" Value="{StaticResource HighForeground}" />
+                            <Setter Property="Background" Value="{StaticResource ButtonThemeBrushMedium}" />
+                        
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#646464" />
+                            </Trigger>
+                        </Style.Triggers>
+                        </Style>
+                    </Grid.Resources>
+                    
+                    <Button Content="Search" Width="60" Command="{Binding SearchCommand}">
+
+                    </Button>
+                </Grid>
             </WrapPanel>
         </Border>
         

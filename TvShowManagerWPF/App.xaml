@@ -5,10 +5,6 @@
              Startup="App_OnStartup">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="TvShowTracker/ScrollViewerStyle.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
             <SolidColorBrush x:Key="HighDarkBackground" Color="#282828" />
             <SolidColorBrush x:Key="MediumDarkBackground" Color="#232323" />
             <SolidColorBrush x:Key="LowDarkBackground" Color="#181818" />
@@ -27,6 +23,20 @@
                 <GradientStop Color="#1e60FF" Offset="1.0"/>
             </LinearGradientBrush>
 
+            <LinearGradientBrush x:Key="ButtonThemeBrushLow" StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStopCollection>
+                    <GradientStop Offset="1" Color="#242424" />
+                    <GradientStop Offset="0" Color="#323232" />
+                </GradientStopCollection>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="ButtonThemeBrushMedium" StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStopCollection>
+                    <GradientStop Offset="1" Color="#323232" />
+                    <GradientStop Offset="0" Color="#484850" />
+                </GradientStopCollection>
+            </LinearGradientBrush>
+
             <!--MainWindow-->
             <SolidColorBrush x:Key="TitleDescriptionForeground" Color="{Binding Color, Source={StaticResource LowForeground}}" />
             <SolidColorBrush x:Key="MainTabControlDefaultForeground" Color="{Binding Color, Source={StaticResource LowForeground}}" />
@@ -37,6 +47,11 @@
                              GradientStops="{Binding GradientStops, Source={StaticResource ThemeColor}}"/>
             <SolidColorBrush x:Key="MainTabControlSelectedForeground" Color="{Binding Color, Source={StaticResource HighForeground}}"/>
             <SolidColorBrush x:Key="MainTabControlIsMouseOverForeground" Color="{Binding Color, Source={StaticResource HighForeground}}"/>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="TvShowTracker/ScrollViewerStyle.xaml" />
+                <ResourceDictionary Source="TvShowTracker/NavigationButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

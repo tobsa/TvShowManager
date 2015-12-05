@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TvShowManagerLibrary;
 using TvShowManagerLibrary.Configurations;
+using TvShowManagerWPF.TvShowTracker;
 
 namespace TvShowManagerWPF
 {
@@ -23,11 +24,6 @@ namespace TvShowManagerWPF
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }

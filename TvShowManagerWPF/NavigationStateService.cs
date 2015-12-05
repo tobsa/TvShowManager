@@ -20,6 +20,16 @@ namespace TvShowManagerWPF
             currentIndex++;
         }
 
+        public bool IsBackwardNavigationStackEmpty()
+        {
+            return currentIndex == 0;
+        }
+
+        public bool IsForwardNavigationStackEmpty()
+        {
+            return currentIndex == navigationStates.Count - 1;
+        }
+
         public Navigation NavigateForward()
         {
             currentIndex++;

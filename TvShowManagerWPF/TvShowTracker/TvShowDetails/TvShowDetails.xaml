@@ -26,7 +26,7 @@
                     </Grid.Background>
 
                     <Image Grid.Column="0" Source="{Binding TvShow.PosterPath}" Width="200" Margin="10" />
-                    
+
                     <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="10">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type Button}">
@@ -70,7 +70,7 @@
                                 </Style.Triggers>
                             </Style>
                         </StackPanel.Resources>
-                        
+
                         <TextBlock Text="{Binding TvShow.Name}" TextWrapping="Wrap" FontSize="36" FontWeight="Light" Foreground="{StaticResource HighForeground}" />
 
                         <Button Width="150" Margin="0 10 0 0" Command="{Binding SubscribeCommand}" HorizontalAlignment="Left"
@@ -132,7 +132,7 @@
                 </Grid>
 
                 <!--Content-->
-                
+
                 <Grid Margin="0 25 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1.5*" />
@@ -154,7 +154,7 @@
 
                         <TextBlock Text="Edit custom data" FontSize="20" VerticalAlignment="Bottom" Foreground="{StaticResource MediumForeground}"
                                     Margin="25 0 0 0"/>
-                        
+
                         <Separator Background="{StaticResource MediumDarkBackground}" Margin="25 0 0 0" />
 
                         <Grid>
@@ -167,14 +167,13 @@
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="BorderThickness" Value="1" />
                                     <Setter Property="BorderBrush" Value="#121212" />
-                                    <Setter Property="Background" Value="#202020" />
-                                    <Setter Property="Foreground" Value="{StaticResource HighForeground}" />
+                                    <Setter Property="Background" Value="{StaticResource ButtonThemeBrushLow}" />
 
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type Button}">
                                                 <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}"
-                                                            BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3">
+                                                        BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3">
                                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                 </Border>
                                             </ControlTemplate>
@@ -183,10 +182,10 @@
 
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#242424" />
+                                            <Setter Property="Background" Value="#323232" />
                                         </Trigger>
                                         <Trigger Property="IsPressed" Value="True">
-                                            <Setter Property="Background" Value="#282828" />
+                                            <Setter Property="Background" Value="#323232" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -203,20 +202,42 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Custom Name:" Margin="0 25 10 5" />
-                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CustomName, UpdateSourceTrigger=PropertyChanged}" Margin="0 25 0 5" />
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Custom Name:" Margin="0 20 10 5" VerticalAlignment="Center"  />
+                            <Border Grid.Row="0" Grid.Column="1" CornerRadius="3" BorderThickness="1" BorderBrush="{StaticResource LowDarkBackground}" 
+                                    Background="White" Height="24" Margin="0 20 0 5" VerticalAlignment="Center">
+                                <DockPanel Margin="5 0" VerticalAlignment="Center">
+                                    <Image Margin="0 0 3 0" Source="../../Content/CustomNameIcon.png" DockPanel.Dock="Left" Height="16" Width="16" />
+                                    <TextBox Text="{Binding CustomName, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" 
+                                             VerticalAlignment="Center" Margin="0 0 0 3" />
+                                </DockPanel>
+                            </Border>
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Addic7ed ID:" Margin="0 5 10 5"  />
-                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Addic7edID, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" />
 
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="IMDb ID:" Margin="0 5 10 25"  />
-                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding IMDbID, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 25" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Addic7ed ID:" Margin="0 5 10 5" VerticalAlignment="Center"  />
+                            <Border Grid.Row="1" Grid.Column="1" CornerRadius="3" BorderThickness="1" BorderBrush="{StaticResource LowDarkBackground}" 
+                                    Background="White" Height="24" Margin="0 5 0 5" VerticalAlignment="Center">
+                                <DockPanel Margin="5 0" VerticalAlignment="Center">
+                                    <Image Margin="0 0 3 0" Source="../../Content/Addic7edIcon.ico" DockPanel.Dock="Left" Height="16" Width="16" />
+                                    <TextBox Text="{Binding Addic7edID, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" 
+                                             VerticalAlignment="Center" Margin="0 0 0 3" />
+                                </DockPanel>
+                            </Border>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="IMDb ID:" Margin="0 5 10 25" VerticalAlignment="Center"  />
+                            <Border Grid.Row="2" Grid.Column="1" CornerRadius="3" BorderThickness="1" BorderBrush="{StaticResource LowDarkBackground}" 
+                                    Background="White" Height="24" Margin="0 5 0 25" VerticalAlignment="Center">
+                                <DockPanel Margin="5 0" VerticalAlignment="Center">
+                                    <Image Margin="0 0 3 0" Source="../../Content/ImdbIcon.ico" DockPanel.Dock="Left" Height="16" Width="16" />
+                                    <TextBox Text="{Binding IMDbID, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" 
+                                             VerticalAlignment="Center" Margin="0 0 0 2" />
+                                </DockPanel>
+                            </Border>
 
                             <Button Grid.Row="3" Grid.Column="1" Command="{Binding SaveCustomDataCommand}" 
-                                        Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}"
-                                        HorizontalAlignment="Right"
-                                        Width="140">
-                                <TextBlock VerticalAlignment="Center" Margin="0 0 0 2" Text="{Binding SaveButtonText}"/>
+                                    Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}"
+                                    HorizontalAlignment="Right"
+                                    Width="140">
+                                <TextBlock VerticalAlignment="Center" Margin="0 0 0 2" Text="{Binding SaveButtonText}" Foreground="{StaticResource HighForeground}"/>
                             </Button>
                         </Grid>
 
@@ -224,135 +245,6 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-                
-                <!--<StackPanel Orientation="Horizontal" Grid.Row="0">
-
-
-                <StackPanel Grid.Row="1" Margin="0 25">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.5*" />
-                            <ColumnDefinition Width="3" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Column="0">
-                            <TextBlock Text="Overview" FontSize="20" Foreground="{StaticResource MediumForeground}" />
-                            <Separator Background="{StaticResource MediumDarkBackground}" />
-                            <TextBlock Text="{Binding TvShow.Overview}" Foreground="{StaticResource LowForeground}" TextWrapping="Wrap" Margin="0 25 25 0" />
-                        </StackPanel>
-
-                        <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Stretch" Background="{StaticResource MediumToHighDarkBackground}"
-                                      Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}"/>
-
-                        <StackPanel Grid.Column="2" Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}">
-                            <TextBlock Text="Edit custom data" FontSize="20" VerticalAlignment="Bottom" Foreground="{StaticResource MediumForeground}"
-                                       Margin="25 0 0 0"/>
-                            <Separator Background="{StaticResource MediumDarkBackground}" />
-                            
-                            <Grid>
-                                <Grid.Resources>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="Foreground" Value="{StaticResource LowForeground}" />
-                                        <Setter Property="HorizontalAlignment" Value="Right" />
-                                    </Style>
-
-                                    <Style TargetType="{x:Type Button}">
-                                        <Setter Property="BorderThickness" Value="1" />
-                                        <Setter Property="BorderBrush" Value="#121212" />
-                                        <Setter Property="Background" Value="#202020" />
-                                        <Setter Property="Foreground" Value="{StaticResource HighForeground}" />
-
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}"
-                                                            BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3">
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#242424" />
-                                            </Trigger>
-                                            <Trigger Property="IsPressed" Value="True">
-                                                <Setter Property="Background" Value="#282828" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Grid.Resources>
-                                
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Custom Name:" Margin="0 25 10 5" />
-                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CustomName, UpdateSourceTrigger=PropertyChanged}" Margin="0 25 0 5" />
-
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Addic7ed ID:" Margin="0 5 10 5"  />
-                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Addic7edID, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" />
-
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="IMDb ID:" Margin="0 5 10 25"  />
-                                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding IMDbID, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 25" />
-
-                                <Button Grid.Row="3" Grid.Column="1" Command="{Binding SaveCustomDataCommand}" 
-                                        Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}"
-                                        HorizontalAlignment="Right"
-                                        Width="140">
-                                    <TextBlock VerticalAlignment="Center" Margin="0 0 0 2" Text="{Binding SaveButtonText}"/>
-                                </Button>
-                            </Grid>
-                            
-                            
-                        </StackPanel>
-                    </Grid>
-                    
-
-
-                    --><!--<Button Content="{Binding ArchiveButtonText}" Width="100" Command="{Binding ArchiveCommand}" CommandParameter="{Binding TvShow}"
-                            Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}"/>--><!--
-                </StackPanel>
-            </Grid>-->
-
-<!--
-
-            <Separator Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}" />
-
-                    <StackPanel Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Width="110" HorizontalContentAlignment="Right" Content="Custom Name:" />
-                            <TextBox Width="200" VerticalAlignment="Center" Text="{Binding CustomName, UpdateSourceTrigger=PropertyChanged}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Width="110" HorizontalContentAlignment="Right" Content="Addic7ed ID:" />
-                            <TextBox Width="200" VerticalAlignment="Center" Text="{Binding Addic7edID, UpdateSourceTrigger=PropertyChanged}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Width="110" HorizontalContentAlignment="Right" Content="IMDb ID:" />
-                            <TextBox Width="200" VerticalAlignment="Center" Text="{Binding IMDbID, UpdateSourceTrigger=PropertyChanged}"/>
-                        </StackPanel>
-                    </StackPanel>
-
-                    <Button Content="{Binding SaveButtonText}" 
-                    Command="{Binding SaveCustomDataCommand}"
-                    Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}"/>
-
-                    <Button Content="{Binding ArchiveButtonText}" Width="100" 
-                    Command="{Binding ArchiveCommand}"
-                    CommandParameter="{Binding TvShow}"
-                    Visibility="{Binding IsSubscribing, Converter={StaticResource VisibilityConverter}}"/>
-                </StackPanel>
-            </StackPanel>-->
         </ScrollViewer>
     </Grid>
 

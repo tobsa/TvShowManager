@@ -5,16 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TvShowManagerWPF"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
-        xmlns:tvShowViewer="clr-namespace:TvShowManagerWPF.TvShowViewer"
         xmlns:tvShowTracker="clr-namespace:TvShowManagerWPF.TvShowTracker"
         Title="TV Show Manager" 
         Width="1600"
         Height="900"
         WindowStartupLocation="CenterScreen"
-        Loaded="MainWindow_OnLoaded"
         Background="{StaticResource MediumDarkBackground}">
     <Window.DataContext>
-        <local:MainWindowViewModel />
+        <local:MainWindowViewModel x:Name="MainWindowViewModel" />
     </Window.DataContext>
                 
     <Grid>

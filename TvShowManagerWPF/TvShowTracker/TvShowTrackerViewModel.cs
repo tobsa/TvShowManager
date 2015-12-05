@@ -35,12 +35,12 @@ namespace TvShowManagerWPF.TvShowTracker
         private bool isTvShowsArchivedChecked;
         private bool isTvShowsPopularChecked;
         private bool isTvShowsTopRatedChecked;
-        private readonly NavigationStateService navigationService;
+        private readonly NavigationStateService navigationService = new NavigationStateService();
+        private bool isBackwardNavigationStackEmpty;
+        private bool isForwardNavigationStackEmpty;
 
         public TvShowTrackerViewModel()
         {
-            navigationService = new NavigationStateService();
-
             SearchCommand = new RelayCommand(OnSearchTvShows);
             NavigateCommand = new RelayCommand<Navigation>(OnNavigation);
             NavigateForwardCommand = new RelayCommand(NavigateForward);
@@ -61,6 +61,8 @@ namespace TvShowManagerWPF.TvShowTracker
         {
             shows.LoadTvShows();
             OnNavigation(Navigation.TvShows);
+            IsBackwardNavigationStackEmpty = navigationService.IsBackwardNavigationStackEmpty();
+            IsForwardNavigationStackEmpty = navigationService.IsForwardNavigationStackEmpty();
         }
 
         public BaseViewModel CurrentViewModel
@@ -91,6 +93,18 @@ namespace TvShowManagerWPF.TvShowTracker
         {
             get { return isTvShowsTopRatedChecked; }
             set { isTvShowsTopRatedChecked = value; OnPropertyChanged(); }
+        }
+
+        public bool IsBackwardNavigationStackEmpty
+        {
+            get { return isBackwardNavigationStackEmpty; }
+            set { isBackwardNavigationStackEmpty = value; OnPropertyChanged(); }
+        }
+
+        public bool IsForwardNavigationStackEmpty
+        {
+            get { return isForwardNavigationStackEmpty; }
+            set { isForwardNavigationStackEmpty = value; OnPropertyChanged(); }
         }
 
         public TvShowLatestNewsViewModel TvShowLatestNewsViewModel
@@ -137,6 +151,9 @@ namespace TvShowManagerWPF.TvShowTracker
                     navigationService.AddNavigationState(new TvShowsTopRatedNavigationState());
                     break;
             }
+
+            IsBackwardNavigationStackEmpty = navigationService.IsBackwardNavigationStackEmpty();
+            IsForwardNavigationStackEmpty = navigationService.IsForwardNavigationStackEmpty();
         }
 
         public void OnHistoryNavigation(Navigation navigation)
@@ -168,6 +185,9 @@ namespace TvShowManagerWPF.TvShowTracker
                     IsTvShowsTopRatedChecked = true;
                     break;
             }
+
+            IsBackwardNavigationStackEmpty = navigationService.IsBackwardNavigationStackEmpty();
+            IsForwardNavigationStackEmpty = navigationService.IsForwardNavigationStackEmpty();
         }
 
         public void NavigateForward()
@@ -178,6 +198,21 @@ namespace TvShowManagerWPF.TvShowTracker
         public void NavigateBackward()
         {
             OnHistoryNavigation(navigationService.NavigateBackward());
+        }
+
+        public void OnXButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.XButton1 == MouseButtonState.Pressed)
+            {
+                NavigateBackward();
+                e.Handled = true;
+            }
+
+            if (e.XButton2 == MouseButtonState.Pressed)
+            {
+                NavigateForward();
+                e.Handled = true;
+            }
         }
 
         private void SetCheckedStatusOnAllControls(bool status)

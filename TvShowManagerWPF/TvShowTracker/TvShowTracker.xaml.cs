@@ -30,5 +30,10 @@ namespace TvShowManagerWPF.TvShowTracker
 
             ((TvShowTrackerViewModel)DataContext)?.LoadTvShows();
         }
+
+        private void UserControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TvShowTrackerViewModel.OnXButtonDown(sender, e);
+        }
     }
 }
