@@ -10,8 +10,14 @@
              Background="{StaticResource LowDarkBackground}">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="50 0" HorizontalAlignment="Center">
-            <Label Foreground="{StaticResource HighForeground}" FontWeight="Light"  FontSize="36" Content="Archived TV Shows"/>
-            <Separator Background="{StaticResource MediumDarkBackground}" Margin="0 0 0 25" />
+            <Label Foreground="{StaticResource HighForeground}" FontWeight="Light"  FontSize="30" Content="Archived TV Shows"/>
+            <Separator Background="{StaticResource MediumDarkBackground}" Margin="0 0 0 15" />
+            <TextBlock Foreground="{StaticResource MediumForeground}" Margin="5 0 0 5"> 
+                <Run Text="You currently have" />
+                <Run Text="{Binding TvShows.Count, Mode=OneWay}" Foreground="#649664" />
+                <Run Text="shows in the archive." />
+            </TextBlock>
+            
 
             <ItemsControl ItemsSource="{Binding TvShows}" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>

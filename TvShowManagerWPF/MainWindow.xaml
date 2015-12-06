@@ -40,12 +40,14 @@
                     <Button Style="{StaticResource TitleBarCloseButtonStyle}" PreviewMouseLeftButtonUp="CloseButton_OnMouseUp" />
                 </WrapPanel>
             </Grid>
-
-
+            
             <Menu Margin="0 0 0 25" HorizontalAlignment="Left" Background="{StaticResource MediumDarkBackground}" Foreground="{StaticResource LowForeground}">
                 <MenuItem Header="File" />
                 <MenuItem Header="Settings">
                     <MenuItem Header="Link Management" />
+                    <MenuItem Header="Edit link file (default program)" />
+                    <MenuItem Header="Open link file folder" />
+                    <Separator />
                     <MenuItem Header="Webscraper Options" />
                 </MenuItem>
             </Menu>

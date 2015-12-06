@@ -12,7 +12,6 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="50 0 50 0" >
             <DockPanel HorizontalAlignment="Center">
                 <StackPanel DockPanel.Dock="Top">
-                   
                     <DockPanel Margin="5 0 0 15">
                         <Border BorderThickness="5" BorderBrush="#242424" DockPanel.Dock="Left">
                             <Image Stretch="None"  Source="../../Content/TvShowsBackground.png" />
@@ -95,89 +94,93 @@
                             </WrapPanel>
                         </StackPanel>
                     </DockPanel>
-                    
-                    
                 </StackPanel>
+                <StackPanel>
+                    <TextBlock Foreground="{StaticResource MediumForeground}" Margin="5 0 0 5" FontSize="14">
+                        <Run Text="You're currently subscribing to" />
+                        <Run Text="{Binding TvShows.Count, Mode=OneWay}" Foreground="#649664" />
+                        <Run Text="shows." />
+                    </TextBlock>
 
+                    <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding TvShows}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
-                <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding TvShows}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <DataTemplate.Resources>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="{StaticResource MediumDarkBackground}" />
+                                        <Setter Property="BorderThickness" Value="0" />
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <DataTemplate.Resources>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="{StaticResource MediumDarkBackground}" />
-                                    <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
 
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Effect">
-                                                <Setter.Value>
-                                                    <DropShadowEffect ShadowDepth="0" Color="WhiteSmoke" Opacity="0.6" BlurRadius="15" RenderingBias="Quality"/>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </DataTemplate.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect ShadowDepth="0" Color="WhiteSmoke" Opacity="0.6" BlurRadius="15" RenderingBias="Quality"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataTemplate.Resources>
 
-                            <Button Command="{Binding DataContext.OnDisplayTvShowDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                <Button Command="{Binding DataContext.OnDisplayTvShowDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                     CommandParameter="{Binding}" Margin="5" Width="150">
-                                <StackPanel HorizontalAlignment="Center">
-                                    <Image Source="{Binding PosterPath}" Width="150" Height="225" />
-                                    <WrapPanel Background="{StaticResource MediumToHighDarkBackground}" Margin="0 5">
-                                        <WrapPanel.Resources>
-                                            <Style TargetType="{x:Type Button}">
-                                                <Setter Property="Width" Value="16" />
-                                                <Setter Property="Height" Value="16" />
-                                                <Setter Property="Background" Value="Transparent" />
-                                                <Setter Property="BorderThickness" Value="0" />
-                                            </Style>
-                                        </WrapPanel.Resources>
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <Image Source="{Binding PosterPath}" Width="150" Height="225" />
+                                        <WrapPanel Background="{StaticResource MediumToHighDarkBackground}" Margin="0 5">
+                                            <WrapPanel.Resources>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Width" Value="16" />
+                                                    <Setter Property="Height" Value="16" />
+                                                    <Setter Property="Background" Value="Transparent" />
+                                                    <Setter Property="BorderThickness" Value="0" />
+                                                </Style>
+                                            </WrapPanel.Resources>
 
-                                        <Button Command="{Binding DataContext.OnHyperLink1NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                            <Button Command="{Binding DataContext.OnHyperLink1NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                             CommandParameter="{Binding}">
-                                            <Image Source="../../Content/SceneAccessIcon.ico"  />
-                                        </Button>
-                                        <Button Command="{Binding DataContext.OnHyperLink2NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                <Image Source="../../Content/SceneAccessIcon.ico"  />
+                                            </Button>
+                                            <Button Command="{Binding DataContext.OnHyperLink2NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                             CommandParameter="{Binding}">
-                                            <Image Source="../../Content/Addic7edIcon.ico" />
-                                        </Button>
-                                        <Button Command="{Binding DataContext.OnHyperLink3NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                <Image Source="../../Content/Addic7edIcon.ico" />
+                                            </Button>
+                                            <Button Command="{Binding DataContext.OnHyperLink3NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                             CommandParameter="{Binding}">
-                                            <Image Source="../../Content/PirateBayIcon.ico" />
-                                        </Button>
-                                        <Button Command="{Binding DataContext.OnHyperLink4NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                <Image Source="../../Content/PirateBayIcon.ico" />
+                                            </Button>
+                                            <Button Command="{Binding DataContext.OnHyperLink4NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                             CommandParameter="{Binding}">
-                                            <Image Source="../../Content/KickassTorrentIcon.ico" />
-                                        </Button>
-                                        <Button Command="{Binding DataContext.OnHyperLink5NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                <Image Source="../../Content/KickassTorrentIcon.ico" />
+                                            </Button>
+                                            <Button Command="{Binding DataContext.OnHyperLink5NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                             CommandParameter="{Binding}">
-                                            <Image Source="../../Content/ImdbIcon.ico" />
-                                        </Button>
-                                    </WrapPanel>
+                                                <Image Source="../../Content/ImdbIcon.ico" />
+                                            </Button>
+                                        </WrapPanel>
 
-                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Foreground="{StaticResource LowForeground}" Margin="8"/>
-                                </StackPanel>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                                        <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Foreground="{StaticResource LowForeground}" Margin="8"/>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </DockPanel>
         </ScrollViewer>
     </Grid>

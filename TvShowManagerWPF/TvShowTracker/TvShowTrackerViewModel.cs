@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,10 +39,12 @@ namespace TvShowManagerWPF.TvShowTracker
         private readonly NavigationStateService navigationService = new NavigationStateService();
         private bool isBackwardNavigationStackEmpty;
         private bool isForwardNavigationStackEmpty;
+        private string textBoxSearchQuery;
 
         public TvShowTrackerViewModel()
         {
             SearchCommand = new RelayCommand(OnSearchTvShows);
+            ClearSearchCommand = new RelayCommand(ClearSearch);
             NavigateCommand = new RelayCommand<Navigation>(OnNavigation);
             NavigateForwardCommand = new RelayCommand(NavigateForward);
             NavigateBackwardCommand = new RelayCommand(NavigateBackward);
@@ -113,9 +116,14 @@ namespace TvShowManagerWPF.TvShowTracker
             set { latestNews = value; OnPropertyChanged(); }
         }
 
-        public string TextBoxSearchQuery { get; set; }
+        public string TextBoxSearchQuery
+        {
+            get { return textBoxSearchQuery; }
+            set { textBoxSearchQuery = value; OnPropertyChanged(); }
+        }
 
         public RelayCommand SearchCommand { get; private set; }
+        public RelayCommand ClearSearchCommand { get; private set; }
         public RelayCommand<Navigation> NavigateCommand { get; private set; } 
         public RelayCommand NavigateForwardCommand { get; private set; } 
         public RelayCommand NavigateBackwardCommand { get; private set; } 
@@ -228,6 +236,11 @@ namespace TvShowManagerWPF.TvShowTracker
             searchedTvShows.TvShows = TvShowService.SearchTvShows(TextBoxSearchQuery, ConfigurationData.NoImageFoundPath).ToObservableCollection();
             searchedTvShows.SearchQuery = TextBoxSearchQuery;
             OnNavigation(Navigation.TvShowsSearched);
+        }
+
+        private void ClearSearch()
+        {
+            TextBoxSearchQuery = "";
         }
 
         private void DisplayTvShowDetails(TvShow show)

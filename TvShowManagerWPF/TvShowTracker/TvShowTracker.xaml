@@ -46,7 +46,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="170" />
+            <ColumnDefinition Width="185" />
             <ColumnDefinition Width="3" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="3" />
@@ -63,10 +63,21 @@
                         <DockPanel.Resources>
                             <ControlTemplate x:Key="ControlTemplate" TargetType="TextBox">
                                 <Grid>
+                                    <Grid.Resources>
+                                        <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type Button}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Grid.Resources>
+                                    
                                     <TextBox Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, 
                                              UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" />
                                     <TextBlock VerticalAlignment="Center" Text="Search..." Margin="5,0,5,0" IsHitTestVisible="False" 
                                                x:Name="UserMessage" Visibility="Hidden" Foreground="{StaticResource LowForeground}" />
+                                    
+                                    <Button HorizontalAlignment="Right" Template="{StaticResource ControlTemplate}"
+                                            Command="{Binding ClearSearchCommand}">
+                                        <Image Source="../Content/ClearSearchButton.png" Width="9" Height="9" />
+                                    </Button>
                                 </Grid>
 
                                 <ControlTemplate.Triggers>
@@ -118,9 +129,12 @@
             <Border BorderThickness="0 0 0 0" BorderBrush="{StaticResource LowDarkBackground}">
                 <StackPanel>
                     <StackPanel.Resources>
-                        <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type RadioButton}">
+                        <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type local:ImageRadioButton}">
                             <Border Name="Border"  BorderBrush="Transparent" Background="{TemplateBinding Background}" Padding="10 5 5 5" BorderThickness="5 0 0 0">
-                                <ContentPresenter Content="{TemplateBinding Content}" />
+                                <DockPanel>
+                                    <Image Source="{TemplateBinding ImageSource}" Width="20" Height="20" Margin="0 1 15 0" />
+                                    <TextBlock Text="{TemplateBinding Content}" />
+                                </DockPanel>
                             </Border>
 
                             <ControlTemplate.Triggers>
@@ -134,7 +148,7 @@
                             </ControlTemplate.Triggers>
 
                         </ControlTemplate>
-                        <Style TargetType="{x:Type RadioButton}">
+                        <Style TargetType="{x:Type local:ImageRadioButton}">
                             <Setter Property="Template" Value="{StaticResource ControlTemplate}" />
                             <Setter Property="Background" Value="Transparent" />
                             <Setter Property="Foreground" Value="{StaticResource LowForeground}" />
@@ -148,22 +162,28 @@
                     </StackPanel.Resources>
                     
                     <Label Content="MAIN MENU" Foreground="{StaticResource LowForeground}" FontSize="12" Margin="0" />
-                    
-                    <RadioButton Content="Popular" IsChecked="{Binding IsTvShowsPopularChecked}" Margin="0"
-                                 Command="{Binding NavigateCommand}" 
-                                 CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShowsPopular}" />
-                    <RadioButton Content="Top Rated" IsChecked="{Binding IsTvShowsTopRatedChecked}"
-                             Command="{Binding NavigateCommand}"
-                             CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShowsTopRated}"/>
+
+                    <local:ImageRadioButton Content="Popular" IsChecked="{Binding IsTvShowsPopularChecked}" Margin="0"
+                                            ImageSource="../Content/TvShowTrackerMenuIcon2.png" RenderOptions.BitmapScalingMode="HighQuality"
+                                            Command="{Binding NavigateCommand}" 
+                                            CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShowsPopular}" />
+
+                    <local:ImageRadioButton Content="Top Rated" IsChecked="{Binding IsTvShowsTopRatedChecked}"
+                                            ImageSource="../Content/TvShowTrackerMenuIcon2.png" RenderOptions.BitmapScalingMode="HighQuality"
+                                            Command="{Binding NavigateCommand}"
+                                            CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShowsTopRated}"/>
 
                     <Label Content="MY SUBSCRIPTIONS" Foreground="{StaticResource LowForeground}" FontSize="12" Margin="0 10 0 0" />
 
-                    <RadioButton Content="TV Shows" IsChecked="{Binding IsTvShowsChecked}" 
-                             Command="{Binding NavigateCommand}" 
-                             CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShows}" />
-                    <RadioButton Content="TV Shows (Archived)" IsChecked="{Binding IsTvShowsArchivedChecked}"
-                             Command="{Binding NavigateCommand}"
-                             CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShowsArchived}"/>
+                    <local:ImageRadioButton Content="TV Shows" IsChecked="{Binding IsTvShowsChecked}" 
+                                            ImageSource="../Content/TvShowTrackerMenuIcon1.png" RenderOptions.BitmapScalingMode="HighQuality"
+                                            Command="{Binding NavigateCommand}" 
+                                            CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShows}" />
+                    
+                    <local:ImageRadioButton Content="Archive" IsChecked="{Binding IsTvShowsArchivedChecked}"
+                                            ImageSource="../Content/TvShowTrackerMenuIcon1.png" RenderOptions.BitmapScalingMode="HighQuality"
+                                            Command="{Binding NavigateCommand}"
+                                            CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShowsArchived}"/>
                 </StackPanel>
             </Border>
         </Grid>
