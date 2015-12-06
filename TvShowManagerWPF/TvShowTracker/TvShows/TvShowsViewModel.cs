@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using CoreLibrary;
 using TvShowManagerLibrary;
 using TvShowManagerLibrary.BrowserLauncher;
@@ -17,7 +18,8 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
     {
         private readonly BrowserLauncher launcher;
         private ObservableCollection<TvShow> tvShows;
-        
+        private List<TvShowLink> _tvShowsCollectionView;
+
         public event Action<TvShow> DisplayTvShowDetailsRequested = delegate { };
 
         public RelayCommand<TvShow> OnDisplayTvShowDetailsCommand { get; private set; }
@@ -41,15 +43,37 @@ namespace TvShowManagerWPF.TvShowTracker.TvShows
             OnHyperLinkMultiNavigateCommand = new RelayCommand<Websites>(OnHyperLinkMultiNavigate);
         }
 
+        private void LoadTvShowsCollectionView()
+        {
+            var links = TvShows.Select(x => new TvShowLink()
+            {
+                Name = x.Name,
+                Addic7edLink = x.Addic7edID
+            }).ToList();
+
+            TvShowsCollectionView = links;
+        }
+
+        public List<TvShowLink> TvShowsCollectionView
+        {
+            get { return _tvShowsCollectionView; }
+            set { _tvShowsCollectionView = value; OnPropertyChanged(); }
+        }
+
         public void LoadTvShows()
         {
             TvShows = TvShowService.GetActiveTvShows().ToObservableCollection();
+            LoadTvShowsCollectionView();
         }
 
         public ObservableCollection<TvShow> TvShows
         {
             get { return tvShows; }
-            set { tvShows = value; OnPropertyChanged(); }
+            set
+            {
+                tvShows = value; OnPropertyChanged();
+                LoadTvShowsCollectionView();
+            }
         }
         
         private void OnDisplayTvShowDetails(TvShow show)

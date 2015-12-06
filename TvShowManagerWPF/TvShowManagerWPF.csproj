@@ -41,6 +41,8 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -98,6 +100,7 @@
     </Compile>
     <Compile Include="TvShowTracker\TvShowsTopRated\TvShowsTopRatedNavigationState.cs" />
     <Compile Include="TvShowTracker\TvShowsTopRated\TvShowsTopRatedViewModel.cs" />
+    <Compile Include="TvShowTracker\TvShows\TvShowLink.cs" />
     <Compile Include="TvShowTracker\TvShows\TvShows.xaml.cs">
       <DependentUpon>TvShows.xaml</DependentUpon>
     </Compile>
@@ -210,10 +213,6 @@
     <ProjectReference Include="..\TvShowManagerLibrary\TvShowManagerLibrary.csproj">
       <Project>{59C21328-5EA8-49F1-A1E0-345BEC7826C5}</Project>
       <Name>TvShowManagerLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebScraper\WebScraper.csproj">
-      <Project>{EFEA4298-B08E-4FB5-9C24-9743252255C5}</Project>
-      <Name>WebScraper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

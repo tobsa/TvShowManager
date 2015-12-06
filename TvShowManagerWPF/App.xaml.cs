@@ -10,7 +10,6 @@ using System.Windows;
 using TvShowManagerLibrary.Configurations;
 using TvShowManagerLibrary.Serialization;
 using TvShowManagerLibrary.Services;
-using WebScraper;
 
 namespace TvShowManagerWPF
 {
@@ -19,9 +18,7 @@ namespace TvShowManagerWPF
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             ConfigurationManager.Load(ConfigurationData.ConfigurationFilePath);
-
-            WebScraperManager.CacheFilepath = ConfigurationData.Addic7edRequestCacheFilepath;
-
+            
             TvShowServiceFactory.CreateTvShowService(ConfigurationManager.ApiKey, ConfigurationData.SubscriptionsFilepath);
         }
     }

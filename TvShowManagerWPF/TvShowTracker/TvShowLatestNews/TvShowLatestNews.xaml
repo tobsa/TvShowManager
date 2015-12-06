@@ -11,7 +11,7 @@
         <local:TvShowLatestNewsViewModel />
     </UserControl.DataContext>
     
-    <ItemsControl ItemsSource="{Binding TvShows}" Foreground="Wheat">
+    <!--<ItemsControl ItemsSource="{Binding TvShows}" Foreground="Wheat">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Button ToolTip="{Binding SeriesName}" Command="{Binding DataContext.OnOpenLinkCommand, 
@@ -30,5 +30,5 @@
                 </Button>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
-    </ItemsControl>
+    </ItemsControl>-->
 </UserControl>

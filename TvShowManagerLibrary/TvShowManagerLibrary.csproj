@@ -54,8 +54,6 @@
     <Compile Include="Services\TvShowService.cs" />
     <Compile Include="Repositories\TvShowXmlRepository.cs" />
     <Compile Include="Services\TvShowServiceFactory.cs" />
-    <Compile Include="WebScrapers\WebScraperShowMapper.cs" />
-    <Compile Include="WebScrapers\WebScraperShow.cs" />
     <Compile Include="Websites.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,10 +64,6 @@
     <ProjectReference Include="..\TMDbWrapper\TMDbWrapper.csproj">
       <Project>{24EC833A-FFEF-478A-83C1-DA5F2EDCB5E6}</Project>
       <Name>TMDbWrapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebScraper\WebScraper.csproj">
-      <Project>{EFEA4298-B08E-4FB5-9C24-9743252255C5}</Project>
-      <Name>WebScraper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

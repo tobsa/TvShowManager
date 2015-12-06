@@ -92,6 +92,13 @@
                                     </WrapPanel>
                                 </Button>
                             </WrapPanel>
+                            
+                            <Grid>
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="190">
+                                    <DataGrid ItemsSource="{Binding TvShowsCollectionView}" CanUserAddRows="False" >
+                                    </DataGrid>
+                            </ScrollViewer>
+                            </Grid>
                         </StackPanel>
                     </DockPanel>
                 </StackPanel>

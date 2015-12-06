@@ -31,7 +31,7 @@ namespace TvShowManagerWPF.TvShowTracker.TvShowLatestNews
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
                 return;
 
-            ((TvShowLatestNewsViewModel)DataContext).LoadTvShows();
+            
         }
     }
 }
