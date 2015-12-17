@@ -46,6 +46,7 @@
     <Compile Include="WScrapeWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WTag.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoreLibrary\CoreLibrary.csproj">

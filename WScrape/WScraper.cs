@@ -10,7 +10,7 @@ using CoreLibrary;
 namespace WScrape
 {
     public static class WScraper
-    {
+    { 
         public static WScrapeResult Scrape(string url, string beginTag, string endTag, string cacheFilePath)
         {
             var content = GetContent(url, cacheFilePath);
@@ -25,14 +25,39 @@ namespace WScrape
             };
         }
 
-        private static string GetContent(string url, string cacheFilePath)
+        public static WScrapeResult Scrape(string url, List<WTag> tags, string cacheFilePath)
+        {
+            var content = GetContent(url, cacheFilePath);
+
+            return new WScrapeResult()
+            {
+                Url = url,
+                Content = content,
+                Result = GetResult(content.Split('\n'), tags),
+            };
+        }
+
+        private static List<string> GetResult(string[] content, List<WTag> tags)
+        {
+            var results = new List<string>();
+            foreach (var tag in tags)
+            {
+                results.AddRange(from row in content
+                                 where row.Contains(tag.BeginTag)
+                                 select row.FindSubstring(tag.BeginTag, tag.EndTag));
+            }
+
+            return results;
+        } 
+
+        public static string GetContent(string url, string cacheFilePath)
         {
             try
             {
                 using (var client = new WScrapeWebClient())
                 {
                     var content = client.DownloadString(url);
-                    File.WriteAllText(cacheFilePath, content);
+                    //File.WriteAllText(cacheFilePath, content);
                     return content;
                 }
             }
