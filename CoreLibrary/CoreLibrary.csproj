@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HtmlExtensions.cs" />
     <Compile Include="HttpWebRequestExtensions.cs" />
+    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="ListExtensions.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="StringExtensions.cs" />

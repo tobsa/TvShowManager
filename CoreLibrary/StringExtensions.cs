@@ -43,6 +43,35 @@ namespace CoreLibrary
             return str.Substring(beginIndex, endIndex - beginIndex);
         }
 
+        public static List<string> FindSubstrings(this string str, string beginTag, string endTag)
+        {
+            var substrings = new List<string>();
+
+            var beginIndex = str.IndexOf(beginTag, StringComparison.Ordinal);
+            if (beginIndex < 0)
+                return new List<string>();
+
+            beginIndex += beginTag.Length;
+
+            var endIndex = str.IndexOf(endTag, beginIndex, StringComparison.Ordinal);
+
+            substrings.Add(str.Substring(beginIndex, endIndex - beginIndex));
+
+            while (true)
+            {
+                beginIndex = str.IndexOf(beginTag, endIndex, StringComparison.Ordinal);
+                if (beginIndex < 0)
+                    break;
+
+                beginIndex += beginTag.Length;
+
+                endIndex = str.IndexOf(endTag, beginIndex, StringComparison.Ordinal);
+                substrings.Add(str.Substring(beginIndex, endIndex - beginIndex));
+            }
+
+            return substrings;
+        } 
+
         public static int IndexOfNth(this string input, string value, int nth)
         {
             var startIndex = 0;
