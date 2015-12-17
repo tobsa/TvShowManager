@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="TvShowManagerWPF.TvShowTracker.TvShowDownloader.TvShowDownloader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowDownloader"
+             mc:Ignorable="d" 
+             Background="{StaticResource LowDarkBackground}"
+             Loaded="TvShowDownloader_OnLoaded"
+             d:DataContext="{d:DesignInstance local:TvShowDownloaderViewModel, IsDesignTimeCreatable=True}">
+    <Grid Margin="50 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Foreground="{StaticResource HighForeground}" FontWeight="Light"  FontSize="26" Content="TV Show Downloader"/>
+        <Separator Grid.Row="1" Background="{StaticResource MediumDarkBackground}" Margin="0 0 0 15" />
+
+        <WrapPanel Grid.Row="2" Margin="0 15">
+            <Label Content="TV Show Source" Foreground="{StaticResource MediumForeground}" />
+            <ComboBox ItemsSource="{Binding TvShowSources}" SelectedItem="{Binding SelectedTvShowSource}" Width="250">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Label Margin="40 0 0 0" Content="Subtitle Source" Foreground="{StaticResource MediumForeground}" />
+            <ComboBox ItemsSource="{Binding SubtitleSources}" SelectedIndex="0" Width="250" />
+        </WrapPanel>
+
+        <DataGrid Grid.Row="3" ItemsSource="{Binding TvShowLinks}" AutoGenerateColumns="False" CanUserAddRows="False" Background="Transparent" 
+                      RowBackground="Transparent" Foreground="{StaticResource LowForeground}" BorderThickness="0"
+                      ScrollViewer.CanContentScroll="True" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+            </DataGrid.Resources>
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="{StaticResource MediumDarkBackground}" />
+                    <Setter Property="Padding" Value="20 5" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="BorderThickness" Value="1 0" />
+                    <Setter Property="Margin" Value="-1,-1,0,0" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Name" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DataTemplate.Resources>
+                                <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type Button}">
+                                    <Border BorderThickness="1" BorderBrush="#181818" Background="{TemplateBinding Background}"
+                                            VerticalAlignment="Center">
+                                        <ContentPresenter VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Template" Value="{StaticResource ControlTemplate}" />
+                                    <Setter Property="Foreground" Value="{StaticResource HighForeground}" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#484848" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataTemplate.Resources>
+
+                            <Button Command="{Binding DataContext.DownloadTvShowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding DisplayLink}" TextWrapping="Wrap" Foreground="{StaticResource LowForeground}" Margin="8 2"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Seeders" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Seeders}" Foreground="#649664" HorizontalAlignment="Center" Margin="20 0" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Size" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" Margin="20 0">
+                                    <Run Text="{Binding Size}" />
+                                    <Run Text="{Binding SizeUnit}" />
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Date" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Date}" HorizontalAlignment="Center" Margin="20 0" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Downloaded" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ProgressBar Name="DownloadProgressBar" Value="{Binding Downloaded, Mode=TwoWay}" Minimum="0.0" Maximum="100.0" Margin="20 0" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+
+    <!--<StackPanel Margin="50 0" >-->
+
+    <!--<ItemsControl ItemsSource="{Binding TvShowLinks}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <DataTemplate.Resources>
+                            <ControlTemplate x:Key="ControlTemplate" TargetType="{x:Type Button}">
+                                <Border Height="28" BorderThickness="1" BorderBrush="#181818" Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template" Value="{StaticResource ControlTemplate}" />
+                                <Setter Property="Foreground" Value="{StaticResource HighForeground}" />
+                                <Setter Property="Background" Value="{StaticResource MediumDarkBackground}" />
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#646464" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataTemplate.Resources>
+
+                        <Button 
+                                Command="{Binding DataContext.DownloadTvShowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding DisplayLink}" TextWrapping="Wrap" Foreground="{StaticResource LowForeground}" Margin="8"/>
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>-->
+    <!--</StackPanel>-->
+</UserControl>

@@ -12,6 +12,8 @@
              xmlns:tvShowManagerWpf="clr-namespace:TvShowManagerWPF"
              xmlns:tvShowsPopular="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsPopular"
              xmlns:tvShowsTopRated="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsTopRated"
+             xmlns:tvShowDownloader="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowDownloader"
+             xmlns:websiteLauncher="clr-namespace:TvShowManagerWPF.TvShowTracker.WebsiteLauncher"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:TvShowTrackerViewModel, IsDesignTimeCreatable=True}"
              Loaded="TvShowTracker_OnLoaded" PreviewMouseDown="UserControl_PreviewMouseDown">
@@ -38,6 +40,12 @@
         <DataTemplate DataType="{x:Type tvShowsTopRated:TvShowsTopRatedViewModel}">
             <tvShowsTopRated:TvShowsTopRated />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type tvShowDownloader:TvShowDownloaderViewModel}">
+            <tvShowDownloader:TvShowDownloader />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type websiteLauncher:WebsiteLauncherViewModel}">
+            <websiteLauncher:WebsiteLauncher />
+        </DataTemplate>
     </UserControl.Resources>
     
     <Grid>
@@ -46,7 +54,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="185" />
+            <ColumnDefinition Width="195" />
             <ColumnDefinition Width="3" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="3" />
@@ -173,14 +181,24 @@
                                             Command="{Binding NavigateCommand}"
                                             CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShowsTopRated}"/>
 
+                    <local:ImageRadioButton Content="Website Launcher" IsChecked="{Binding IsWebsiteLauncherChecked}"
+                                            ImageSource="../Content/TvShowTrackerMenuIcon2.png" RenderOptions.BitmapScalingMode="HighQuality"
+                                            Command="{Binding NavigateCommand}"
+                                            CommandParameter="{x:Static tvShowManagerWpf:Navigation.WebsiteLauncher}"/>
+
                     <Label Content="MY SUBSCRIPTIONS" Foreground="{StaticResource LowForeground}" FontSize="12" Margin="0 10 0 0" />
 
                     <local:ImageRadioButton Content="TV Shows" IsChecked="{Binding IsTvShowsChecked}" 
                                             ImageSource="../Content/TvShowTrackerMenuIcon1.png" RenderOptions.BitmapScalingMode="HighQuality"
                                             Command="{Binding NavigateCommand}" 
                                             CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShows}" />
-                    
-                    <local:ImageRadioButton Content="Archive" IsChecked="{Binding IsTvShowsArchivedChecked}"
+
+                    <local:ImageRadioButton Content="TV Show Downloader" IsChecked="{Binding IsTvShowDownloaderChecked}" 
+                                            ImageSource="../Content/TvShowTrackerMenuIcon1.png" RenderOptions.BitmapScalingMode="HighQuality"
+                                            Command="{Binding NavigateCommand}" 
+                                            CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShowDownloader}" />
+
+                    <local:ImageRadioButton Content="TV Shows (Archived)" IsChecked="{Binding IsTvShowsArchivedChecked}"
                                             ImageSource="../Content/TvShowTrackerMenuIcon1.png" RenderOptions.BitmapScalingMode="HighQuality"
                                             Command="{Binding NavigateCommand}"
                                             CommandParameter="{x:Static tvShowManagerWpf:Navigation.TvShowsArchived}"/>

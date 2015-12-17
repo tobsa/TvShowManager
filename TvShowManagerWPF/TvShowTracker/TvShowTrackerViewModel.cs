@@ -13,12 +13,14 @@ using TvShowManagerLibrary.ExternalServices;
 using TvShowManagerLibrary.Repositories;
 using TvShowManagerLibrary.Services;
 using TvShowManagerWPF.TvShowTracker.TvShowDetails;
+using TvShowManagerWPF.TvShowTracker.TvShowDownloader;
 using TvShowManagerWPF.TvShowTracker.TvShows;
 using TvShowManagerWPF.TvShowTracker.TvShowsSearched;
 using TvShowManagerWPF.TvShowTracker.TvShowLatestNews;
 using TvShowManagerWPF.TvShowTracker.TvShowsArchived;
 using TvShowManagerWPF.TvShowTracker.TvShowsPopular;
 using TvShowManagerWPF.TvShowTracker.TvShowsTopRated;
+using TvShowManagerWPF.TvShowTracker.WebsiteLauncher;
 
 namespace TvShowManagerWPF.TvShowTracker
 {
@@ -32,14 +34,19 @@ namespace TvShowManagerWPF.TvShowTracker
         private TvShowLatestNewsViewModel latestNews = new TvShowLatestNewsViewModel();
         private readonly TvShowsPopularViewModel popularShows = new TvShowsPopularViewModel();
         private readonly TvShowsTopRatedViewModel topRatedShows = new TvShowsTopRatedViewModel();
+        private readonly TvShowDownloaderViewModel showDownloader = new TvShowDownloaderViewModel();
+        private readonly WebsiteLauncherViewModel websiteLauncher = new WebsiteLauncherViewModel();
         private bool isTvShowsChecked;
         private bool isTvShowsArchivedChecked;
         private bool isTvShowsPopularChecked;
         private bool isTvShowsTopRatedChecked;
-        private readonly NavigationStateService navigationService = new NavigationStateService();
         private bool isBackwardNavigationStackEmpty;
         private bool isForwardNavigationStackEmpty;
         private string textBoxSearchQuery;
+        private bool isTvShowDownloaderChecked;
+        private readonly NavigationStateService navigationService = new NavigationStateService();
+        private Navigation currentNavigation;
+        private bool isWebsiteLauncherChecked;
 
         public TvShowTrackerViewModel()
         {
@@ -98,6 +105,18 @@ namespace TvShowManagerWPF.TvShowTracker
             set { isTvShowsTopRatedChecked = value; OnPropertyChanged(); }
         }
 
+        public bool IsTvShowDownloaderChecked
+        {
+            get { return isTvShowDownloaderChecked; }
+            set { isTvShowDownloaderChecked = value; OnPropertyChanged(); }
+        }
+
+        public bool IsWebsiteLauncherChecked
+        {
+            get { return isWebsiteLauncherChecked; }
+            set { isWebsiteLauncherChecked = value; OnPropertyChanged(); }
+        }
+
         public bool IsBackwardNavigationStackEmpty
         {
             get { return isBackwardNavigationStackEmpty; }
@@ -133,8 +152,11 @@ namespace TvShowManagerWPF.TvShowTracker
             switch (navigation)
             {
                 case Navigation.TvShows:
-                    CurrentViewModel = shows;
-                    navigationService.AddNavigationState(new TvShowsNavigationState());
+                    if (currentNavigation != Navigation.TvShows)
+                    {
+                        CurrentViewModel = shows;
+                        navigationService.AddNavigationState(new TvShowsNavigationState());
+                    }
                     break;
                 case Navigation.TvShowDetails:
                     CurrentViewModel = showDetails;
@@ -147,18 +169,43 @@ namespace TvShowManagerWPF.TvShowTracker
                     navigationService.AddNavigationState(new TvShowsSearchedNavigationState(searchedTvShows));
                     break;
                 case Navigation.TvShowsArchived:
-                    CurrentViewModel = archivedShows;
-                    navigationService.AddNavigationState(new TvShowsArchivedNavigationState());
+                    if (currentNavigation != Navigation.TvShowsArchived)
+                    {
+                        CurrentViewModel = archivedShows;
+                        navigationService.AddNavigationState(new TvShowsArchivedNavigationState());
+                    }
                     break;
                 case Navigation.TvShowsPopular:
-                    CurrentViewModel = popularShows;
-                    navigationService.AddNavigationState(new TvShowsPopularNavigationState());
+                    if (currentNavigation != Navigation.TvShowsPopular)
+                    {
+                        CurrentViewModel = popularShows;
+                        navigationService.AddNavigationState(new TvShowsPopularNavigationState());
+                    }
                     break;
                 case Navigation.TvShowsTopRated:
-                    CurrentViewModel = topRatedShows;
-                    navigationService.AddNavigationState(new TvShowsTopRatedNavigationState());
+                    if (currentNavigation != Navigation.TvShowsTopRated)
+                    {
+                        CurrentViewModel = topRatedShows;
+                        navigationService.AddNavigationState(new TvShowsTopRatedNavigationState());
+                    }
+                    break;
+                case Navigation.TvShowDownloader:
+                    if (currentNavigation != Navigation.TvShowDownloader)
+                    {
+                        CurrentViewModel = showDownloader;
+                        navigationService.AddNavigationState(new TvShowDownloaderNavigationState());
+                    }
+                    break;
+                case Navigation.WebsiteLauncher:
+                    if (currentNavigation != Navigation.WebsiteLauncher)
+                    {
+                        CurrentViewModel = websiteLauncher;
+                        navigationService.AddNavigationState(new WebsiteLauncherNavigationState());
+                    }
                     break;
             }
+
+            currentNavigation = navigation;
 
             IsBackwardNavigationStackEmpty = navigationService.IsBackwardNavigationStackEmpty();
             IsForwardNavigationStackEmpty = navigationService.IsForwardNavigationStackEmpty();
@@ -191,6 +238,14 @@ namespace TvShowManagerWPF.TvShowTracker
                 case Navigation.TvShowsTopRated:
                     CurrentViewModel = topRatedShows;
                     IsTvShowsTopRatedChecked = true;
+                    break;
+                case Navigation.TvShowDownloader:
+                    CurrentViewModel = showDownloader;
+                    IsTvShowDownloaderChecked = true;
+                    break;
+                case Navigation.WebsiteLauncher:
+                    CurrentViewModel = websiteLauncher;
+                    IsWebsiteLauncherChecked = true;
                     break;
             }
 
@@ -229,6 +284,7 @@ namespace TvShowManagerWPF.TvShowTracker
             IsTvShowsArchivedChecked = status;
             IsTvShowsPopularChecked = status;
             IsTvShowsTopRatedChecked = status;
+            IsTvShowDownloaderChecked = status;
         }
 
         private void OnSearchTvShows()

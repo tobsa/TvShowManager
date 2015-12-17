@@ -11,6 +11,10 @@ namespace TvShowManagerWPF
         public const string ConfigurationFilePath = "Data/Configuration.xml";
         public const string SubscriptionsFilepath = "Data/Subscriptions.xml";
         public const string LinksFilepath = "Data/Links.xml";
+
+        public const string TvShowSourceLinks = "Data/TvShowSourceLinks.xml";
+        public const string SubtitleSourceLinks = "Data/SubtitleSourceLinks.xml";
+
         public const string Addic7edRequestCacheFilepath = "Data/Cache.txt";
 
         public const string NoImageFoundPath = "../../Content/NoImageFound.png";

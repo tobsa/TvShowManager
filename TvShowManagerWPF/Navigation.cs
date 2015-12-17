@@ -8,11 +8,14 @@ namespace TvShowManagerWPF
 {
     public enum Navigation
     {
+        None,
         TvShows,
         TvShowsArchived,
         TvShowsSearched,
         TvShowDetails,
         TvShowsPopular,
         TvShowsTopRated,
+        TvShowDownloader,
+        WebsiteLauncher
     }
 }

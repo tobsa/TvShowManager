@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TvShowManagerWPF.TvShowTracker.TvShowsTopRated"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-                          d:DataContext="{d:DesignInstance local:TvShowsTopRatedViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance local:TvShowsTopRatedViewModel, IsDesignTimeCreatable=True}"
              Loaded="TvShowsTopRated_OnLoaded"
              Background="{StaticResource LowDarkBackground}">
     

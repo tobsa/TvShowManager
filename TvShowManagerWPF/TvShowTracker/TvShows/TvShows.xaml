@@ -13,14 +13,14 @@
             <DockPanel HorizontalAlignment="Center">
                 <StackPanel DockPanel.Dock="Top">
                     <DockPanel Margin="5 0 0 15">
-                        <Border BorderThickness="5" BorderBrush="#242424" DockPanel.Dock="Left">
-                            <Image Stretch="None"  Source="../../Content/TvShowsBackground.png" />
+                        <Border BorderThickness="5" BorderBrush="#242424" DockPanel.Dock="Left" Width="175" Height="175">
+                            <Image Stretch="Uniform"  Source="../../Content/TvShowsBackground.png" />
                         </Border>
                         
                         <StackPanel>
                             <Label Content="TV Shows" Margin="5 0 0 0" Foreground="{StaticResource HighForeground}" FontWeight="Light"  FontSize="36" />
                             <Separator Background="{StaticResource MediumDarkBackground}" Margin="10 0" />
-                            
+
                             <WrapPanel Margin="5 5">
                                 <WrapPanel.Resources>
                                     <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
@@ -92,13 +92,6 @@
                                     </WrapPanel>
                                 </Button>
                             </WrapPanel>
-                            
-                            <Grid>
-                                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="190">
-                                    <DataGrid ItemsSource="{Binding TvShowsCollectionView}" CanUserAddRows="False" >
-                                    </DataGrid>
-                            </ScrollViewer>
-                            </Grid>
                         </StackPanel>
                     </DockPanel>
                 </StackPanel>

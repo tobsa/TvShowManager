@@ -46,6 +46,7 @@
     <Compile Include="Configurations\Link.cs" />
     <Compile Include="Configurations\LinkManager.cs" />
     <Compile Include="ExternalServices\ITvShowExternalService.cs" />
+    <Compile Include="JobRunner\JobRunner.cs" />
     <Compile Include="Repositories\ITvShowRepository.cs" />
     <Compile Include="Serialization\XmlSerializerHelper.cs" />
     <Compile Include="ExternalServices\TvShowTMDbExternalService.cs" />
@@ -64,6 +65,10 @@
     <ProjectReference Include="..\TMDbWrapper\TMDbWrapper.csproj">
       <Project>{24EC833A-FFEF-478A-83C1-DA5F2EDCB5E6}</Project>
       <Name>TMDbWrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WScrape\WScrape.csproj">
+      <Project>{554A4E39-D09D-4176-A5DF-BBF4CF299114}</Project>
+      <Name>WScrape</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
